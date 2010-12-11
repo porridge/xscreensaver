@@ -19,8 +19,8 @@ TARFILES	= README README.hacking README.VMS INSTALL \
 
 TAR		= tar
 
-MAKE_SUBDIR  = for dir in $(SUBDIRS); do (cd $$dir; $(MAKE) $@) || exit 5; done
-MAKE_SUBDIR2 = for dir in $(SUBDIRS2);do (cd $$dir; $(MAKE) $@) || exit 5; done
+MAKE_SUBDIR  = +for dir in $(SUBDIRS); do (cd $$dir; $(MAKE) $@) || exit 5; done
+MAKE_SUBDIR2 = +for dir in $(SUBDIRS2);do (cd $$dir; $(MAKE) $@) || exit 5; done
 
 default::
 	@$(MAKE_SUBDIR)

@@ -880,8 +880,6 @@ ENTRYPOINT void init_tangram(ModeInfo * mi)
             fprintf(stderr, "%s: out of memory\n", progname);
             exit(1);
         }
-
-        tp = &tps[MI_SCREEN(mi)];
     }
 
     tp = &tps[MI_SCREEN(mi)];
@@ -891,6 +889,8 @@ ENTRYPOINT void init_tangram(ModeInfo * mi)
     }
 
     wire = MI_IS_WIREFRAME(mi);
+
+    tp->name_list = glGenLists(1);
 
     load_fonts(mi);
     init_shapes(mi);

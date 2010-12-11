@@ -1,4 +1,4 @@
-/* xscreensaver, Copyright (c) 1992-2008 Jamie Zawinski <jwz@jwz.org>
+/* xscreensaver, Copyright (c) 1992-2010 Jamie Zawinski <jwz@jwz.org>
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is hereby granted without fee, provided that
@@ -221,6 +221,8 @@ merge_options (void)
 	  strcat (newr, oldr);
 	  *s = newr;
 	}
+      else
+        *s = strdup (*s);
   }
 }
 
@@ -442,7 +444,7 @@ screenhack_table_handle_events (Display *dpy,
             ft->reshape_cb (dpy, window, closure,
                             event.xconfigure.width, event.xconfigure.height);
 #ifdef DEBUG_PAIR
-          if (event.xany.window == window2)
+          if (window2 && event.xany.window == window2)
             ft->reshape_cb (dpy, window2, closure2,
                             event.xconfigure.width, event.xconfigure.height);
 #endif
@@ -451,7 +453,7 @@ screenhack_table_handle_events (Display *dpy,
                (! (event.xany.window == window
                    ? ft->event_cb (dpy, window, closure, &event)
 #ifdef DEBUG_PAIR
-                   : event.xany.window == window2
+                   : (window2 && event.xany.window == window2)
                    ? ft->event_cb (dpy, window2, closure2, &event)
 #endif
                    : 0)))
@@ -805,6 +807,12 @@ main (int argc, char **argv)
 
       exit (help_p ? 0 : 1);
     }
+
+  {
+    char **s;
+    for (s = merged_defaults; *s; s++)
+      free(*s);
+  }
 
   free (merged_options);
   free (merged_defaults);

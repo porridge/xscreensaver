@@ -1,4 +1,4 @@
-/* xscreensaver, Copyright (c) 1998-2006 Jamie Zawinski <jwz@jwz.org>
+/* xscreensaver, Copyright (c) 1998-2010 Jamie Zawinski <jwz@jwz.org>
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is hereby granted without fee, provided that
@@ -279,7 +279,6 @@ a2_dither (unsigned int *in, unsigned char *out, int w, int h)
   long *temp_err;
   int fs_scale = 1024;
   int brightness = 75;
-  int fs_direction;
 
 #if 0
   {
@@ -320,7 +319,6 @@ a2_dither (unsigned int *in, unsigned char *out, int w, int h)
       this_berr[x] = random() % (fs_scale * 2) - fs_scale;
       /* (random errors in [-1 .. 1]) */
     }
-  fs_direction = 1;
 
   for (y = 0; y < h; y++)
     for (x = 0; x < w; x++)
@@ -569,6 +567,9 @@ image_loaded_cb (Screen *screen, Window window, Drawable p,
      image (regardless of whether it started as TrueColor/PseudoColor.)
    */
   pick_a2_subimage (dpy, window, image, buf32, w, h);
+  free(image->data);
+  image->data = 0;
+  XDestroyImage(image);
 
   /* Then dither the 32bpp image to a 6-color Apple][ colormap.
    */
@@ -705,7 +706,7 @@ static void slideshow_controller(apple2_sim_t *sim, int *stepno,
           basename = slash+1;
         }
       {
-        char *dot=strchr(basename,'.');
+        char *dot=strrchr(basename,'.');
         if (dot) *dot=0;
       }
       if (strlen(basename)>20) basename[20]=0;
@@ -784,6 +785,7 @@ static void slideshow_controller(apple2_sim_t *sim, int *stepno,
     free(mine->render_img);
     free(mine->img_filename);
     free(mine);
+    mine = 0;
     return;
 
   }
@@ -905,6 +907,9 @@ launch_text_generator (struct terminal_controller_data *mine)
       sprintf (buf, "%.100s: %.100s", progname, program);
       perror(buf);
     }
+
+  free(oprogram);
+  free(program);
 }
 
 static void
@@ -1526,6 +1531,7 @@ terminal_controller(apple2_sim_t *sim, int *stepno, double *next_actiontime)
   case A2CONTROLLER_FREE:
     terminal_closegen(mine);
     free(mine);
+    mine = 0;
     return;
   }
 }
@@ -1888,6 +1894,7 @@ basic_controller(apple2_sim_t *sim, int *stepno, double *next_actiontime)
 
   case A2CONTROLLER_FREE:
     free(mine);
+    mine = 0;
     break;
   }
 

@@ -198,6 +198,13 @@ static inline void start_crack(struct field *f, crack *cr)
         /* We timed out.  Use our default values */
         px = cr->x;
         py = cr->y;
+
+        /* Sanity check needed */
+        if (px < 0) px = 0;
+        if (px >= f->width) px = f->width - 1;
+        if (py < 0) py = 0;
+        if (py >= f->height) py = f->height - 1;
+
         ref_cgrid(f, px, py) = cr->t;
     }
 
@@ -311,7 +318,6 @@ static inline unsigned long rgb2point(int depth, int r, int g, int b)
 
     switch(depth) {
         case 32:
-            ret = 0xff000000;
         case 24:
 #ifdef HAVE_COCOA
             /* This program idiotically does not go through a color map, so
@@ -487,16 +493,11 @@ movedrawcrack(struct state *st, GC fgc, struct field *f, int cracknum)
         cr->y += ((float) STEP * sin(cr->t * M_PI/180));
     }
     else {
-        float oldx, oldy;
-
-        oldx = cr->x;
-        oldy = cr->y;
-
         cr->x += ((float) cr->ys * cos(cr->t * M_PI/180));
         cr->y += ((float) cr->ys * sin(cr->t * M_PI/180));
 
         cr->x += ((float) cr->xs * cos(cr->t * M_PI/180 - M_PI / 2));
-        cr->x += ((float) cr->xs * sin(cr->t * M_PI/180 - M_PI / 2));
+        cr->y += ((float) cr->xs * sin(cr->t * M_PI/180 - M_PI / 2));
 
         cr->t += cr->t_inc;
         cr->degrees_drawn += abs(cr->t_inc);

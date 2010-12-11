@@ -458,8 +458,6 @@ init_polyhedra (ModeInfo *mi)
       fprintf(stderr, "%s: out of memory\n", progname);
       exit(1);
     }
-
-    bp = &bps[MI_SCREEN(mi)];
   }
 
   bp = &bps[MI_SCREEN(mi)];
@@ -469,8 +467,6 @@ init_polyhedra (ModeInfo *mi)
   bp->which = -1;
   load_fonts (mi);
   startup_blurb (mi);
-
-  reshape_polyhedra (mi, MI_WIDTH(mi), MI_HEIGHT(mi));
 
   if (!wire)
     {
@@ -556,6 +552,8 @@ init_polyhedra (ModeInfo *mi)
   }
 
   new_polyhedron (mi);
+  reshape_polyhedra (mi, MI_WIDTH(mi), MI_HEIGHT(mi));
+
 }
 
 

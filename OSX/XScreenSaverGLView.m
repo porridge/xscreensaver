@@ -108,23 +108,34 @@ init_GL (ModeInfo *mi)
 
   if (!ctx) {
 
-    NSOpenGLPixelFormatAttribute attrs[] = {
-      NSOpenGLPFADoubleBuffer,
-      NSOpenGLPFAColorSize, 24,
-      NSOpenGLPFAAlphaSize, 8,
-      NSOpenGLPFADepthSize, 16,
-      0 };
+    NSOpenGLPixelFormatAttribute attrs[20];
+    int i = 0;
+    attrs[i++] = NSOpenGLPFAColorSize; attrs[i++] = 24;
+    attrs[i++] = NSOpenGLPFAAlphaSize; attrs[i++] = 8;
+    attrs[i++] = NSOpenGLPFADepthSize; attrs[i++] = 16;
+
+    if (get_boolean_resource (mi->dpy, "doubleBuffer", "DoubleBuffer"))
+      attrs[i++] = NSOpenGLPFADoubleBuffer;
+
+    attrs[i] = 0;
+
     NSOpenGLPixelFormat *pixfmt = [[NSOpenGLPixelFormat alloc] 
                                     initWithAttributes:attrs];
 
     ctx = [[NSOpenGLContext alloc] 
             initWithFormat:pixfmt
               shareContext:nil];
+//    [pixfmt release]; // #### ???
   }
 
   // Sync refreshes to the vertical blanking interval
   GLint r = 1;
   [ctx setValues:&r forParameter:NSOpenGLCPSwapInterval];
+  check_gl_error ("NSOpenGLCPSwapInterval");
+
+  // #### "Build and Analyze" says that ctx leaks, because it doesn't
+  //      seem to realize that makeCurrentContext retains it (right?)
+  //      Not sure what to do to make this warning go away.
 
   [ctx makeCurrentContext];
   check_gl_error ("makeCurrentContext");
@@ -149,7 +160,6 @@ init_GL (ModeInfo *mi)
       NSLog (@"enabling multi-threaded OpenGL failed: %d", err);
     }
   }
-
 
   // Caller expects a pointer to an opaque struct...  which it dereferences.
   // Don't ask me, it's historical...

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=IFS
+Exec=/usr/lib/xscreensaver/ifs -root
+TryExec=/usr/lib/xscreensaver/ifs
+Comment=This one draws spinning, colliding iterated-function-system images. Note that the "Detail" parameter is exponential. Number of points drawn is functions^detail. http://en.wikipedia.org/wiki/Iterated_function_system Written by Chris Le Sueur and Robby Griffin.

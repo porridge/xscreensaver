@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Braid
+Exec=/usr/lib/xscreensaver/braid -root
+TryExec=/usr/lib/xscreensaver/braid
+Comment=Draws random color-cycling inter-braided concentric circles. Written by John Neil.

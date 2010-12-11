@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Engine
+Exec=/usr/lib/xscreensaver/engine -root
+TryExec=/usr/lib/xscreensaver/engine
+Comment=Draws a simple model of an engine that floats around the screen. http://en.wikipedia.org/wiki/Internal_combustion_engine#Operation Written by Ben Buxton and Ed Beroset.

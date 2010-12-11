@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=MirrorBlob
+Exec=/usr/lib/xscreensaver/mirrorblob -root
+TryExec=/usr/lib/xscreensaver/mirrorblob
+Comment=Draws a wobbly blob that distorts the image behind it. Written by Jon Dowdall.

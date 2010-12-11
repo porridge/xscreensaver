@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Boxed
+Exec=/usr/lib/xscreensaver/boxed -root
+TryExec=/usr/lib/xscreensaver/boxed
+Comment=Draws a box full of 3D bouncing balls that explode. Written by Sander van Grieken.

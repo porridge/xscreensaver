@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Carousel
+Exec=/usr/lib/xscreensaver/carousel -root
+TryExec=/usr/lib/xscreensaver/carousel
+Comment=Loads several random images, and displays them flying in a circular formation. The formation changes speed and direction randomly, and images periodically drop out to be replaced by new ones. Written by Jamie Zawinski.

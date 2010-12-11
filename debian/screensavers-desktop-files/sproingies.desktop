@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Sproingies
+Exec=/usr/lib/xscreensaver/sproingies -root
+TryExec=/usr/lib/xscreensaver/sproingies
+Comment=Slinky-like creatures walk down an infinite staircase and occasionally explode! http://en.wikipedia.org/wiki/Slinky http://en.wikipedia.org/wiki/Q%2Abert http://en.wikipedia.org/wiki/Marble_Madness Written by Ed Mackey.

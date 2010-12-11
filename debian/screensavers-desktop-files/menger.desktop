@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Menger
+Exec=/usr/lib/xscreensaver/menger -root
+TryExec=/usr/lib/xscreensaver/menger
+Comment=This draws the three-dimensional variant of the recursive Menger Gasket, a cube-based fractal object analagous to the Sierpinski Tetrahedron. http://en.wikipedia.org/wiki/Menger_sponge http://en.wikipedia.org/wiki/Sierpinski_carpet Written by Jamie Zawinski.

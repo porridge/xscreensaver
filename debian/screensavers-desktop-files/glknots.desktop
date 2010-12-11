@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=GLKnots
+Exec=/usr/lib/xscreensaver/glknots -root
+TryExec=/usr/lib/xscreensaver/glknots
+Comment=Generates some twisting 3d knot patterns. Spins 'em around. http://en.wikipedia.org/wiki/Knot_theory Written by Jamie Zawinski.

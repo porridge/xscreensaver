@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+#fix up our old screwup
+if dpkg-divert --list  /usr/share/gnome/apps/Settings/Desktop/screensaver-properties.desktop | grep -q "diversion of /usr/share/gnome/apps/Settings/Desktop/screensaver-properties.desktop to /usr/share/gnome/apps/Settings/Desktop/screensaver-properties.desktop.orig by xscreensaver"; then
+	rm -f /usr/share/gnome/apps/Settings/Desktop/screensaver-properties.desktop
+	rm -f /usr/share/control-center/Desktop/screensaver-properties.desktop
+	dpkg-divert --package xscreensaver --remove --rename --divert \
+		/usr/share/gnome/apps/Settings/Desktop/screensaver-properties.desktop.orig \
+		/usr/share/gnome/apps/Settings/Desktop/screensaver-properties.desktop
+	dpkg-divert --package xscreensaver --remove --rename --divert \
+		/usr/share/control-center/Desktop/screensaver-properties.desktop.orig \
+		/usr/share/control-center/Desktop/screensaver-properties.desktop
+fi
+
+# remove old link if it exists
+if [ -L /usr/X11R6/lib/X11/app-defaults/XScreenSaver ]; then
+	rm /usr/X11R6/lib/X11/app-defaults/XScreenSaver
+fi
+
+# Use the correct app defaults
+cd /etc/X11/app-defaults
+if [ -f XScreenSaver-gl ]; then
+	ln -sf XScreenSaver-gl  XScreenSaver
+else
+	ln -sf XScreenSaver-nogl XScreenSaver
+fi
+
+# Remove /usr/doc symlink
+if [ -d /usr/doc -a -h /usr/doc/xscreensaver -a -d /usr/share/doc/xscreensaver ]; then
+        rm -f /usr/doc/xscreensaver
+fi
+
+#DEBHELPER#

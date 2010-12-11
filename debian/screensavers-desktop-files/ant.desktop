@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Ant
+Exec=/usr/lib/xscreensaver/ant -root
+TryExec=/usr/lib/xscreensaver/ant
+Comment=A cellular automaton that is really a two-dimensional Turing machine: as the heads ("ants") walk along the screen, they change pixel values in their path. Then, as they pass over changed pixels, their behavior is influenced. http://en.wikipedia.org/wiki/Langton%27s_ant http://en.wikipedia.org/wiki/Turing_machine Written by David Bagley.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Lavalite
+Exec=/usr/lib/xscreensaver/lavalite -root
+TryExec=/usr/lib/xscreensaver/lavalite
+Comment=Draws a 3D Simulation a Lava Lite(r). Odd-shaped blobs of a mysterious substance are heated, slowly rise to the top of the bottle, and then drop back down as they cool. This simulation requires a fairly fast machine (both CPU and 3D performance.) "LAVA LITE(r) and the configuration of the LAVA(r) brand motion lamp are registered trademarks of Haggerty Enterprises, Inc. The configuration of the globe and base of the motion lamp are registered trademarks of Haggerty Enterprises, Inc. in the U.S.A. and in other countries around the world." http://en.wikipedia.org/wiki/Lava_lamp http://en.wikipedia.org/wiki/Metaballs Written by Jamie Zawinski.

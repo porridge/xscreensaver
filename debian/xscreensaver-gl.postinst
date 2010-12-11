@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+# remove old link if it exists
+if [ -L /usr/X11R6/lib/X11/app-defaults/XScreenSaver ]; then
+        rm /usr/X11R6/lib/X11/app-defaults/XScreenSaver
+fi
+
+cd /etc/X11/app-defaults
+if [ -f XScreenSaver-gl ]; then
+	ln -sf XScreenSaver-gl  XScreenSaver
+else
+	ln -sf XScreenSaver-nogl XScreenSaver
+fi
+
+# Remove /usr/doc symlink
+if [ -d /usr/doc -a -h /usr/doc/xscreensaver-gl -a -d /usr/share/doc/xscreensaver-gl ]; then
+        rm -f /usr/doc/xscreensaver-gl
+fi
+
+#DEBHELPER#

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Surfaces
+Exec=/usr/lib/xscreensaver/surfaces -root
+TryExec=/usr/lib/xscreensaver/surfaces
+Comment=This draws a visualization of several interesting parametric surfaces. http://mathworld.wolfram.com/DinisSurface.html http://en.wikipedia.org/wiki/Enneper_surface http://mathworld.wolfram.com/EnnepersMinimalSurface.html http://mathworld.wolfram.com/KuenSurface.html http://en.wikipedia.org/wiki/Moebius_strip http://mathworld.wolfram.com/Seashell.html http://mathworld.wolfram.com/SwallowtailCatastrophe.html http://mathworld.wolfram.com/BohemianDome.html http://en.wikipedia.org/wiki/Whitney_umbrella http://mathworld.wolfram.com/PlueckersConoid.html http://mathworld.wolfram.com/HennebergsMinimalSurface.html http://mathworld.wolfram.com/CatalansSurface.html http://mathworld.wolfram.com/CorkscrewSurface.html Written by Andrey Mirtchovski and Carsten Steger.

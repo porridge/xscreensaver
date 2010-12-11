@@ -1,0 +1,410 @@
+Format-Specification: 
+    http://wiki.debian.org/Proposals/CopyrightFormat?action=recall&rev=196
+Upstream-Author: Jamie Zawinski <jwz@jwz.org>
+Packaged-By: Larry Daffner <vizzie@airmail.net>
+Upstream-Name: XScreenSaver
+Original-Source-Location: 
+    http://www.jwz.org/xscreensaver/xscreensaver-(.*)\.tar\.gz
+Original-Source-Command: uscan --force-download
+Original-Source-Depends: devscripts
+
+Files: *
+Copyright: © 1991-2008 Jamie Zawinski <jwz@jwz.org>
+License: Other
+ Permission to use, copy, modify, distribute, and sell this software and its
+ documentation for any purpose is hereby granted without fee, provided that
+ the above copyright notice appear in all copies and that both that
+ copyright notice and this permission notice appear in supporting
+ documentation.  No representations are made about the suitability of this
+ software for any purpose.  It is provided "as is" without express or 
+ implied warranty.
+
+Files: hacks/flame.{man,c}, 
+       hacks/bouboule.{man,c},
+       hacks/hopalong.{man,c}
+Copyright: © 1988-1991 Patrick J. Naughton
+License: Other
+ Permission to use, copy, modify, and distribute this software and its
+ documentation for any purpose and without fee is hereby granted,
+ provided that the above copyright notice appear in all copies and that
+ both that copyright notice and this permission notice appear in
+ supporting documentation.
+
+Files: hacks/xanalogtv.{man,c}, hacks/analogtv.{c,man}
+Copyright: © 2003 Trevor Blackwell <tlb@tlb.org>
+License: Other
+ Permission to use, copy, modify, distribute, and sell this software and its 
+ documentation for any purpose is hereby granted without fee, provided that 
+ the above copyright notice appear in all copies and that both that copyright 
+ notice and this permission notice appear in supporting documentation.  
+ No representations are made about the suitability of this software for any 
+ purpose.  It is provided "as is" without express or implied warranty.
+
+Files: hacks/lissie.{man,c}
+Copyright: © 1996-2002 Alexander Jolk <ub9x@rz.uni-karlsruhe.de>
+License: Other
+ Permission to use, copy, modify, and distribute this software and its
+ documentation for any purpose and without fee is hereby granted,
+ provided that the above copyright notice appear in all copies and that
+ both that copyright notice and this permission notice appear in
+ supporting documentation.
+
+ This file is provided AS IS with no warranties of any kind.  The author
+ shall have no liability with respect to the infringement of copyrights,
+ trade secrets or any patents by this file or any part thereof.  In no
+ event will the author be liable for any lost revenue or profits or
+ other special, indirect and consequential damages.
+
+Files: hacks/munch.{c,man}
+Copyright: © 1997 Tim Showalter
+License: Other
+ Permission is granted to copy, modify, and use this as long
+ as this notice remains intact.  No warranties are expressed or implied.
+ CMU Sucks.
+
+Files: hacks/squiral.{c,man}
+Copyright: © 1999 Jeff Epler <jepler@inetnebr.com>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/euler2d.{c,man}, hacks/polyominoes.{c,man}
+Copyright: © 2000 Stephen Montgomery-Smith <stephen@math.missouri.edu>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/sierpinski.{c,man}
+Copyright: © 1996 Desmond Daignault
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/wormhole.{c,man}
+Copyright: © 2004 Jon Rafkind
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/xspirograph.c
+Copyright: © 2000 Rohit Singh <rohit_singh@hotmail.com>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/petri.{man,c}, 
+       hacks/nerverot.{c,man}
+Copyright: © 1992-2000 Dan Bornstein <danfuzz@milk.com>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/xflame.{c,man}
+Copyright: © 1996-2002 Carsten Haitzler <raster@redhat.com>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/bumps.{c,man}
+Copyright: © 1999-2006 Shane Smit
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/vines.{c,man}
+Copyright: © 1997 Tracy Camp <campt@hurrah.com>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/celtic.{man,c}
+Copyright: © 2006 Max Froumentin <max@lapin-bleu.net>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/metaballs.{c,man}
+Copyright: © 2002-2003 W.P. van Paassen <peter@paassen.tmfweb.nl>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/grav.{c,man}
+Copyright: © 1993 Greg Bowering
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/penetrate.{c,man}
+Copyright: © 1999 Adam Miller
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/kaleidescope.{c,man} 
+Copyright: © 1997-2006 Ron Tapia <tapia@nmia.com>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/truchet.{c,man}
+Copyright: © 1998 Adrian Likins <adrian@gimp.org>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/spiral.{c,man}
+Copyright: © 1994 Darrick Brown
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/noseguy.{man,c}
+Copyright: © 1985-1990 Dan Heller <argv@danheller.com>
+License: Same as XScreenSaver
+
+Files: hacks/hyperball.{man,c}
+Copyright: © 2000 Joe Keane.
+License: Same as XScreenSaver
+
+Files: hacks/laser.{man,c}
+Copyright: © 1995 Pascal Pensa <pensa@aurora.unice.fr>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/interference.{man,c}
+Copyright: © 1998 Hannu Mallat <hmallat@cs.hut.fi>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/epicycle.{man,c}
+Copyright: © 1998 James Youngman <jay@gnu.org>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/mountain.{man,c}
+Copyright: © 1995 Pascal Pensa <pensa@aurora.unice.fr>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/juggle.{man,c}
+Copyright: © 1996 Tim Auckland <tda10.geo@yahoo.com>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/kumppa.{man,c}
+Copyright: © 1998-2002 Teemu Suutari <temisu@utu.fi>
+License: MIT with extra notice
+ Permission is hereby granted, free of charge, to any person obtaining
+ a copy of this software and associated documentation files (the
+ "Software"), to deal in the Software without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
+ distribute, sublicense, and/or sell copies of the Software, and to
+ permit persons to whom the Software is furnished to do so, subject to
+ the following conditions:
+
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ IN NO EVENT SHALL THE X CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
+ 
+ Except as contained in this notice, the name of the X Consortium shall
+ not be used in advertising or otherwise to promote the sale, use or
+ other dealings in this Software without prior written authorization
+ from the X Consortium.
+
+Files: hacks/automata.h
+Copyright: © 1995 David Bagley
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/anemone.{c,man}
+Copyright: © 2001-2002 Gabriel Finch
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/crystal.{c,man}
+Copyright: © 1997 Jouk Jansen <joukj@crys.chem.uva.nl>
+License: Same as hacks/lissie.{c,man} extended
+ Permission to use, copy, modify, and distribute this software and its
+ documentation for any purpose and without fee is hereby granted,
+ provided that the above copyright notice appear in all copies and that
+ both that copyright notice and this permission notice appear in
+ supporting documentation.
+ 
+ This file is provided AS IS with no warranties of any kind.  The author
+ shall have no liability with respect to the infringement of copyrights,
+ trade secrets or any patents by this file or any part thereof.  In no
+ event will the author be liable for any lost revenue or profits or
+ other special, indirect and consequential damages.
+ 
+ The author should like to be notified if changes have been made to the
+ routine.  Response will only be guaranteed when a VMS version of the 
+ program is available.
+
+Files: hacks/blaster.{c,man}
+Copyright: © 1999 Jonathan H. Lin <jonlin@tesuji.org>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/ant.c
+Copyright: © 1995 David Bagley
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/rotor.c
+Copyright: © 1991 Patrick J. Naughton
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/rotor.man
+Copyright: © 2002 Tom Lawrence
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/demon.{c,man}
+Copyright: © 1995-2002 David Bagley
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/interaggregate.{man,c}
+Copyright: © 2003 J. Tarbell
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/ccurve.{c,man}, hacks/wander.{c,man}
+Copyright: © 1998-2002 Rick Campbell <rick@campbellcentral.org>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/pacman{_ai.h,_ai.c,.c,.h,.man,_level.c,_level.h}
+Copyright: © 2002 Edwin de Jong <mauddib@gmx.net>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/penrose.{c,man}
+Copyright: © 1996 Timo Korvola <tkorvola@dopey.hut.fi>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/spotlight.{c,man}
+Copyright: © 1999 Rick Schultz
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/triangle.{c,man}
+Copyright: © 1995 Tobias Gloth
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/zoom.{c,man}
+Copyright: © 2000 James Macnicol
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/speedmine.{c,man}
+Copyright: © 2001 Conrad Parker <conrad@deephackmode.org>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/popsquares.{c,man}
+Copyright: 2003 Levi Burton <donburton@sbcglobal.net>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/flag.{c,man}
+Copyright: © 1996 Charles Vidal <vidalc@univ-mlv.fr>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/fireworkx{.c,.man,_mmx.S}
+Copyright: © 1999-2007 Rony B Chandran <ronybc@asia.com>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/xsublim.{c,man}
+Copyright: © 1999-2000 Greg Knauss <greg@eod.com>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/imsmap.{c,man}
+Copyright: © 1992-2008 Juergen Nickelsen and Jamie Zawinski
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/maze.{c,man}, hacks/sphere.{c,man}
+Copyright: © 1988 Sun Microsystems
+License: Other
+ Permission to use, copy, modify, and distribute this software and its
+ documentation for any purpose and without fee is hereby granted, 
+ provided that the above copyright notice appear in all copies and that
+ both that copyright notice and this permission notice appear in 
+ supporting documentation, and that the names of Sun or MIT not be
+ used in advertising or publicity pertaining to distribution of the
+ software without specific prior written permission. Sun and M.I.T. 
+ make no representations about the suitability of this software for 
+ any purpose. It is provided "as is" without any express or implied warranty.
+ 
+ SUN DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING
+ ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ PURPOSE. IN NO EVENT SHALL SUN BE LIABLE FOR ANY SPECIAL, INDIRECT
+ OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+ OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+ OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE
+ OR PERFORMANCE OF THIS SOFTWARE.
+
+Files: hacks/vermiculate.{c,man}
+Copyright: © 2002 Tyler Pierce
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/abstractile.{c,man}
+Copyright: © 2004 Steve Sundstrom
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/flow.{c,man}
+Copyright: © 1996 Tim Auckland <Tim.Auckland@Procket.com>
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/braid.{c,man}
+Copyright: © 1995 John Neil
+License: Same as hacks/lissie.{c,man}
+
+Files: hacks/asm6502.{h,c,man}
+Copyright: © Jeremy English <jhe@jeremyenglish.org>
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/pedal.{c,man}
+Copyright: © 1994 Carnegie Mellon University
+License: Same as hacks/xanalogtv.{c,man}
+
+Files: hacks/glx/chessmodels.{c,man}
+Copyright: © 2006 John-Paul Gignac <jjgignac@users.sf.net>
+           © 2002 Robert Ancell <bob27@users.sourceforge.net>
+	   © 2002 Michael Duelli <duelli@users.sourceforge.net>
+License: GPL-2+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License along
+ with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+Files: hacks/glx/tangram.{man,c}
+Copyright: © 2005 Jeremy English <jhe@jeremyenglish.org>
+License: same as hacks/xanalogtv.{c,man}
+
+Files: hacks/glx/moebius.{c,man}
+Copyright: © 1997-2002 Marcelo F. Vianna <mfvianna@centroin.com.br>
+License: same as hacks/lissie.{c,man}
+
+Files: hacks/glx/timetunnel.{c,man}
+Copyright: © 2005 Sean Brennan <zettix@yahoo.com>
+License: same as hacks/xanalogtv.{c,man}
+
+Files: hacks/glx/glcells.{c,man}
+Copyright: © 2007 Matthias Toussaint
+License: same as hacks/lissie.{c,man}
+
+Files: hacks/glx/{glut_roman,glut_stroke,glutstroke,glut_swidth}.c
+Copyright: © 1989-1995 Mark J. Kilgard
+License: Other
+ This program is freely distributable without licensing fees 
+ and is provided without guarantee or warrantee expressed or 
+ implied. This program is -not- in the public domain.
+ 
+Files: hacks/glx/stonerview*
+Copyright: © 1998-2001 Andrew Plotkin <erkyrath@eblong.com>
+License: same as hacks/xanalogtv.{c,man}
+
+Files: hacks/glx/tunnel_draw.{c,h}
+Copyright: © 2002-2004 E. Lassauge
+License: same as hacks/lissie.{c,man}
+
+
+
+Files: debian/*
+Copyright: © 1996-2002 Larry Daffner <vizzie@airmail.net>
+           © 2002 Colin Watson <cjwatson@debian.org>
+	   © 2002-2005 Karl Ramm <kcr@debian.org>
+	   © 2005-2007 Ralf Hildebrandt <ralf.hildebrandt@charite.de>
+	   © 2005-2007 Josselin Mouette <joss@debian.org>
+	   © 2007-2009 Jose Luis Rivas <ghostbar@debian.org>
+	   © 2007-2009 Tormod Volden <debian.tormod@gmail.com>
+License: MIT
+ Permission is hereby granted, free of charge, to any person obtaining
+ a copy of this software and associated documentation files (the
+ "Software"), to deal in the Software without restriction, including
+ without limitation the rights to use, copy, modify, merge, publish,
+ distribute, sublicense, and/or sell copies of the Software, and to
+ permit persons to whom the Software is furnished to do so, subject to
+ the following conditions:
+
+ The above copyright notice and this permission notice shall be included
+ in all copies or substantial portions of the Software.
+ 
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ IN NO EVENT SHALL THE X CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=XSpirograph
+Exec=/usr/lib/xscreensaver/xspirograph -root
+TryExec=/usr/lib/xscreensaver/xspirograph
+Comment=Simulates that pen-in-nested-plastic-gears toy from your childhood. http://en.wikipedia.org/wiki/Spirograph Written by Rohit Singh.

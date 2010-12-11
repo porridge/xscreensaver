@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=BlinkBox
+Exec=/usr/lib/xscreensaver/blinkbox -root
+TryExec=/usr/lib/xscreensaver/blinkbox
+Comment=Shows a ball contained inside of a bounding box. Colored blocks blink in when the ball hits the sides. Written by Jeremy English.

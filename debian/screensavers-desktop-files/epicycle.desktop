@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Epicycle
+Exec=/usr/lib/xscreensaver/epicycle -root
+TryExec=/usr/lib/xscreensaver/epicycle
+Comment=This draws the path traced out by a point on the edge of a circle. That circle rotates around a point on the rim of another circle, and so on, several times. These were the basis for the pre-heliocentric model of planetary motion. http://en.wikipedia.org/wiki/Deferent_and_epicycle Written by James Youngman.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=FlipText
+Exec=/usr/lib/xscreensaver/fliptext -root
+TryExec=/usr/lib/xscreensaver/fliptext
+Comment=Draws successive pages of text. The lines flip in and out in a soothing 3D pattern. Written by Jamie Zawinski.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=GLHanoi
+Exec=/usr/lib/xscreensaver/glhanoi -root
+TryExec=/usr/lib/xscreensaver/glhanoi
+Comment=Solves the Towers of Hanoi puzzle. Move N disks from one pole to another, one disk at a time, with no disk ever resting on a disk smaller than itself. http://en.wikipedia.org/wiki/Tower_of_Hanoi Written by Dave Atkinson; 2005. 	

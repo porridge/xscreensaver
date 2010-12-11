@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Barcode
+Exec=/usr/lib/xscreensaver/barcode -root
+TryExec=/usr/lib/xscreensaver/barcode
+Comment=Draws a random sequence of colorful barcodes scrolling across your screen. CONSUME! The barcodes follow the UPC-A, UPC-E, EAN-8 or EAN-13 standards. http://en.wikipedia.org/wiki/Universal_Product_Code http://en.wikipedia.org/wiki/European_Article_Number Written by Dan Bornstein.

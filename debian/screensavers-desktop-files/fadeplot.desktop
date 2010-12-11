@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=FadePlot
+Exec=/usr/lib/xscreensaver/fadeplot -root
+TryExec=/usr/lib/xscreensaver/fadeplot
+Comment=Draws what looks like a waving ribbon following a sinusoidal path. Written by Bas van Gaalen and Charles Vidal.

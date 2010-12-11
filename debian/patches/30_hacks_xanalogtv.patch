@@ -1,0 +1,22 @@
+Index: xscreensaver-5.04/hacks/xanalogtv.c
+===================================================================
+--- xscreensaver-5.04.orig/hacks/xanalogtv.c	2006-03-31 09:21:41.000000000 +0200
++++ xscreensaver-5.04/hacks/xanalogtv.c	2007-12-08 17:47:00.000000000 +0100
+@@ -42,7 +42,7 @@
+ #include "xpm-pixmap.h"
+ #include "analogtv.h"
+ 
+-#include "images/logo-50.xpm"
++#include "images/logo-50-bad.xpm"
+ 
+ /* #define DEBUG 1 */
+ /* #define USE_TEST_PATTERNS */
+@@ -170,7 +170,7 @@
+   ypos += st->ugly_font.char_h*5/2;
+ 
+   analogtv_draw_xpm(st->tv, input,
+-                    logo_50_xpm, xpos - 100, ypos);
++                    logo_50_bad_xpm, xpos - 100, ypos);
+ 
+   ypos += 58;
+ 

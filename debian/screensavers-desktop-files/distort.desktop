@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Distort
+Exec=/usr/lib/xscreensaver/distort -root
+TryExec=/usr/lib/xscreensaver/distort
+Comment=Grabs an image of the screen, and then lets a transparent lens wander around the screen, magnifying whatever is underneath. Written by Jonas Munsin.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Juggler3D
+Exec=/usr/lib/xscreensaver/juggler3d -root
+TryExec=/usr/lib/xscreensaver/juggler3d
+Comment=3D simulation of a juggler performing with balls, clubs and rings. http://en.wikipedia.org/wiki/Siteswap Written by Brian Apps.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Cage
+Exec=/usr/lib/xscreensaver/cage -root
+TryExec=/usr/lib/xscreensaver/cage
+Comment=This draws Escher's "Impossible Cage", a 3d analog of a moebius strip, and rotates it in three dimensions. http://en.wikipedia.org/wiki/Maurits_Cornelis_Escher Written by Marcelo Vianna.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=AntSpotlight
+Exec=/usr/lib/xscreensaver/antspotlight -root
+TryExec=/usr/lib/xscreensaver/antspotlight
+Comment=Draws an ant (with a headlight) who walks on top of an image of your desktop or other image. Written by Blair Tennessy.

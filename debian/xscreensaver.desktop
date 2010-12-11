@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=XScreenSaver Setup
+Exec=xscreensaver-demo
+Icon=xscreensaver
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=System;

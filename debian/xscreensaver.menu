@@ -1,0 +1,27 @@
+?package(xscreensaver):needs="x11" section="Screen/Saving" \
+	title="Enable XScreenSaver" \
+	command="/usr/bin/xscreensaver"
+?package(xscreensaver):needs="x11" section="Screen/Saving" \
+	title="Disable XScreenSaver" \
+	command="/usr/bin/xscreensaver-command -exit"
+?package(xscreensaver):needs="x11" section="Screen/Saving" \
+	title="Demo Screen Hacks" \
+	command="/usr/bin/xscreensaver-command -demo"
+?package(xscreensaver):needs="x11" section="Screen/Saving" \
+	title="ScreenSaver Preferences" \
+	command="/usr/bin/xscreensaver-command -prefs"
+?package(xscreensaver):needs="x11" section="Screen/Saving" \
+	title="Reinitialize XScreenSaver" \
+	command="/usr/bin/xscreensaver-command -restart"
+?package(xscreensaver):needs="x11" section="Screen/Saving" \
+	title="Activate ScreenSaver (Random)" \
+	command="/usr/bin/xscreensaver-command -activate"
+?package(xscreensaver):needs="x11" section="Screen/Saving" \
+	title="Activate ScreenSaver (Next)" \
+	command="/usr/bin/xscreensaver-command -next"
+?package(xscreensaver):needs="x11" section="Screen/Saving" \
+	title="Activate ScreenSaver (Previous)" \
+	command="/usr/bin/xscreensaver-command -prev"
+?package(xscreensaver):needs="x11" section="Screen/Locking" \
+	title="Lock Screen (XScreenSaver)" \
+	command="/usr/bin/xscreensaver-command -lock"

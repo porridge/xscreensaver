@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Wormhole
+Exec=/usr/lib/xscreensaver/wormhole -root
+TryExec=/usr/lib/xscreensaver/wormhole
+Comment=Flying through a colored wormhole in space. Written by Jon Rafkind.

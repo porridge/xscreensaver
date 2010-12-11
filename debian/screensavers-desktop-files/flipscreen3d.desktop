@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=FlipScreen3D
+Exec=/usr/lib/xscreensaver/flipscreen3d -root
+TryExec=/usr/lib/xscreensaver/flipscreen3d
+Comment=Grabs an image of the desktop, turns it into a GL texture map, and spins it around and deforms it in various ways. Written by Ben Buxton and Jamie Zawinski.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Polyominoes
+Exec=/usr/lib/xscreensaver/polyominoes -root
+TryExec=/usr/lib/xscreensaver/polyominoes
+Comment=Repeatedly attempts to completely fill a rectangle with irregularly-shaped puzzle pieces. http://en.wikipedia.org/wiki/Polyomino Written by Stephen Montgomery-Smith.

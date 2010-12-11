@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=SlideScreen
+Exec=/usr/lib/xscreensaver/slidescreen -root
+TryExec=/usr/lib/xscreensaver/slidescreen
+Comment=This takes an image, divides it into a grid, and then randomly shuffles the squares around as if it was one of those "fifteen-puzzle" games where there is a grid of squares, one of which is missing. http://en.wikipedia.org/wiki/Fifteen_puzzle Written by Jamie Zawinski.

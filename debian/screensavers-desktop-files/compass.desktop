@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Compass
+Exec=/usr/lib/xscreensaver/compass -root
+TryExec=/usr/lib/xscreensaver/compass
+Comment=This draws a compass, with all elements spinning about randomly, for that "lost and nauseous" feeling. Written by Jamie Zawinski.

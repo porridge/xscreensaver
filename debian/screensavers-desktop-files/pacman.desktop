@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Pacman
+Exec=/usr/lib/xscreensaver/pacman -root
+TryExec=/usr/lib/xscreensaver/pacman
+Comment=Simulates a game of Pac-Man on a randomly-created level. http://en.wikipedia.org/wiki/Pac-Man Written by Edwin de Jong.

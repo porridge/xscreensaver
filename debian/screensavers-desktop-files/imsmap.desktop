@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=IMSMap
+Exec=/usr/lib/xscreensaver/imsmap -root
+TryExec=/usr/lib/xscreensaver/imsmap
+Comment=This generates random cloud-like patterns. The idea is to take four points on the edge of the image, and assign each a random "elevation". Then find the point between them, and give it a value which is the average of the other four, plus some small random offset. Coloration is done based on elevation. Written by Juergen Nickelsen and Jamie Zawinski.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Tangram
+Exec=/usr/lib/xscreensaver/tangram -root
+TryExec=/usr/lib/xscreensaver/tangram
+Comment=Solves tangram puzzles. http://en.wikipedia.org/wiki/Tangram Written by Jeremy English.

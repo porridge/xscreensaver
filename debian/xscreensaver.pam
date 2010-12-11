@@ -1,0 +1,6 @@
+#
+# /etc/pam.d/xscreensaver - PAM behavior for xscreensaver
+#
+
+@include common-auth
+@include common-account

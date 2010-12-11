@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Greynetic
+Exec=/usr/lib/xscreensaver/greynetic -root
+TryExec=/usr/lib/xscreensaver/greynetic
+Comment=Draws random colored, stippled and transparent rectangles. Written by Jamie Zawinski.

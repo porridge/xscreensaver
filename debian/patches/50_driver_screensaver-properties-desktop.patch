@@ -1,0 +1,14 @@
+Index: xscreensaver/driver/screensaver-properties.desktop.in
+===================================================================
+--- xscreensaver.orig/driver/screensaver-properties.desktop.in	2009-09-02 23:40:20.000000000 +0200
++++ xscreensaver/driver/screensaver-properties.desktop.in	2009-09-06 18:33:31.000000000 +0200
+@@ -1,7 +1,8 @@
+ [Desktop Entry]
+ Exec=xscreensaver-demo
+-Icon=xscreensaver
++Icon=xscreensaver.svg
+ Terminal=false
++StartupNotify=true
+ _Name=Screensaver
+ _Comment=Change screensaver properties
+ Type=Application

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=XScreensaver
+TryExec=xscreensaver
+Exec=xscreensaver -nosplash
+NoDisplay=true
+#X-GNOME-Autostart-Phase=Application
+#X-GNOME-Autostart-Notify=true
+Comment=The XScreensaver daemon

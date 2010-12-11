@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Rorschach
+Exec=/usr/lib/xscreensaver/rorschach -root
+TryExec=/usr/lib/xscreensaver/rorschach
+Comment=This generates random inkblot patterns via a reflected random walk. Any deep-seated neurotic tendencies which this program reveals are your own problem. http://en.wikipedia.org/wiki/Rorschach_inkblot_test http://en.wikipedia.org/wiki/Random_walk Written by Jamie Zawinski.

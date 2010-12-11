@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Juggle
+Exec=/usr/lib/xscreensaver/juggle -root
+TryExec=/usr/lib/xscreensaver/juggle
+Comment=Draws a juggling stick-man. See also "Juggler3D". http://en.wikipedia.org/wiki/Siteswap Written by Tim Auckland.

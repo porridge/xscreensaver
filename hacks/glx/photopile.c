@@ -216,6 +216,7 @@ static void
 image_loaded_cb (const char *filename, XRectangle *geom,
                  int image_width, int image_height,
                  int texture_width, int texture_height,
+                 const char *description,
                  void *closure)
 {
   photopile_state *ss = (photopile_state *) closure;
@@ -297,7 +298,7 @@ load_image (ModeInfo *mi)
   frame->loaded_p = False;
 
   if (wire)
-    image_loaded_cb (0, 0, 0, 0, 0, 0, ss);
+    image_loaded_cb (0, 0, 0, 0, 0, 0, 0, ss);
   else
     {
       int w = MI_WIDTH(mi);

@@ -540,8 +540,8 @@ typedef struct slideshow_data_s {
 
 static void
 image_loaded_cb (Screen *screen, Window window, Drawable p,
-                 const char *name, XRectangle *geometry,
-                 void *closure)
+                 const char *name, const char *description,
+                 XRectangle *geometry, void *closure)
 {
   Display *dpy = DisplayOfScreen (screen);
   apple2_sim_t *sim = (apple2_sim_t *) closure;

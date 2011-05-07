@@ -175,22 +175,34 @@ checkerboard (Screen *screen, Drawable drawable)
 
 
 static char *
-get_name (Display *dpy, Window window)
+get_string_property (Display *dpy, Window window, char *atom_name)
 {
   Atom type;
   int format;
   unsigned long nitems, bytesafter;
-  unsigned char *name = 0;
-  Atom atom = XInternAtom (dpy, XA_XSCREENSAVER_IMAGE_FILENAME, False);
+  unsigned char *string_property = 0;
+  Atom atom = XInternAtom (dpy, atom_name, False);
   if (XGetWindowProperty (dpy, window, atom,
                           0, 1024, False, XA_STRING,
                           &type, &format, &nitems, &bytesafter,
-                          &name)
+                          &string_property)
       == Success
       && type != None)
-    return (char *) name;
+    return (char *) string_property;
   else
     return 0;
+}
+
+static char *
+get_name (Display *dpy, Window window)
+{
+  return get_string_property(dpy, window, XA_XSCREENSAVER_IMAGE_FILENAME);
+}
+
+static char *
+get_description (Display *dpy, Window window)
+{
+  return get_string_property(dpy, window, XA_XSCREENSAVER_IMAGE_DESCRIPTION);
 }
 
 
@@ -302,7 +314,8 @@ fork_exec_wait (const char *command)
 
 typedef struct {
   void (*callback) (Screen *, Window, Drawable,
-                    const char *name, XRectangle *geom, void *closure);
+                    const char *name, const char *description,
+                    XRectangle *geom, void *closure);
   Screen *screen;
   Window window;
   Drawable drawable;
@@ -320,8 +333,8 @@ static void
 fork_exec_cb (const char *command,
               Screen *screen, Window window, Drawable drawable,
               void (*callback) (Screen *, Window, Drawable,
-                                const char *name, XRectangle *geom,
-                                void *closure),
+                                const char *name, const char *description,
+                                XRectangle *geom, void *closure),
               void *closure)
 {
   XtAppContext app = XtDisplayToApplicationContext (DisplayOfScreen (screen));
@@ -403,17 +416,19 @@ finalize_cb (XtPointer closure, int *fd, XtIntervalId *id)
 {
   grabclient_data *data = (grabclient_data *) closure;
   Display *dpy = DisplayOfScreen (data->screen);
-  char *name;
+  char *name, *description;
   XRectangle geom = { 0, 0, 0, 0 };
 
   XtRemoveInput (*id);
 
   name = get_name (dpy, data->window);
+  description = get_description (dpy, data->window);
   get_geometry (dpy, data->window, &geom);
 
   data->callback (data->screen, data->window, data->drawable,
-                  name, &geom, data->closure);
+                  name, description, &geom, data->closure);
   if (name) free (name);
+  if (description) free (description);
 
   fclose (data->read_pipe);
 
@@ -435,8 +450,8 @@ finalize_cb (XtPointer closure, int *fd, XtIntervalId *id)
 static void
 load_random_image_1 (Screen *screen, Window window, Drawable drawable,
                      void (*callback) (Screen *, Window, Drawable,
-                                       const char *name, XRectangle *geom,
-                                       void *closure),
+                                       const char *name, const char *description,
+                                       XRectangle *geom, void *closure),
                      void *closure,
                      char **name_ret,
                      XRectangle *geom_ret)
@@ -596,7 +611,7 @@ pipe_cb (XtPointer closure, int *source, XtInputId *id)
   }
 
   if (absfile) free (absfile);
-  clo2->callback (clo2->screen, clo2->xwindow, clo2->drawable, buf, &geom,
+  clo2->callback (clo2->screen, clo2->xwindow, clo2->drawable, buf, 0, &geom,
                   clo2->closure);
   clo2->callback = 0;
   free (clo2->directory);
@@ -609,6 +624,7 @@ osx_load_image_file_async (Screen *screen, Window xwindow, Drawable drawable,
                            const char *dir,
                            void (*callback) (Screen *, Window, Drawable,
                                              const char *name,
+                                             const char *description,
                                              XRectangle *geom,
                                              void *closure),
                        void *closure)
@@ -657,8 +673,8 @@ osx_load_image_file_async (Screen *screen, Window xwindow, Drawable drawable,
 static void
 load_random_image_1 (Screen *screen, Window window, Drawable drawable,
                      void (*callback) (Screen *, Window, Drawable,
-                                       const char *name, XRectangle *geom,
-                                       void *closure),
+                                       const char *name, const char *description,
+                                       XRectangle *geom, void *closure),
                      void *closure,
                      char **name_ret,
                      XRectangle *geom_ret)
@@ -732,7 +748,7 @@ load_random_image_1 (Screen *screen, Window window, Drawable drawable,
   if (callback) {
     /* If we got here, we loaded synchronously even though they wanted async.
      */
-    callback (screen, window, drawable, name_ret_2, &geom_ret_2, closure);
+    callback (screen, window, drawable, name_ret_2, 0, &geom_ret_2, closure);
   }
 }
 
@@ -795,8 +811,8 @@ print_loading_msg (Screen *screen, Window window)
 void
 load_image_async (Screen *screen, Window window, Drawable drawable,
                   void (*callback) (Screen *, Window, Drawable,
-                                    const char *name, XRectangle *geom,
-                                    void *closure),
+                                    const char *name, const char *description,
+                                    XRectangle *geom, void *closure),
                   void *closure)
 {
   load_random_image_1 (screen, window, drawable, callback, closure, 0, 0);
@@ -810,7 +826,8 @@ struct async_load_state {
 
 static void
 load_image_async_simple_cb (Screen *screen, Window window, Drawable drawable,
-                            const char *name, XRectangle *geom, void *closure)
+                            const char *name, const char *description,
+                            XRectangle *geom, void *closure)
 {
   async_load_state *state = (async_load_state *) closure;
   state->done_p = True;

@@ -1125,53 +1125,16 @@ display_file (Screen *screen, Window window, Drawable drawable,
   return False;
 }
 
-
-/* Invokes a sub-process and returns its output (presumably, a file to
-   load.)  Free the string when done.  'grab_type' controls which program
-   to run.  Returned pathname may be relative to 'directory', or absolute.
+/* Invokes a sub-process and returns its output. Free the string when done.
  */
 static char *
-get_filename_1 (Screen *screen, const char *directory, grab_type type,
-                Bool verbose_p)
+get_program_output (Screen *screen, int ac, char *av[], Bool verbose_p)
 {
   Display *dpy = DisplayOfScreen (screen);
   pid_t forked;
   int fds [2];
   int in, out;
   char buf[10240];
-  char *av[20];
-  int ac = 0;
-
-  switch (type)
-    {
-    case GRAB_FILE:
-      av[ac++] = GETIMAGE_FILE_PROGRAM;
-      if (verbose_p)
-        av[ac++] = "--verbose";
-      av[ac++] = "--name";
-      av[ac++] = (char *) directory;
-      break;
-
-    case GRAB_VIDEO:
-      av[ac++] = GETIMAGE_VIDEO_PROGRAM;
-      if (verbose_p)
-        av[ac++] = "--verbose";
-      av[ac++] = "--name";
-      break;
-
-# ifdef USE_EXTERNAL_SCREEN_GRABBER
-    case GRAB_DESK:
-      av[ac++] = GETIMAGE_SCREEN_PROGRAM;
-      if (verbose_p)
-        av[ac++] = "--verbose";
-      av[ac++] = "--name";
-      break;
-# endif
-
-    default:
-      abort();
-    }
-  av[ac] = 0;
 
   if (verbose_p)
     {
@@ -1219,11 +1182,9 @@ get_filename_1 (Screen *screen, const char *directory, grab_type type,
       }
     default:
       {
-        struct stat st;
         int wait_status = 0;
         FILE *f = fdopen (in, "r");
         int L;
-        char *ret = 0;
 
         close (out);  /* don't need this one */
         *buf = 0;
@@ -1241,31 +1202,84 @@ get_filename_1 (Screen *screen, const char *directory, grab_type type,
         if (!*buf)
           return 0;
 
-        ret = strdup (buf);
-
-        if (*ret != '/')
-          {
-            /* Program returned path relative to directory.  Prepend dir
-               to buf so that we can properly stat it. */
-            strcpy (buf, directory);
-            if (directory[strlen(directory)-1] != '/')
-              strcat (buf, "/");
-            strcat (buf, ret);
-          }
-
-        if (stat(buf, &st))
-          {
-            fprintf (stderr, "%s: file does not exist: \"%s\"\n",
-                     progname, buf);
-            free (ret);
-            return 0;
-          }
-        else
-          return ret;
+        return strdup (buf);
       }
     }
 
   abort();
+}
+
+
+/* Invokes a sub-process and returns its output (presumably, a file to
+   load.)  Free the string when done.  'grab_type' controls which program
+   to run.  Returned pathname may be relative to 'directory', or absolute.
+ */
+static char *
+get_filename_1 (Screen *screen, const char *directory, grab_type type,
+                Bool verbose_p)
+{
+  char *av[20];
+  int ac = 0;
+  struct stat st;
+  char *ret, *tmp;
+
+  switch (type)
+    {
+    case GRAB_FILE:
+      av[ac++] = GETIMAGE_FILE_PROGRAM;
+      if (verbose_p)
+        av[ac++] = "--verbose";
+      av[ac++] = "--name";
+      av[ac++] = (char *) directory;
+      break;
+
+    case GRAB_VIDEO:
+      av[ac++] = GETIMAGE_VIDEO_PROGRAM;
+      if (verbose_p)
+        av[ac++] = "--verbose";
+      av[ac++] = "--name";
+      break;
+
+# ifdef USE_EXTERNAL_SCREEN_GRABBER
+    case GRAB_DESK:
+      av[ac++] = GETIMAGE_SCREEN_PROGRAM;
+      if (verbose_p)
+        av[ac++] = "--verbose";
+      av[ac++] = "--name";
+      break;
+# endif
+
+    default:
+      abort();
+    }
+  av[ac] = 0;
+
+  ret = get_program_output (screen, ac, av, verbose_p);
+  if (!ret || !*ret)
+    return 0;
+
+  if (*ret != '/')
+    {
+      /* Program returned path relative to directory.  Prepend dir
+         so that we can properly stat it. */
+      tmp = malloc(strlen(ret) + 2 + strlen(directory));
+      strcpy (tmp, directory);
+      if (directory[strlen(directory)-1] != '/')
+        strcat (tmp, "/");
+      strcat (tmp, ret);
+    }
+  else
+    tmp = strdup (ret);
+
+  if (stat(tmp, &st))
+    {
+      fprintf (stderr, "%s: file does not exist: \"%s\"\n",
+               progname, tmp);
+      free (ret);
+      ret = 0;
+    }
+  free (tmp);
+  return ret;
 }
 
 

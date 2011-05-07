@@ -490,6 +490,7 @@ typedef struct {
    */
   void (*callback) (const char *filename, XRectangle *geometry,
                     int iw, int ih, int tw, int th,
+                    const char *description,
                     void *closure);
   void *closure;
 
@@ -647,8 +648,8 @@ ximage_to_texture (XImage *ximage,
 
 static void load_texture_async_cb (Screen *screen,
                                         Window window, Drawable drawable,
-                                        const char *name, XRectangle *geometry,
-                                        void *closure);
+                                        const char *name, const char *description,
+                                        XRectangle *geometry, void *closure);
 
 
 /* Grabs an image of the desktop (or another random image file) and
@@ -670,6 +671,7 @@ load_texture_async (Screen *screen, Window window,
                                       int image_height,
                                       int texture_width,
                                       int texture_height,
+                                      const char *description,
                                       void *closure),
                     void *closure)
 {
@@ -708,7 +710,8 @@ load_texture_async (Screen *screen, Window window,
  */
 static void
 load_texture_async_cb (Screen *screen, Window window, Drawable drawable,
-                       const char *name, XRectangle *geometry, void *closure)
+                       const char *name, const char *description,
+                       XRectangle *geometry, void *closure)
 {
   Display *dpy = DisplayOfScreen (screen);
   Bool ok;
@@ -824,7 +827,7 @@ load_texture_async_cb (Screen *screen, Window window, Drawable drawable,
 
   if (dd.callback)
     /* asynchronous mode */
-    dd.callback (name, geometry, iw, ih, tw, th, dd.closure);
+    dd.callback (name, geometry, iw, ih, tw, th, description, dd.closure);
   else
     {
       /* synchronous mode */

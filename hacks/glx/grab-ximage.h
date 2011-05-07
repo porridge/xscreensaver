@@ -70,6 +70,7 @@ void load_texture_async (Screen *, Window, GLXContext,
                                            int image_height,
                                            int texture_width,
                                            int texture_height,
+                                           const char *description,
                                            void *closure),
                          void *closure);
 

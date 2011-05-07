@@ -109,6 +109,7 @@ typedef struct {
   ModeInfo *mi;
   int id;			   /* unique number for debugging */
   char *title;			   /* the filename of this image */
+  char *description;		   /* the optional description of this image */
   int w, h;			   /* size in pixels of the image */
   int tw, th;			   /* size in pixels of the texture */
   XRectangle geom;		   /* where in the image the bits are */
@@ -265,6 +266,7 @@ double_time (void)
 static void image_loaded_cb (const char *filename, XRectangle *geom,
                              int image_width, int image_height,
                              int texture_width, int texture_height,
+		             const char *description,
                              void *closure);
 
 
@@ -288,7 +290,7 @@ alloc_image (ModeInfo *mi)
   ss->image_load_time = ss->now;
 
   if (wire)
-    image_loaded_cb (0, 0, 0, 0, 0, 0, img);
+    image_loaded_cb (0, 0, 0, 0, 0, 0, 0, img);
   else
     load_texture_async (mi->xgwa.screen, mi->window, *ss->glx_context,
                         0, 0, mipmap_p, img->texid, image_loaded_cb, img);
@@ -306,6 +308,7 @@ static void
 image_loaded_cb (const char *filename, XRectangle *geom,
                  int image_width, int image_height,
                  int texture_width, int texture_height,
+		 const char *description,
                  void *closure)
 {
   image *img = (image *) closure;
@@ -339,6 +342,7 @@ image_loaded_cb (const char *filename, XRectangle *geom,
   img->th = texture_height;
   img->geom = *geom;
   img->title = (filename ? strdup (filename) : 0);
+  img->description = (description ? strdup (description) : 0);
 
   /* If the image's width doesn't come back as the width of the screen,
      then the image must have been scaled down (due to insufficient
@@ -806,6 +810,7 @@ draw_sprite (ModeInfo *mi, sprite *sp)
       }
 
 
+    /* Print the title at the top. */
     if (do_titles &&
         img->title && *img->title)
       {
@@ -820,6 +825,28 @@ draw_sprite (ModeInfo *mi, sprite *sp)
         print_gl_string (mi->dpy, ss->xfont, ss->font_dlist,
                          mi->xgwa.width, mi->xgwa.height, x, y,
                          img->title, False);
+      }
+
+    /* Print the description at the bottom. */
+    if (do_titles &&
+        img->description && *img->description)
+      {
+        int y = 10, x = 10;
+        int i, newlines = 1;
+        GLfloat line_height = ss->xfont->ascent + ss->xfont->descent;
+        for (i = 0; img->description[i]; i++)
+          if (img->description[i] == '\n')
+            newlines++;
+        y += ceil(line_height * (GLfloat)newlines);
+        glColor4f (0, 0, 0, sp->opacity);   /* cheap-assed dropshadow */
+        print_gl_string (mi->dpy, ss->xfont, ss->font_dlist,
+                         mi->xgwa.width, mi->xgwa.height, x, y,
+                         img->description, False);
+        x++; y++;
+        glColor4f (1, 1, 1, sp->opacity);
+        print_gl_string (mi->dpy, ss->xfont, ss->font_dlist,
+                         mi->xgwa.width, mi->xgwa.height, x, y,
+                         img->description, False);
       }
   }
   glPopMatrix();

@@ -30,6 +30,10 @@
    If it is from a file, then the `filename' argument will be the name
    of the file.  It may be NULL.  If you want to keep this string, copy it.
 
+   If available, the `description' argument will be set to a string containing
+   up to a few lines of description of the image. It may be NULL.  If you want
+   to keep this string, copy it.
+
    The size and position of the image is in the `geometry' arg.
    The image will generally have been scaled up to fit the window, but
    if a loaded file had a different aspect ratio than the window, it
@@ -41,6 +45,7 @@ extern void load_image_async (Screen *, Window, Drawable,
                               void (*callback) (Screen *, Window,
                                                 Drawable,
                                                 const char *name,
+                                                const char *description,
                                                 XRectangle *geometry,
                                                 void *closure),
                               void *closure);
@@ -79,6 +84,7 @@ extern void grab_screen_image_internal (Screen *, Window);
 /* Don't use these: this is how "xscreensaver-getimage" and "grabclient.c"
    pass the file name around. */
 #define XA_XSCREENSAVER_IMAGE_FILENAME "_SCREENSAVER_IMAGE_FILENAME"
+#define XA_XSCREENSAVER_IMAGE_DESCRIPTION "_SCREENSAVER_IMAGE_DESCRIPTION"
 #define XA_XSCREENSAVER_IMAGE_GEOMETRY "_SCREENSAVER_IMAGE_GEOMETRY"
 
 /* For debugging: turn on verbosity. */

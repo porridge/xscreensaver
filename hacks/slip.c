@@ -104,8 +104,8 @@ erandom(slipstruct *sp, int mv)
 #ifdef STANDALONE
 static void
 image_loaded_cb (Screen *screen, Window w, Drawable d,
-                 const char *name, XRectangle *geom,
-                 void *closure)
+                 const char *name, const char *description,
+                 XRectangle *geom, void *closure)
 {
   ModeInfo *mi = (ModeInfo *) closure;
   slipstruct *sp = &slips[MI_SCREEN(mi)];

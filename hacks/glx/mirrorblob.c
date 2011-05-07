@@ -543,6 +543,7 @@ static void
 image_loaded_cb (const char *filename, XRectangle *geometry,
                  int image_width, int image_height, 
                  int texture_width, int texture_height,
+                 const char *description,
                  void *closure)
 {
   mirrorblobstruct *mp = (mirrorblobstruct *) closure;

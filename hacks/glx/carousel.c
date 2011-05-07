@@ -196,6 +196,7 @@ alloc_frame (ModeInfo *mi)
 static void image_loaded_cb (const char *filename, XRectangle *geom,
                              int image_width, int image_height,
                              int texture_width, int texture_height,
+                             const char *description,
                              void *closure);
 
 
@@ -225,7 +226,7 @@ load_image (ModeInfo *mi, image_frame *frame)
   ss->loads_in_progress++;
 
   if (wire)
-    image_loaded_cb (0, 0, 0, 0, 0, 0, frame);
+    image_loaded_cb (0, 0, 0, 0, 0, 0, 0, frame);
   else
     {
       int w = (MI_WIDTH(mi)  / 2) - 1;
@@ -245,6 +246,7 @@ static void
 image_loaded_cb (const char *filename, XRectangle *geom,
                  int image_width, int image_height,
                  int texture_width, int texture_height,
+                 const char *description,
                  void *closure)
 {
   image_frame *frame = (image_frame *) closure;

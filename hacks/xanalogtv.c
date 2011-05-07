@@ -309,8 +309,8 @@ static void analogtv_load_random_image(struct state *);
 
 
 static void image_loaded_cb (Screen *screen, Window window, Drawable pixmap,
-                             const char *name, XRectangle *geometry,
-                             void *closure)
+                             const char *name, const char *description,
+                             XRectangle *geometry, void *closure)
 {
   /* When an image has just been loaded, store it into the first available
      channel.  If there are other unloaded channels, then start loading

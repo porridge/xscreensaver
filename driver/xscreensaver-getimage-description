@@ -1,0 +1,27 @@
+#!/bin/sh
+# Copyright Š 2011 Marcin Owsiany <marcin@owsiany.pl>.
+#
+# Permission to use, copy, modify, distribute, and sell this software and its
+# documentation for any purpose is hereby granted without fee, provided that
+# the above copyright notice appear in all copies and that both that
+# copyright notice and this permission notice appear in supporting
+# documentation.  No representations are made about the suitability of this
+# software for any purpose.  It is provided "as is" without express or 
+# implied warranty.
+#
+#
+# This script is invoked by "xscreensaver-getimage" to retrieve the textual
+# description of the image, if any. It may then be used by some of the hacks
+# (such as glslideshow) to be displayed on the screen together with the image.
+#
+# Created: 10-05-2011.
+if ! type jhead >/dev/null 2>&1; then
+	exit 1
+else
+	# Generic image info goes to STDOUT, and warnings to STDERR. Redirect
+	# them both to /dev/null. Reopen another random FD we hope is unused
+	# (7) to STDOUT and tell head to dump the comment section to there.
+	# I don't know how portable /dev/fd/X is, but this way there is no need
+	# to use a temporary file.
+	jhead -cs /dev/fd/7 "$@" 7>&1 >/dev/null 2>&1
+fi

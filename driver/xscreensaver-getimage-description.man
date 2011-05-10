@@ -1,0 +1,45 @@
+.TH XScreenSaver 1 "10-May-2011 (5.13)" "X Version 11"
+.SH NAME
+xscreensaver-getimage-description - retrieve an image description
+.SH SYNOPSIS
+.B xscreensaver-getimage-description
+file
+.SH DESCRIPTION
+The \fIxscreensaver\-getimage\-description\fP program is a helper program
+for the xscreensaver hacks that show images.  Specifically, it
+is invoked by
+.BR xscreensaver\-getimage (1)
+as needed.  This is not a user-level command.
+
+There are multiple ways to attach description to an image: from keeping it
+separately in a file or dedicated database, to embedding in the image file
+itself, in various ways, depending on the image format.
+
+Sometimes the description is typed in by the user to describe the scene, but in
+many cases it is just an advertisement for the digital camera or photo editing
+software, and as such is not useful for displaying by xscreensaver.
+However we try as hard as we can, and ultimately it is up to the user to
+maintain a consistent way of storing descriptions of his image collection, or
+tweaking/substituting this script to suit their needs.
+
+This script works by running
+.BR jhead (1)
+to retrieve the JPEG (non-EXIF) comment section.
+.SH SEE ALSO
+.BR jhead (1),
+.BR X (1),
+.BR xscreensaver (1),
+.BR xscreensaver\-demo (1),
+.BR xscreensaver\-getimage (1),
+.BR xscreensaver\-getimage\-file (1),
+.SH COPYRIGHT
+Copyright \(co 2011 by Marcin Owsiany.  Permission to use, copy,
+modify, distribute, and sell this software and its documentation for
+any purpose is hereby granted without fee, provided that the above
+copyright notice appear in all copies and that both that copyright
+notice and this permission notice appear in supporting documentation.
+No representations are made about the suitability of this software for
+any purpose.  It is provided "as is" without express or implied
+warranty.
+.SH AUTHOR
+Marcin Owsiany <marcin@owsiany.pl>, 10-May-2011.

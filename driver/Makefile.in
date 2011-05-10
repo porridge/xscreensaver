@@ -220,7 +220,7 @@ EXES2		= @ALL_DEMO_PROGRAMS@
 EXES_OSX	= pdf2jpeg
 
 SCRIPTS_1	= xscreensaver-getimage-file xscreensaver-getimage-video \
-		  xscreensaver-text
+		  xscreensaver-text xscreensaver-getimage-description
 SCRIPTS_OSX	= xscreensaver-getimage-desktop
 SCRIPTS		= $(SCRIPTS_1) @SCRIPTS_OSX@
 
@@ -233,6 +233,7 @@ MEN_1		= xscreensaver.man xscreensaver-demo.man \
 		  xscreensaver-text.man \
 		  xscreensaver-getimage.man \
 		  xscreensaver-getimage-file.man \
+		  xscreensaver-getimage-description.man \
 		  xscreensaver-getimage-video.man
 MEN_OSX		= xscreensaver-getimage-desktop.man pdf2jpeg.man
 MEN		= $(MEN_1) @MEN_OSX@

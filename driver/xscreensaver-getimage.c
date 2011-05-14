@@ -1525,6 +1525,7 @@ get_image (Screen *screen,
   grab_type which = GRAB_BARS;
   struct stat st;
   const char *file_prop = 0;
+  const char *description = 0;
   char *absfile = 0;
   XRectangle geom = { 0, 0, 0, 0 };
 
@@ -1703,6 +1704,17 @@ get_image (Screen *screen,
                           (absfile ? absfile : file),
                           verbose_p, &geom))
         goto COLORBARS;
+      {
+        int ac = 0;
+        char *av[20];
+        char *ret;
+        av[ac++] = "xscreensaver-getimage-description";
+        av[ac++] = absfile ? absfile : (char *) file;
+        av[ac] = 0;
+        ret = get_program_output (screen, ac, av, verbose_p);
+        if (ret && *ret)
+          description = ret;
+      }
       file_prop = file;
       break;
 
@@ -1722,6 +1734,13 @@ get_image (Screen *screen,
     if (file_prop && *file_prop)
       XChangeProperty (dpy, window, a, XA_STRING, 8, PropModeReplace, 
                        (unsigned char *) file_prop, strlen(file_prop));
+    else
+      XDeleteProperty (dpy, window, a);
+
+    a = XInternAtom (dpy, XA_XSCREENSAVER_IMAGE_DESCRIPTION, False);
+    if (description)
+      XChangeProperty (dpy, window, a, XA_STRING, 8, PropModeReplace,
+                       (unsigned char *) description, strlen(description));
     else
       XDeleteProperty (dpy, window, a);
 

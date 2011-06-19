@@ -94,6 +94,7 @@
 # define DEF_ZOOM           "75"
 # define DEF_FPS_CUTOFF     "5"
 # define DEF_TITLES         "False"
+# define DEF_DESCRIPTIONS   "False"
 # define DEF_LETTERBOX      "True"
 # define DEF_DEBUG          "False"
 # define DEF_MIPMAP         "True"
@@ -192,6 +193,7 @@ static Bool letterbox_p;    /* When a loaded image is not the same aspect
                              */
 static Bool mipmap_p;	    /* Use mipmaps instead of single textures. */
 static Bool do_titles;	    /* Display image titles. */
+static Bool do_descriptions;/* Display image descriptions. */
 static Bool debug_p;	    /* Be loud and do weird things. */
 
 
@@ -202,6 +204,7 @@ static XrmOptionDescRec opts[] = {
   {"-zoom",         ".zoom",          XrmoptionSepArg, 0      },
   {"-cutoff",       ".FPScutoff",     XrmoptionSepArg, 0      },
   {"-titles",       ".titles",        XrmoptionNoArg, "True"  },
+  {"-descriptions", ".descriptions",  XrmoptionNoArg, "True"  },
   {"-letterbox",    ".letterbox",     XrmoptionNoArg, "True"  },
   {"-no-letterbox", ".letterbox",     XrmoptionNoArg, "False" },
   {"-clip",         ".letterbox",     XrmoptionNoArg, "False" },
@@ -220,6 +223,7 @@ static argtype vars[] = {
   { &fps_cutoff,    "FPScutoff",    "FPSCutoff",    DEF_FPS_CUTOFF,     t_Int},
   { &debug_p,       "debug",        "Debug",        DEF_DEBUG,         t_Bool},
   { &do_titles,     "titles",       "Titles",       DEF_TITLES,        t_Bool},
+  { &do_descriptions,"descriptions","Descriptions", DEF_DESCRIPTIONS,  t_Bool},
 };
 
 ENTRYPOINT ModeSpecOpt slideshow_opts = {countof(opts), opts, countof(vars), vars, NULL};
@@ -828,7 +832,7 @@ draw_sprite (ModeInfo *mi, sprite *sp)
       }
 
     /* Print the description at the bottom. */
-    if (do_titles &&
+    if (do_descriptions &&
         img->description && *img->description)
       {
         int y = 10, x = 10;

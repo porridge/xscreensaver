@@ -103,6 +103,7 @@ typedef enum {
 #define GETIMAGE_VIDEO_PROGRAM   "xscreensaver-getimage-video"
 #define GETIMAGE_FILE_PROGRAM    "xscreensaver-getimage-file"
 #define GETIMAGE_SCREEN_PROGRAM  "xscreensaver-getimage-desktop"
+#define GETIMAGE_DESCRIPTION_PROGRAM "xscreensaver-getimage-description"
 
 extern const char *blurb (void);
 
@@ -1519,6 +1520,7 @@ get_image (Screen *screen,
            Bool video_p,
            Bool image_p,
            const char *dir,
+           Bool desc_p,
            const char *file)
 {
   Display *dpy = DisplayOfScreen (screen);
@@ -1559,6 +1561,8 @@ get_image (Screen *screen,
                progname, image_p ? "True" : "False");
       fprintf (stderr, "%s: imageDirectory:     %s\n",
                progname, (file ? file : dir ? dir : ""));
+      fprintf (stderr, "%s: getDescriptions: %s\n",
+               progname, desc_p ? "True" : "False");
     }
 
 # if !(defined(HAVE_GDK_PIXBUF) || defined(HAVE_JPEGLIB))
@@ -1704,17 +1708,18 @@ get_image (Screen *screen,
                           (absfile ? absfile : file),
                           verbose_p, &geom))
         goto COLORBARS;
-      {
-        int ac = 0;
-        char *av[20];
-        char *ret;
-        av[ac++] = "xscreensaver-getimage-description";
-        av[ac++] = absfile ? absfile : (char *) file;
-        av[ac] = 0;
-        ret = get_program_output (screen, ac, av, verbose_p);
-        if (ret && *ret)
-          description = ret;
-      }
+      if (desc_p)
+        {
+          int ac = 0;
+          char *av[20];
+          char *ret;
+          av[ac++] = GETIMAGE_DESCRIPTION_PROGRAM;
+          av[ac++] = absfile ? absfile : (char *) file;
+          av[ac] = 0;
+          ret = get_program_output (screen, ac, av, verbose_p);
+          if (ret && *ret)
+            description = ret;
+        }
       file_prop = file;
       break;
 
@@ -1804,6 +1809,7 @@ mapper (XrmDatabase *db, XrmBindingList bindings, XrmQuarkList quarks,
    "      -images  / -no-images       whether to allow image file loading\n"  \
    "      -video   / -no-video        whether to allow video grabs\n"	      \
    "      -desktop / -no-desktop      whether to allow desktop screen grabs\n"\
+   "      -desc / -no-desc            whether to retrieve image descriptions\n" \
    "      -directory <path>           where to find image files to load\n"    \
    "      -file <filename>            load this image file\n"                 \
    "\n"									      \
@@ -1902,6 +1908,8 @@ main (int argc, char **argv)
       else if (!strcmp (argv[i], "-no-video"))   P.grab_video_p = False;
       else if (!strcmp (argv[i], "-images"))     P.random_image_p = True;
       else if (!strcmp (argv[i], "-no-images"))  P.random_image_p = False;
+      else if (!strcmp (argv[i], "-desc"))       P.get_desc_p = True;
+      else if (!strcmp (argv[i], "-no-desc"))    P.get_desc_p = False;
       else if (!strcmp (argv[i], "-file"))       file = argv[++i];
       else if (!strcmp (argv[i], "-directory") || !strcmp (argv[i], "-dir"))
         P.image_directory = argv[++i];
@@ -1979,6 +1987,6 @@ main (int argc, char **argv)
 
   get_image (screen, window, drawable, P.verbose_p,
              P.grab_desktop_p, P.grab_video_p, P.random_image_p,
-             P.image_directory, file);
+             P.image_directory, P.get_desc_p, file);
   exit (0);
 }

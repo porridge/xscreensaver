@@ -283,6 +283,7 @@ static const char * const prefs[] = {
   "grabDesktopImages",
   "grabVideoFrames",
   "chooseRandomImages",
+  "getDescriptions",
   "imageDirectory",
   "mode",
   "selected",
@@ -826,6 +827,7 @@ write_init_file (Display *dpy,
       CHECK("grabDesktopImages") type =pref_bool, b = p->grab_desktop_p;
       CHECK("grabVideoFrames")   type =pref_bool, b = p->grab_video_p;
       CHECK("chooseRandomImages")type =pref_bool, b = p->random_image_p;
+      CHECK("getDescriptions")   type =pref_bool, b = p->get_desc_p;
       CHECK("imageDirectory")    type =pref_str,  s = p->image_directory;
 
       CHECK("mode")             type = pref_str,
@@ -1083,6 +1085,7 @@ load_init_file (Display *dpy, saver_preferences *p)
   p->grab_desktop_p  = get_boolean_resource (dpy, "grabDesktopImages",  "Boolean");
   p->grab_video_p    = get_boolean_resource (dpy, "grabVideoFrames",    "Boolean");
   p->random_image_p  = get_boolean_resource (dpy, "chooseRandomImages", "Boolean");
+  p->get_desc_p      = get_boolean_resource (dpy, "getDescriptions",    "Boolean");
   p->image_directory = get_string_resource  (dpy,
                                              "imageDirectory",
                                              "ImageDirectory");

@@ -118,8 +118,9 @@ struct saver_preferences {
 
   Bool grab_desktop_p;		/* These are not used by "xscreensaver" */
   Bool grab_video_p;		/*  itself: they are used by the external */
-  Bool random_image_p;		/*  "xscreensaver-getimage" program, and set */
-  char *image_directory;	/*  by the "xscreensaver-demo" configurator. */
+  Bool random_image_p;		/*  "xscreensaver-getimage" program, */
+  Bool get_desc_p;		/*  and set by the "xscreensaver-demo" */
+  char *image_directory;	/*  configurator. */
 
   text_mode tmode;		/* How we generate text to display. */
   char *text_literal;		/* used when tmode is TEXT_LITERAL. */

@@ -1557,6 +1557,7 @@ flush_dialog_changes_and_save (state *s)
   CHECKBOX (p2->grab_video_p,     "grab_video_button");
   CHECKBOX (p2->random_image_p,   "grab_image_button");
   PATHNAME (p2->image_directory,  "image_text");
+  CHECKBOX (p2->get_desc_p,       "get_desc_button1");
 
 #if 0
   CHECKBOX (p2->verbose_p,        "verbose_button");
@@ -1668,6 +1669,7 @@ flush_dialog_changes_and_save (state *s)
   COPY(grab_desktop_p, "grab_desktop_p");
   COPY(grab_video_p,   "grab_video_p");
   COPY(random_image_p, "random_image_p");
+  COPY(get_desc_p,     "get_desc_p");
 
 # undef COPY
 
@@ -2798,6 +2800,7 @@ populate_prefs_page (state *s)
   TOGGLE_ACTIVE ("grab_desk_button",  p->grab_desktop_p);
   TOGGLE_ACTIVE ("grab_video_button", p->grab_video_p);
   TOGGLE_ACTIVE ("grab_image_button", p->random_image_p);
+  TOGGLE_ACTIVE ("get_desc_button1",  p->get_desc_p);
   TOGGLE_ACTIVE ("install_button",    p->install_cmap_p);
   TOGGLE_ACTIVE ("fade_button",       p->fade_p);
   TOGGLE_ACTIVE ("unfade_button",     p->unfade_p);

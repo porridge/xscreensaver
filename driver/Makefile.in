@@ -27,7 +27,7 @@ INTLTOOL_MERGE	= @INTLTOOL_MERGE@
 GTK_DATADIR	= @GTK_DATADIR@
 GTK_APPDIR	= $(GTK_DATADIR)/applications
 GTK_ICONDIR	= $(GTK_DATADIR)/pixmaps
-GTK_GLADEDIR	= $(GTK_DATADIR)/xscreensaver/glade
+GTK_GLADEDIR	= $(prefix)/$(GTK_DATADIR)/xscreensaver/glade
 HACK_CONF_DIR	= @HACK_CONF_DIR@
 
 CC		= @CC@

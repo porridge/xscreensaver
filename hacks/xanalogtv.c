@@ -42,7 +42,7 @@
 #include "xpm-pixmap.h"
 #include "analogtv.h"
 
-#include "images/logo-50.xpm"
+#include "images/logo-50-bad.xpm"
 
 /* #define DEBUG 1 */
 /* #define USE_TEST_PATTERNS */
@@ -170,7 +170,7 @@ update_smpte_colorbars(analogtv_input *input)
   ypos += st->ugly_font.char_h*5/2;
 
   analogtv_draw_xpm(st->tv, input,
-                    logo_50_xpm, xpos - 100, ypos);
+                    logo_50_bad_xpm, xpos - 100, ypos);
 
   ypos += 58;
 

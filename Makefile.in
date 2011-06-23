@@ -54,8 +54,8 @@ clean::
 	@$(MAKE_SUBDIR2)
 
 distclean:: clean
-	-rm -f config.h Makefile config.status config.cache config.log TAGS *~ "#"* intltool-extract intltool-merge intltool-update
 	@$(MAKE_SUBDIR2)
+	-rm -f config.h Makefile config.status config.cache config.log TAGS *~ "#"* intltool-extract intltool-merge intltool-update
 
 dist:: tar
 

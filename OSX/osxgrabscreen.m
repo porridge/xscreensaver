@@ -10,6 +10,11 @@
  */
 
 /* This is the OSX implementation of desktop-grabbing and image-loading.
+   This code is invoked by "utils/grabclient.c", which is linked directly
+   in to each screen saver bundle.
+
+   X11-based builds of the savers do not use this code (even on MacOS).
+   This is used only by the Cocoa build of the savers.
  */
 
 #import <stdlib.h>

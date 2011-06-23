@@ -1,4 +1,4 @@
-/* glslideshow, Copyright (c) 2003-2008 Jamie Zawinski <jwz@jwz.org>
+/* glslideshow, Copyright (c) 2003-2011 Jamie Zawinski <jwz@jwz.org>
  * Loads a sequence of images and smoothly pans around them; crossfades
  * when loading new images.
  *
@@ -358,11 +358,15 @@ image_loaded_cb (const char *filename, XRectangle *geom,
       img->geom.height *= scale;
     }
 
-  if (img->title)   /* strip filename to part after last /. */
+# if 0 /* xscreensaver-getimage returns paths relative to the image directory
+          now, so leave the sub-directory part in.
+        */
+  if (img->title)  /* strip filename to part between last "/" and last ".". */
     {
       char *s = strrchr (img->title, '/');
       if (s) strcpy (img->title, s+1);
     }
+# endif /* 0 */
 
   if (debug_p)
     fprintf (stderr, "%s: loaded   img %2d: \"%s\"\n",

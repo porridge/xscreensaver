@@ -2219,6 +2219,7 @@ sub pick_from_local_dir {
 
   my $v = ($verbose_exec ? "-v" : "");
   my $pick = `xscreensaver-getimage-file $v "$dir"`;
+  $pick = "$dir/$pick" unless ($pick =~ m@^/@s);       # relative path
 
   LOG ($verbose_load, "picked file $pick ($id)");
   return ($id, $pick);

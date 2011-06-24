@@ -1,3 +1,9 @@
+xscreensaver (5.10-3ubuntu4.1) lucid; urgency=low
+
+  * Added the full-path patch from jmv
+
+ -- Marcin Owsiany <porridge@debian.org>  Fri, 24 Jun 2011 08:15:05 +0100
+
 xscreensaver (5.10-3ubuntu4) lucid; urgency=low
 
   * Import parts of debian's current .preinst file to get rid of the

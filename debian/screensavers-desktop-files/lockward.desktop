@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Lockward
+Exec=/usr/lib/xscreensaver/lockward -root
+TryExec=/usr/lib/xscreensaver/lockward
+Comment=A translucent spinning, blinking thing. Sort of a cross between the wards in an old combination lock and those old backlit information displays that animated and changed color via polarized light. Written by Leo L. Schwab.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=WebCollage
+Exec=/usr/lib/xscreensaver/webcollage -root
+TryExec=/usr/lib/xscreensaver/webcollage
+Comment=This makes collages out of random images pulled off of the World Wide Web. It finds these images by doing random web searches, and then extracting images from the returned pages. WARNING: THE INTERNET SOMETIMES CONTAINS PORNOGRAPHY. The Internet being what it is, absolutely anything might show up in the collage including -- quite possibly -- pornography, or even nudity. Please act accordingly. See also http://www.jwz.org/webcollage/ Written by Jamie Zawinski.

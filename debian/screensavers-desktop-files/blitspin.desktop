@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=BlitSpin
+Exec=/usr/lib/xscreensaver/blitspin -root
+TryExec=/usr/lib/xscreensaver/blitspin
+Comment=Repeatedly rotates a bitmap by 90 degrees by using logical operations: the bitmap is divided into quadrants, and the quadrants are shifted clockwise. Then the same thing is done again with progressively smaller quadrants, except that all sub-quadrants of a given size are rotated in parallel. As you watch it, the image appears to dissolve into static and then reconstitute itself, but rotated. Written by Jamie Zawinski.

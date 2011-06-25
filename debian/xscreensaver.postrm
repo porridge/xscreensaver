@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in 
+  remove|purge)
+	if [ -x /usr/sbin/suidunregister ]; then
+		suidunregister -s xscreensaver /usr/X11R6/bin/xscreensaver
+		suidunregister -s xscreensaver /usr/X11R6/bin/sonar
+		suidunregister -s xscreensaver /usr/X11R6/lib/xscreensaver/sonar
+		suidunregister -s xscreensaver /usr/bin/xscreensaver
+		suidunregister -s xscreensaver /usr/lib/xscreensaver/sonar
+	fi
+	if [ -L /etc/X11/app-defaults/XScreenSaver ]; then
+		rm /etc/X11/app-defaults/XScreenSaver
+	fi
+	if [ -L /usr/X11R6/lib/X11/app-defaults/XScreenSaver ]; then
+		rm /usr/X11R6/lib/X11/app-defaults/XScreenSaver
+	fi
+	if [ -L /usr/doc/xscreensaver ]; then
+		rm -f /usr/doc/xscreensaver
+	fi
+	;;
+esac
+
+#DEBHELPER#

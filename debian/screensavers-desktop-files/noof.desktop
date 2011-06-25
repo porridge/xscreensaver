@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Noof
+Exec=/usr/lib/xscreensaver/noof -root
+TryExec=/usr/lib/xscreensaver/noof
+Comment=Draws some rotatey patterns, using OpenGL. Written by Bill Torzewski.

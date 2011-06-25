@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Julia
+Exec=/usr/lib/xscreensaver/julia -root
+TryExec=/usr/lib/xscreensaver/julia
+Comment=Animates the Julia set (a close relative of the Mandelbrot set). The small moving dot indicates the control point from which the rest of the image was generated. See also the "Discrete" screen saver. http://en.wikipedia.org/wiki/Julia_set Written by Sean McCullough.

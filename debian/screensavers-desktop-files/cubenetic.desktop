@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Cubenetic
+Exec=/usr/lib/xscreensaver/cubenetic -root
+TryExec=/usr/lib/xscreensaver/cubenetic
+Comment=Draws a pulsating set of overlapping boxes with ever-chaning blobby patterns undulating across their surfaces. It's sort of a cubist Lavalite. Written by Jamie Zawinski.

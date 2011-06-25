@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Gleidescope
+Exec=/usr/lib/xscreensaver/gleidescope -root
+TryExec=/usr/lib/xscreensaver/gleidescope
+Comment=A kaleidoscope that operates on your desktop image, or on image files loaded from disk. http://en.wikipedia.org/wiki/Kaleidoscope Written by Andrew Dean.

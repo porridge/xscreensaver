@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Blaster
+Exec=/usr/lib/xscreensaver/blaster -root
+TryExec=/usr/lib/xscreensaver/blaster
+Comment=Draws a simulation of flying space-combat robots (cleverly disguised as colored circles) doing battle in front of a moving star field. Written by Jonathan Lin.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Petri
+Exec=/usr/lib/xscreensaver/petri -root
+TryExec=/usr/lib/xscreensaver/petri
+Comment=This simulates colonies of mold growing in a petri dish. Growing colored circles overlap and leave spiral interference in their wake. Written by Dan Bornstein.

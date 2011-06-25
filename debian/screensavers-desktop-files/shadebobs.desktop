@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=ShadeBobs
+Exec=/usr/lib/xscreensaver/shadebobs -root
+TryExec=/usr/lib/xscreensaver/shadebobs
+Comment=This draws smoothly-shaded oscillating oval patterns that look something like vapor trails or neon tubes. Written by Shane Smit.

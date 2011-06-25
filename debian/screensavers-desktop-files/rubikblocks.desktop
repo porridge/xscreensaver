@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=RubikBlocks
+Exec=/usr/lib/xscreensaver/rubikblocks -root
+TryExec=/usr/lib/xscreensaver/rubikblocks
+Comment=Animates the Rubik's Mirror Blocks puzzle. See also the "Rubik", "Cube21", and "GLSnake" screen savers. http://en.wikipedia.org/wiki/Combination_puzzles#Irregular_Cuboids Written by Vasek Potocek.

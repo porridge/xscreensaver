@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=SBalls
+Exec=/usr/lib/xscreensaver/sballs -root
+TryExec=/usr/lib/xscreensaver/sballs
+Comment=Draws an animation of textured balls spinning like crazy. Written by Eric Lassauge.

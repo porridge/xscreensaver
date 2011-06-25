@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Starfish
+Exec=/usr/lib/xscreensaver/starfish -root
+TryExec=/usr/lib/xscreensaver/starfish
+Comment=This generates a sequence of undulating, throbbing, star-like patterns which pulsate, rotate, and turn inside out. Another display mode uses these shapes to lay down a field of colors, which are then cycled. The motion is very organic. Written by Jamie Zawinski.

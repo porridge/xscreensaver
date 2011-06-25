@@ -1,0 +1,33 @@
+# We use section 6x (games!) for the hacks, but put them in the
+# man6 directory anyway
+
+Index: xscreensaver/hacks/Makefile.in
+===================================================================
+--- xscreensaver.orig/hacks/Makefile.in	2009-06-21 20:31:33.000000000 +0200
++++ xscreensaver/hacks/Makefile.in	2009-06-21 20:33:16.000000000 +0200
+@@ -18,8 +18,8 @@
+ datadir		= @datadir@
+ mandir		= @mandir@
+ libexecdir	= @libexecdir@
+-mansuffix	= 6
+-manNdir		= $(mandir)/man$(mansuffix)
++mansuffix	= 6x
++manNdir		= $(mandir)/man6
+ 
+ HACKDIR		= @HACKDIR@
+ HACK_CONF_DIR	= @HACK_CONF_DIR@
+Index: xscreensaver/hacks/glx/Makefile.in
+===================================================================
+--- xscreensaver.orig/hacks/glx/Makefile.in	2009-06-21 20:31:33.000000000 +0200
++++ xscreensaver/hacks/glx/Makefile.in	2009-06-21 20:31:38.000000000 +0200
+@@ -19,8 +19,8 @@
+ datadir		= @datadir@
+ mandir		= @mandir@
+ libexecdir	= @libexecdir@
+-mansuffix	= 6
+-manNdir		= $(mandir)/man$(mansuffix)
++mansuffix	= 6x
++manNdir		= $(mandir)/man6
+ 
+ HACKDIR		= @HACKDIR@
+ HACK_CONF_DIR	= @HACK_CONF_DIR@

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=XLyap
+Exec=/usr/lib/xscreensaver/xlyap -root
+TryExec=/usr/lib/xscreensaver/xlyap
+Comment=This generates pretty fractal pictures via the Lyapunov exponent. http://en.wikipedia.org/wiki/Lyapunov_exponent Written by Ron Record.

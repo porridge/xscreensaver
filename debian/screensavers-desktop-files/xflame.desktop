@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=XFlame
+Exec=/usr/lib/xscreensaver/xflame -root
+TryExec=/usr/lib/xscreensaver/xflame
+Comment=Draws a simulation of pulsing fire. It can also take an arbitrary image and set it on fire too. Written by Carsten Haitzler and many others.

@@ -1,0 +1,1392 @@
+xscreensaver (5.11-1) unstable; urgency=low
+
+  * New upstream version
+    - New versions of photopile, strange
+    - Fixed flicker in pipes, cubestorm, noof
+  * Drop obsolete 11_upstream_flurry_man_name.patch
+  * debian/screensavers-desktop.stub: Add missing semicolon
+    to Categories list (LP: #554856)
+  * Bump Standards-Version to 3.8.4 (no changes needed)
+  * debian/rules: Simplify cleaning
+  * debian/rules: Remove obsolete --with-gnome flag
+  * README.Debian: More tips for autostart configuration
+
+ -- Tormod Volden <debian.tormod@gmail.com>  Wed, 02 Jun 2010 23:06:32 +0200
+
+xscreensaver (5.10-7) unstable; urgency=low
+
+  * Removed libxxf86misc{*} from Build-Depends (Closes: #559693)
+
+ -- Jose Luis Rivas <ghostbar@debian.org>  Sun, 24 Jan 2010 11:41:02 -0430
+
+xscreensaver (5.10-6) unstable; urgency=low
+
+  * Removing autostart from xdg, is now on /usr/share so user can copy it if
+  wants autostart. (Closes: #357297)
+
+ -- Jose Luis Rivas <ghostbar@debian.org>  Mon, 11 Jan 2010 18:17:34 -0430
+
+xscreensaver (5.10-5) unstable; urgency=low
+
+  [ Joachim Breitner ]
+  * Added unicode to app-defaults list (Closes: #560184) (Thanks Joachim
+    Breitner <nomeata@debian.org> for updating patch #53)
+
+ -- Jose Luis Rivas <ghostbar@debian.org>  Fri, 11 Dec 2009 10:31:06 -0430
+
+xscreensaver (5.10-4) unstable; urgency=low
+
+  * Removing Xsession hook (Closes: #550201)
+  * Split hacks bsod and webcollage on independent packages
+  (Closes: #553529)
+
+ -- Jose Luis Rivas <ghostbar@debian.org>  Sun, 08 Nov 2009 09:27:00 -0430
+
+xscreensaver (5.10-3) unstable; urgency=low
+
+  * Move sonar to xscreensaver-gl, it got GL-ified (Closes: #550002)
+  * Remove Xsession hook, could not be disabled (Closes: #550042)
+  * Add desktop file to /etc/xdg/autostart, to disable it see
+    http://standards.freedesktop.org/autostart-spec/ (Closes: #357297)
+  * Move 20_hack_flurry_man_name to 11_upstream_flurry_man_name
+  * debian/split-config.sh, debian/rules, etc: Auto-generate the
+    package.install files to make one single dh_install{,man} call
+    since this is so much more efficent.
+
+ -- Tormod Volden <debian.tormod@gmail.com>  Mon, 12 Oct 2009 18:50:17 +0200
+
+xscreensaver (5.10-2) unstable; urgency=low
+
+  * Updated my email address in debian/copyright.
+  * Added README.hacking to debian/xscreensaver.docs (Closes: #544352).
+  * Included a hook for Xsession thanks to Y Giridhar Appaji Nag 
+    <debian@appaji.net> (Closes: #357297).
+  * Fixed the changelog.
+
+ -- Jose Luis Rivas <ghostbar@debian.org>  Fri, 25 Sep 2009 16:52:44 -0430
+
+xscreensaver (5.10-1) unstable; urgency=low
+
+  [ Tormod Volden ]
+  * Drop patch applied upstream:
+    - 12_upstream_fix_typo_in_de.po.patch
+  * Removed hyperball and hypercube hacks, retired upstream
+
+  [ Jose Luis Rivas ]
+  * Updated Standards-Version to 3.8.3 w/o any changes needed.
+  * Created debian/README.source.
+  * Added patch 20_hack_flurry_man_name for NAME section of
+    manpage for flurry hack.
+  * Changed my email address from ghostbar38@gmail.com to
+    ghostbar@debian.org in Maintainer field.
+  * Acknowledging NMU for 5.05.
+
+  [ Tormod Volden ]
+  * New Upstream Version
+    - Fixed intermittent failure in xscreensaver-command
+      Thanks to contribution by James Vega (Closes: 486603)
+    - Fixed another potential RANDR crash
+  * Drop patches applied upstream:
+    - 11_upstream_phosphor_segfault_win_size.patch
+    - 63_upstream_blinkbox-man.patch
+    - 64_upstream_topblock-man.patch
+    - 65_upstream_eruption-man.patch
+    - 66_upstream_truchet-man.patch
+    - 67_upstream_metaballs-man.patch
+    - 70_upstream_fix_local_screenlock_bypass.patch  (Closes: #539699)
+  * Do not ship juggle any longer (merged with juggler3d)
+  * Ship new hacks: rubikblocks and surfaces
+  * 80_Makefile_in-clean-fix.patch: Workaround for make distclean
+    failure in some situations, probably autoconf 2.64 issue
+  * Ship the new "photopile" hack
+  * Delete two unused patches (52_ and 60_) from source
+  * Fix location of Norwegian Bokmål locale (no -> nb)
+  * Do not ship these hacks any longer (retired upstream):
+      bubbles, critical, flag, forest, glforestfire, lmorph, laser,
+      lightning, lisa, lissie, rotor, sphere, spiral, t3d, vines,
+      whirlygig, worm, mismunch
+  * 10_upstream_skip_retired_hacks.patch: Fix hacks/Makefile.in and
+    hacks/glx/Makefile.in so that retired hacks are not built
+  * debian/control: Update FSF address
+  * Update to debhelper compat 7
+  * Fix typo in package description (Closes: #504424)
+  * Add missing hacks to package description (Closes: #481749)
+  * debian/control: Breaks gnome-screensaver < 2.26 since we are
+    using full paths in the desktop files
+  * Split debian/patches/20_hacks_Makefile.patch into new
+    20_hacks_man_section.patch and 20_hacks_maze_xpm_libs.patch
+  * debian/patches/20_skip_install-pam.patch:
+    Do not run install-pam since we use dh_installpam
+  * 11_upstream_phosphor_segfault_win_size.patch:
+    phospor hack segfaults on window resize (Closes: #505379)
+  * debian/split-hacks.{sh,config}: Configure which hacks go
+    in which packages instead of manually editing *.files
+    (Closes: #539937)
+  * Refresh 50_driver_screensaver-properties-desktop.patch so that
+    we do not change the .desktop file Category (Closes: #544837)
+
+  [ James Vega ]
+  * debian/rules: Fix sequential build invokations
+
+  [ Jose Luis Rivas ]
+  * debian/copyright: Major update (not 100% yet)
+  * Move jigsaw from xscreensaver-data-extra.files to 
+    xscreensaver-gl-extra.files since it now is a glx hack
+  * Screensavers that uses images now rotates according to EXIF data 
+    since this new upstream version (Closes: #314553)
+  * Reinstate flurry on xscreensaver-gl-extra since crashes were not
+    reproducible (Closes: #495633)
+
+ -- Jose Luis Rivas <ghostbar@debian.org>  Fri, 25 Sep 2009 07:12:21 -0430
+
+xscreensaver (5.05-3+nmu1) unstable; urgency=high
+
+  * Non-maintainer upload by the security team.
+  * Fix local screen lock bypass vulnerability (closes: #539699).
+
+ -- Michael Gilbert <michael.s.gilbert@gmail.com>  Mon, 17 Aug 2009 00:43:39 -0400
+
+xscreensaver (5.07-1) unstable; urgency=low
+
+  [ Tormod Volden ]
+  * New Upstream Version
+  * driver/XScreensaver.ad.in:
+    + Use ISO time/date format in password dialog
+    + Use url as default text method
+    + remove dnalogo and flurry which are not installed 
+  * remove xsublim hack since upstream no more installs it
+  * add desktop file comment to cubicgrid, hypnowheel and lcdscrub
+  * debian/patches: renamed, commented, refreshed patches and series
+  * debian/control: use Suggests xscreensaver instead of Enhances
+    for -data and -gl packages
+  * Fixed Exec and TryExec entries in desktop files.
+  * Fixed manpages warnings and bad-formatting.
+  * Fixed Vcs-Browser URI.
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Fri, 31 Oct 2008 18:54:17 -0430
+
+xscreensaver (5.06-1) unstable; urgency=low
+
+  [ Jose Luis Rivas ]
+  * New upstream release
+  * debian/patches:
+   + delete patch for xinerama, is now merged upstream
+   + add patch for hacks/Makefile.in
+
+  [ Tormod Volden ]
+  * debian/control: let the hacks packages "enhance" xscreensaver
+    and gnome-screensaver since they can be used independently
+  * use upstream xscreensaver-properties.desktop instead of our own
+  * move man pages to section 6x in a consistent way
+  * ship the lcdscrub man page
+  * factor out common stuff from hacks desktop files into one stub
+    file for easier mass modification
+  * add OnlyShowIn=GNOME to desktop files (fixes lintian warnings)
+  * add -randomize to truchet and xlyap desktop files
+  * add desktop file for m6502, abstractile and cwaves
+  * fixed up names in several desktop files
+  * use yelp to display man pages in Preferences dialog if available,
+    and do the right thing in a terminal window if not
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Tue, 22 Jul 2008 23:33:51 -0430
+
+xscreensaver (5.05-3) unstable; urgency=low
+
+  [ Tormod Volden ]
+  * debian/patches/10_jwz-xscreensaver-randr-patch-3.patch:
+    from upstream, addresses issues with xrandr/xinerama
+    (Closes: #482385, #428797, #471920, #453708, #473681, #479715, #480231)
+  * fixed typo "screen < real_nscreens" in driver/lock:1527 from above patch
+  * drop 61_DualHead-nVidia_bug471920.patch (obsolete)
+  * drop 67_XineRama-mode_bug473681.patch (obsolete)
+  * fix m6502.o typo in hacks/Makefile.in
+  * refresh 53_XScreenSaver.ad.in.patch
+  * refresh (disabled) 60_add-ant-hack.patch
+
+  [ Jose Luis Rivas ]
+  * add xscreensaver-demo desktop file, thanks to Daniel Dickinson
+    (Closes: #480592)
+  * update package descriptions (thanks jwz)
+  * fix categories in xscreensaver.menu
+  * change build-deps from xlibmesa-gl-dev to libgl1-mesa-dev,
+    xutils to xutils-dev, x-dev to x11proto-core-dev.
+  * bump Standards-Version to 3.8.0
+  * add Vcs fields and Homepage to debian/control
+  * Flurry is not installed until the bug get fixed (Closes: #484112)
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Tue, 15 Jul 2008 14:48:48 -0430
+
+xscreensaver (5.05-2) unstable; urgency=low
+
+  * (this version was not published)
+  * debian/rules: Add `--with-proc-interrupts' to the configure command.
+    (Closes: #354559)
+  * debian/patches/61_DualHead-nVidia_bug471920.patch:
+    Thanks to Vincent Crevot (Closes: #471920)
+  * debian/patches/67_XineRama-mode_bug473681.patch:
+    Thanks to Lionel Elie Mamane (Closes: #473681)
+  * create debian/watch
+  * debian/control: fix libpam0g deps to use >= 0.72 instead of >=0.72-1
+  * debian/xscreensaver.pam:
+    Add common-account for handling account service type (Closes: #475861)
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Fri, 11 Apr 2008 11:56:14 -0430
+
+xscreensaver (5.05-1) unstable; urgency=low
+
+  * New upstream release. 
+    - fixed overlapping with Xinerama. (Closes: #453708)
+    - fixed double-buffering in cubestorm and noof (Closes: #310157)
+    - don't warn about about bogus ClientMessages of GNOME (Closes: #191530)
+  * debian/control:
+    - Added which hacks are in which package to the description field of each
+      package. (Closes: #469108)
+    - Added a warning that xss-data-extra ships webcollage and may download
+      porn from the internet without appropriate filters. (Closes: #458145)
+    - Added conflicts with kscreensaver-xsavers previous to 4:3.5.9-1 to
+      avoid breakage for KDE users after the package split in 5.04-3.
+      (Closes: #469099)
+    - Deleted a superfluous x-dev build-depend.
+  * debian/screensaver-desktop-files: Added desktop files for cubicgrid,
+    hypnowheel and lcdscrub (new hacks)
+  * debian/patches/50_driver_screensaver-properties-desktop.patch:
+    Use the svg icon we ship in xscreensaver.svg
+  * debian/xscreensaver-data-extra.files: Added new hack lcdscrub, removed
+    ant hack. (See note below about 60_add-ant-hack.patch)
+  * debian/xscreensaver-gl-extra.files: Added new hacks hypnowheel and
+    cubicgrid.
+  * debian/patches/53_XScreenSaver.ad.in.patch: Extract from the disabled
+    52_driver_XScreenSaver.ad.in.patch fixing the gnome-terminal dependency
+    (Closes: #470466).
+  * debian/patches/60_add-ant-hack.patch: Deactivated for the moment, there
+    were several new changes in Makefile.in and XScreenSaver, besides,
+    ant doesn't have a man page and hasn't been shipped for a long time.
+    Will not be shipped until we find a way to actually make it fit the new
+    upstream code.
+  * debian/patches/70_fade_oversleep.patch: Dropped, applied upstream.
+  * debian/patches/71_endgame_whiter_colour.patch: Dropped, applied upstream.
+  * debian/patches/series: Cleaned up.
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Tue, 11 Mar 2008 22:45:00 -0430
+
+xscreensaver (5.04-4) unstable; urgency=low
+
+  * debian/control: Add replaces/conflicts to fix upgrades (Closes: #468899)
+  * corrected previous changelog entry on xscreensaver-gl-extra
+
+ -- Tormod Volden <debian.tormod@gmail.com>  Sun, 02 Mar 2008 11:41:13 +0100
+
+xscreensaver (5.04-3) unstable; urgency=low
+
+  [ Tormod Volden ]
+  * (From Ubuntu) Include .desktop files for hacks (Closes: #410095)
+  * debian/xscreensaver-data.files: Skip .desktop file for popsquares
+    for now until conflict is sorted out with gnome-screensaver that
+    also ships it
+  * dropped planetary_gears.desktop (gears goes planetary randomly
+    and has no command option for it)
+  * 60_add-ant-hack.patch: restore "ant" (disabled upstream in 4.23)
+  * Add .desktop description for "ant"
+  * (From Ubuntu) Split xscreensaver package into:
+    - xscreensaver (core backend without hacks)
+    - xscreensaver-data (standard hacks)
+    - xscreensaver-data-extra (hacks not installed by default)
+  * (From Ubuntu) Split xscreensaver-gl package into:
+    - xscreensaver-gl (standard GL hacks)
+    - xscreensaver-gl-extra (GL hacks not installed by default)
+  * 70_fade_oversleep.patch: don't hang on resume (Closes: #454523)
+  * 71_endgame_whiter_colour.patch: better contrast (Closes: #463345)
+
+  [ Jose Luis Rivas ]
+  * debian/xscreensaver-gl.files: Deleted interplanetary-gears.desktop since
+  it's not shipped.
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Fri, 29 Feb 2008 18:53:35 -0430
+
+xscreensaver (5.04-2) unstable; urgency=low
+
+  [ Tormod Volden ]
+  * debian/rules:
+   + Moved POT generation from clean to build.
+   + xscreensaver.svg is now copied from `debian/` at build time.
+  * po/xscreensaver.pot:
+   + Is now deleted since it is autogenerated.
+  * debian/control:
+   + Added libxss-dev, libxtst-dev, libxxf86misc-dev and x-dev as
+   build depends.
+   + Added quilt and removed dpatch from build-depends.
+  * debian/patches/00_maindiffwithorig.patch got split up in:
+    - 20_hacks_Makefile.patch: add xpm libs for "maze" hack
+    - 22_hacks_barcode.patch: make family-friendly
+    - 23_hacks_glx_glsnake.patch: make family-friendly
+    - 30_hacks_xanalogtv.patch: use logo-50-bad.xpm
+    - 31_utils_images_logo-50-bad-xpm.patch: less colours
+    - 50_driver_screensaver-properties-desktop.patch: use svg icon
+
+  [ Jose Luis Rivas ]
+  * debian/xscreensaver.files:
+   + Added m6502 (without manpage at the moment) and abstractile 
+   hacks.
+  * debian/xscreensaver-gl.files:
+   + Added moebiusgears and lockward hacks. (Closes: #454601)
+  * debian/control:
+   + Added Tormod Volden as Uploader.
+   + Updated to 3.7.3 Standards-Version, no modification needed.
+  * debian/xscreensaver.install:
+   + Now xscreensaver.svg is in `debian/`.
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Sun, 09 Dec 2007 20:37:38 -0430
+
+xscreensaver (5.04-1) unstable; urgency=low
+
+  * New upstream release
+  * David Moreno Garza (damog) removed from Uploaders field.
+  * Fixed authentication bypass (CVE-2007-5585) by upstream (closes: #448157)
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Mon, 26 Nov 2007 14:04:52 -0400
+
+xscreensaver (5.03-3.1) unstable; urgency=high
+
+  * Non-maintainer upload by the testing-security team
+  * Include upstream patch to fix crash with gl screensavers, which
+    leads to an authentication bypass (Closes: #448157)
+    Fixes: CVE-2007-5585
+
+ -- Steffen Joeris <white@debian.org>  Fri, 16 Nov 2007 15:04:15 +1100
+
+xscreensaver (5.03-3) unstable; urgency=low
+
+  * Added `gdm' to the Build-Depends field since is needed to build with
+  gdmflexiserver support. (Closes: #436010)
+  * The config problems doesn't exists anymore since there's now the original
+  XML file, so no changes needed. (Closes: #367791, #405266).
+  * debian/rules:
+   + Added a line that adds "NoDisplay=true" to 
+   gnome-screensaver-properties.desktop. (Closes: #435446)
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Sat, 04 Aug 2007 16:25:39 -0400
+
+xscreensaver (5.03-2) unstable; urgency=low
+
+  * debian/rules, debian/xscreensaver.files, debian/xscreensaver-gl.files:
+   + Adding again the `x` at the end of each manpage. 
+   (Closes: #435035)
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Sun, 29 Jul 2007 02:22:49 -0400
+
+xscreensaver (5.03-1) unstable; urgency=low
+
+  * New maintainer and uploader (Closes: #428813, #428798)
+  * New upstream version packaged (Closes: #407886)
+  * No error during authentication (Closes: #180063)
+  * No more waiting until mouse moves for starting. (Closes: #257092)
+  * Flurry now runs OK. (Closes: #296552)
+  * No more crashes during exit of `xscreensaver' (Closes: #273180)
+  * Xscreensaver has changed a lot how works with the pam_module and it seems
+  as does not ask for password anymore if is not required. (Closes: #303368)
+  * XScreensaver turns off both screens if is used with Dual-head on laptops
+  tested on a HP and a Siragon notebook. (Closes: #337100)
+  * Currently XScreensaver request password everytime, even if Power management
+  is enabled. (Closes: #330971)
+  * XScreensaver does not longer ignores settings on ~/.xscreensaver anymore
+  and modifying settings with `xscreensaver-demo' will save your settings as 
+  should and will not be restarted. (Closes: #316931)
+  * xscreensaver does properly requests passwords and proccess them as should 
+  if that's the case. (Closes: #368600)
+  * Now images are rotated as should when using carousel with the EXIF data of
+  each JPEG archive. (Closes: #375488)
+  * Fontglide is running OK without fonts issues. (Closes: #393140)
+  * The apple2 hack was tested and there's no problem. (Closes: #423560)
+  * Webcollage renders properly and add images to the collage without emptying
+  the screen (tested with nv, nvidia and vesa drivers). (Closes: #317383)
+  * Added the `unlock' button to login box. (Closes: #326733)
+  * debian/control:
+    + Deleted `Uploaders' field.
+    + Changed `Maintainer' name and email.
+    + Replaced build-depend on `xlibs-data' with `xbitmaps'. (Closes: #419022)
+    + Updated `Standard-Versions' to 3.7.2, no changes needed.
+    + Added Build-Depend on `dpatch'.
+    + Updated `xscreensaver-gl' description with `X.Org' instead of `XFree'.
+    + Moved `netpbm' to Depends from Suggests of xscreensaver since it's used by
+    packages on `xscreensaver'. (Closes: #376982)
+  * debian/rules:
+    + Included `dpatch.make' for patching.
+    + Changed targets to fits `dpatch' functioning.
+    + Changed the way as config.{sub|guess} is deleted, now is moved so isn't 
+    showed in the final `diff.gz'.
+  * debian/xscreensaver.files:
+    + Removed line for adding `gnome-screensaver-properties.desktop' since 
+    GNOME ships their own screensaver and the menu entrie in preferences should
+    not be added, users should use the another menu entrie. (Closes: #390672)
+    + Added new hack `cwaves'.
+    + Removed the `x's at the end of every manpage line.
+  * debian/xscreensaver-gl.files:
+    + Removed the `x's at the end of every manpage line.
+    + Added new hacks: `glcells', `glschool', `topblock' and `voronoi'.
+  * debian/changelog:
+    + Version created and no data modified, was modified in a NMU (4.23-1.1)
+    changed to 4.23-0.1 according to debian dev-reference. (Was lintian
+    warning).
+    + Double date on version 1.27-1, removed the old one, I left the october
+    one since is the most obvious (Was lintian warning).
+  * debian/patches:
+    + Created!
+  * debian/patches/00_maindiffwithorig.patch:
+    + Created! This patch was created with the end to avoid editing original
+    tarball as was before, instead patch's should been used.
+
+ -- Jose Luis Rivas <ghostbar38@gmail.com>  Fri, 13 Jul 2007 17:15:43 -0400
+
+xscreensaver (4.24-5) unstable; urgency=low
+
+  * remove /usr/doc/xscreensaver link to finish /usr/doc ->
+    /usr/share/doc transition (closes: #380394)
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Sat, 29 Jul 2006 23:00:43 +0100
+
+xscreensaver (4.24-4) unstable; urgency=low
+
+  * we may be building in an environment (e.g. Debian buildd chroot)
+    without a proper /proc filesystem. If /proc/interrupts exists,
+    then we'll check that it has the bits we need, but otherwise we'll
+    just go on faith. Thanks to <skunk@iSKUNK.ORG> (closes: #356821)
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Thu, 04 May 2006 11:00:43 +0100
+
+xscreensaver (4.24-3) unstable; urgency=high
+
+  * fix build-deps (closes: #364254)
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Sun, 23 Apr 2006 11:00:43 +0100
+
+xscreensaver (4.24-2) unstable; urgency=low
+
+  * apply patch "xscreensaver-getimage-video: the first video frame should not always be grabbed" (closes: #357907)
+  * fix pong manpage typos (closes: #361686)
+  * apply patch "xscreensaver-4.16-sanitize-hacks.patch" (closes: #313492)
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Tue, 11 Apr 2006 11:00:43 +0100
+
+xscreensaver (4.24-1) unstable; urgency=low
+
+  * new upstream release:
+  * New versions of cube21, glsnake, celtic. 
+  * Fixed startup crash in getgroups() when running setuid. (closes: #302791)
+  * Default to not displaying stderr on the saver window. 
+  * Fixed bad free() in `Documentation'' button. 
+  * Don't try to run hacks that aren't installed (closes: #350029, #309443)
+  * Minor fixes to various XML config files and man pages.
+  * fix typo in German PO file (closes: #359067)
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Sun, 26 Mar 2006 11:00:43 +0100
+
+xscreensaver (4.23-4) unstable; urgency=high
+
+  * replace xlibs-dev build-depend with the individual libraries that
+    the package actually build-depends on (closes: #346855).
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Mon, 09 Jan 2006 11:00:43 +0100
+
+xscreensaver (4.23-3) unstable; urgency=low
+
+  * driver/timers.c: back out a change from 4.23 leading to screen
+    blanking even though the keyboard is in use (closes: #336368).
+  * Build-depend on autotools-dev.
+  * driver/XScreenSaver.ad.in:
+    + Restore RSS modifications that disappeared unexpectedly in a
+      previous upload.
+    + Now use planet.debian.org instead of .net.
+    + Set the newLoginCommand here, not trusting the result of the
+      configure test, making the configure.in patch unnecessary
+      (closes: #336590).
+    + Force gdmflexiserver to start a new flexible X server
+      (closes: #337760).
+  * utils/images/logo-50-bad.xpm: this is a stripped down (64 colors) 
+    version of the logo.
+  * hacks/xanalogtv.c: use this version instead (closes: #304344).
+
+ -- Josselin Mouette <joss@debian.org>  Fri,  9 Dec 2005 00:53:01 +0100
+
+xscreensaver (4.23-2) unstable; urgency=low
+
+  * Apply NMU patch (why was there an NMU? Hello? Talk to me before doing an NMU!) (Closes: #334193)
+  * Fix typo in tangram man page (Closes: #336432)
+  * Found out that the upstream already applied the "grayscale option patch" to bubbles (Closes: #331248)
+  * Suggest xfishtank (Closes: #335589)
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Sun, 30 Oct 2005 14:43:43 +0100
+
+xscreensaver (4.23-0.1) unstable; urgency=high
+
+  * NMU.
+  * should not kill running xscreensavers (Close: #334193)
+
+ -- Emfox Zhou <EmfoxZhou@gmail.com>  Sun, 30 Oct 2005 01:54:04 +0800
+
+xscreensaver (4.23-1) unstable; urgency=low
+
+  * new upstream (closes: #308668, #195727, #322752, #305528)
+    
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Wed, 26 Sep 2005 15:23:43 +0200
+
+xscreensaver (4.21-7) unstable; urgency=low
+
+  * fixed fubared patch in lines 1596 to 1603 of file "driver/prefs.c" (closes: #323841)
+    thanks to Arnaud Giersch
+    
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Thu, 22 Sep 2005 23:23:43 +0200
+    
+xscreensaver (4.21-6) unstable; urgency=low
+
+  * patch against stop_the_insanity() (closes: #323841)
+  * patch typo in the whirlygig.6x man page (closes: #326534)
+  * patch against run_hack() in driver/demo-Gtk.c (closes: #302777)
+  * fix dependencies (closes: #318512)
+  * closing old stuff that's already fixed (closes: #118089, #118881, #137073, #145814, #129124)
+  * closing old stuff that's WONTFIX (closes: #127276)
+  * relax dependency on netpbm (closes: #320446)
+  * fix build dependencies for gl and glu
+  * fix lintian bugs about debian-control-with-duplicate-fields conflicts: 12, 15
+  * fix lintian bug (man pages for flow and intermomentary)
+  * fix lintian bug syntax-error-in-debian-changelog line 313 "unrecognised line"
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Mon, 19 Sep 2005 11:20:43 +0200
+
+xscreensaver (4.21-5) unstable; urgency=low
+
+  * debian/control, debian/rules: remove legacy xscreensaver-gnome and
+    xscreensaver-nognome packages.
+  * Patch from Martin Pitt <martin.pitt@ubuntu.com> to generate a POT file
+    during the package build (closes: #313530):
+    + debian/control: build-depend on intltool.
+    + debian/rules: run intltool-update in the clean target.
+    + po/POTFILES.in: remove driver/xscreensaver-demo.glade which does not
+      exist any more.
+  * debian/xscreensaver.links: removed, unneeded with GNOME 2.10
+    (closes: #312044).
+  * po/de.po: patch from Jens Seidel <jensseidel@users.sf.net>
+    (closes: #313870).
+
+ -- Josselin Mouette <joss@debian.org>  Wed, 15 Jun 2005 00:34:23 +0200
+
+xscreensaver (4.21-4) unstable; urgency=low
+
+  * Fix typos (closes: #301317).
+  * Fix typos (closes: #301355)
+  * Fix metric assload of typos (closes: #312772, #312769, #312768, #312775, #312773, #312774 ,#312782, #312780)
+  * Fix metric assload of typos (closes: #312776, #312777, #312785, #312783, #312784, #312786, #312791, #312789)
+  * Fix metric assload of typos (closes: #312797, #312796, #312793, #312795, #312798, #312800, #312802, #312803)
+  * Apply jwz's patch to phosphor (closes: #308720)
+  
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Sat, 11 Jun 2005 11:20:43 +0200
+
+xscreensaver (4.21-3) unstable; urgency=low
+
+  * Patch by Joachim Breitner to check more frequently if DPMS kicked in (closes: #303374, #286664).
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Sat, 09 Apr 2005 00:06:43 +0100
+
+xscreensaver (4.21-2) unstable; urgency=low
+
+  * driver/subprocs.c: revert unuseful patch.
+  * hacks/bubbles.h: BUBBLES_IO is unused now.
+  * debian/copyright: update copyright dates.
+  * configure.in: don't check for gdmflexiserver's location, so that we don't
+    have to build-depend on gdm.
+  * debian/xscreensaver.postinst:
+    + send SIGHUP to all running xscreensaver processes.
+    + don't call update-menus twice.
+  * improve maintainer scripts.
+  * driver/XScreenSaver.ad.in: use url mode by default, pointing to
+    planet.debian.net's RSS feed.
+  * driver/xscreensaver-text: fall back to text file mode when an URL isn't
+    found.
+  * hacks/webcollage: remove moot patch.
+  * driver/Makefile.in, hacks/Makefile.in, hacks/glx/Makefile.in: patch from
+    upstream, to avoid patching all the man files.
+  * hacks/*.man, hacks/glx/*.man: this makes all these patches unnecessary.
+  * hacks/vidwhacker: remove unuseful patch.
+  * debian/rules: install debian/changelog even in dummy packages.
+
+ -- Josselin Mouette <joss@debian.org>  Thu, 24 Mar 2005 00:06:43 +0100
+
+xscreensaver (4.21-1) unstable; urgency=low
+
+  * New upstream release (closes: #300804).
+    + Correctly repaints the preferences window (closes: #165834).
+    + Includes a button to launch gdmflexiserver (closes: #276142).
+  * Add myself as a co-maintainer.
+  * Update config.guess and config.sub.
+  * A bit of cleanup in debian/rules and others.
+  * Install a new, SVG logo, based on a (LGPL) Nuvola icon. Use it in the
+    menu and replace the XPM logos by pixmaps generated from it.
+  * Remove the extra .desktop files (closes: #258955).
+  * Enable gdmflexiserver in the configure arguments.
+  * Tuning in XScreenSaver.ad.in:
+    + Enable DPMS by default.
+    + Enable locking by default after some time.
+    + Disable grabbing of desktop images (for obvious security reasons).
+    + Use fortune by default, not some nonexistent README file.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 22 Mar 2005 01:20:40 +0100
+
+xscreensaver (4.20-2) unstable; urgency=low
+
+  * Alphabetically sorted *.files, closes: #129265
+  * fixed spelling of description, closes: #125564
+  * fixed manpage of boxed, closes: #244786
+  * fixed manpage of glsnake, closes: #222833
+  * 4.20 upstream closes even more bugs, closes: #279982
+  * made ISO 8601 time format the default, closes: #279982, #299890
+  * Debian has /etc/alternatives which the Gnome and KDE packages use
+    Thus XScreensaver should use x-www-browser and x-terminal-emulator
+    instead of gnome-terminal and the like, closes: #300285, #276648
+  * No more typos in configure.in, closes: #134722
+  * Fix in upstream: as of xscreensaver 4.18, if it can't grab both the keyboard and
+    mouse, it does not blank the screen.  This means that if you are
+    running rdesktop or some long-keyboard-grabbing program, xscreensaver
+    will never lock your screen until that grab is released.
+    This is still bad, obviously, but perhaps it will confuse people less,
+    and -- perhaps -- failing to lock at all is less bad than accidentally
+    typing passwords at the wrong window, closes: #105995
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Sat, 19 Mar 2005 11:06:00 +0100
+
+xscreensaver (4.20-1) unstable; urgency=low
+
+  * New upstream version, closes: #260697, #162390, #235852, #238549,
+    #107549, #280513, #286076, #256765, #292283, #280652, #260160
+  * KDE xscreensaver.kss was removed in the upstream version
+  * fixed various complaints that lintian threw out (fix inconsistent manpages)
+  * added manpage for screensaver-properties-capplet (just to have one)
+  * applied patch from #222734, closes: #222734
+  * added a non-virtual wordlist package to Suggests:, closes #271283
+  * changed french localization in one spot, closes: #220204
+
+ -- Ralf Hildebrandt <ralf.hildebrandt@charite.de>  Mon, 14 Mar 2005 08:30:00 +0100
+
+xscreensaver (4.16-1) unstable; urgency=low
+
+  * New upstream version, closes: closes: #250065, #245128, #244468
+  * Add build dependency on xlibs-dev, closes: #251621
+
+ -- Karl Ramm <kcr@debian.org>  Sat, 12 Jun 2004 00:15:10 -0400
+
+xscreensaver (4.15-1) unstable; urgency=low
+
+  * New upstream version, closes: #232932, #233457
+
+ -- Karl Ramm <kcr@debian.org>  Thu,  4 Mar 2004 20:21:41 -0500
+
+xscreensaver (4.14-4) unstable; urgency=low
+
+  * disable the traditional password checking code; only use paim.
+    closes: #171453
+
+ -- Karl Ramm <kcr@debian.org>  Sun,  2 Nov 2003 14:42:11 -0500
+
+xscreensaver (4.14-3) unstable; urgency=low
+
+  * commit the control file to accomplish the conflicting mentioned
+    previously.  my bad.  closes: #218440
+
+ -- Karl Ramm <kcr@debian.org>  Fri, 31 Oct 2003 13:20:59 -0500
+
+xscreensaver (4.14-2) unstable; urgency=low
+
+  * Build the extrusion hack.  closes: #217603, #127067
+  * Fix a cvs fumble. closes: #217753
+  * xscreensaver-gl: conflict with versions of xscreensaver << 4.14-2 due
+    to relocation of extrusion manpage.
+
+ -- Karl Ramm <kcr@debian.org>  Thu, 30 Oct 2003 00:28:02 -0500
+
+xscreensaver (4.14-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Karl Ramm <kcr@debian.org>  Sat, 25 Oct 2003 06:00:11 -0400
+
+xscreensaver (4.13-1) unstable; urgency=low
+
+  * New upstream version. closes: #216841
+  * Try using sensible-browser to display html.  closes: #173346
+  * don't build arch-independent packages in the binary-arch target.
+    oops.  closes: #207197
+  * do the new pam thing.  closes: #216918
+
+ -- Karl Ramm <kcr@debian.org>  Tue, 21 Oct 2003 14:50:00 -0400
+
+xscreensaver (4.12-1) unstable; urgency=low
+
+  * New upstream version. closes: #198625, #199321
+  * Supposedly, 4.11 fixed an X error when starting a hack. closes: #195740
+
+ -- Karl Ramm <kcr@debian.org>  Thu, 21 Aug 2003 00:29:49 -0400
+
+xscreensaver (4.10-1) unstable; urgency=low
+
+  * New upstream version
+  * vidwhacker shouldn't bomb out on an unrecognized file type. closes: #192960
+  * fixes jigglypuff for me. closes: #192076
+  * point the gnome configuration icon at an absolute path.  closes: #191443
+  * resurrect xscreensaver-gnome and xscreensaver-nognome in an attempt to
+    unconfuse people. closes: #191212, #191967
+
+ -- Karl Ramm <kcr@debian.org>  Thu, 29 May 2003 00:27:25 -0400
+
+xscreensaver (4.09-3) unstable; urgency=low
+
+  * add libjpeg62-dev and an explicit xlibmesa-dev to build-depends,
+    closes: #191117
+
+ -- Karl Ramm <kcr@debian.org>  Tue, 29 Apr 2003 10:22:22 -0400
+
+xscreensaver (4.09-2) unstable; urgency=low
+
+  * build against gnome2 and gtk2. closes: #190914, #184961
+  * Building for the gnome2 control-center allows us to not depend on all
+    of gnome, which means we can fold -gnome and -nognome into the main
+    xscreensaver pacakge, making everyone's life simpler.  xscreensaver
+    now conflicts-replaces-provides xscreensaver-gnome and
+    xscreensaver-nognome.  closes: #170361
+
+ -- Karl Ramm <kcr@debian.org>  Sun, 27 Apr 2003 23:29:32 -0400
+
+xscreensaver (4.09-1) unstable; urgency=low
+
+  * Another new upstream version.  closes: #185218
+  * fix rounding error in ifs, thanks to sam@zoy.org, closes: #186291
+
+ -- Karl Ramm <kcr@debian.org>  Thu,  3 Apr 2003 00:32:01 -0500
+
+xscreensaver (4.06-1) unstable; urgency=low
+
+  * new upstream version.
+  * fix gnome2 config menu icon, closes: #169848
+  * circuit segfault fixed upstream, closes: #170970
+  * patch config file for glplanet, does not completely fix 173209
+  * disable the paranoia leading to the "PAM: brk grew by 8k" messages
+    closes: #169608
+  * note in the xscreensaver manpage that one should not lightly mess with
+    one's .fvwm2rc. closes: #167848
+  * webcollage mimics netscape when talking to images.google.com.
+    closes: #163563
+  
+ -- Karl Ramm <kcr@debian.org>  Tue, 31 Dec 2002 23:42:16 -0500
+
+xscreensaver (4.05-10) unstable; urgency=low
+
+  * build against libcapplet1-dev, closes: #168058, #163180
+  * don't lock up switching hacks if ther's only one random hack
+    selected. closes: #168821
+
+ -- Karl Ramm <kcr@debian.org>  Thu, 14 Nov 2002 13:38:51 -0500
+
+xscreensaver (4.05-9) unstable; urgency=low
+
+  * Build conflict with libgkt2.0-dev, closes: #154964
+
+ -- Karl Ramm <kcr@debian.org>  Wed, 31 Jul 2002 11:37:31 -0400
+
+xscreensaver (4.05-8) unstable; urgency=low
+
+  * append an 'x' to the filenames of the hack manpages.
+  [I am getting *really* sick of this]
+    closes: #154584
+  * remove the undocumented symlink for screensaver-properties-capplet
+    closes: #154533
+
+ -- Karl Ramm <kcr@debian.org>  Sun, 28 Jul 2002 12:11:57 -0400
+
+xscreensaver (4.05-7) unstable; urgency=low
+
+  * move xscreensaver hack manpages to section six: closes: #154188
+  * more general cleanup.
+
+ -- Karl Ramm <kcr@debian.org>  Fri, 26 Jul 2002 22:52:02 -0400
+
+xscreensaver (4.05-6) unstable; urgency=low
+
+  * fix Makefile.in.in that puts locales somewhere desperately
+    wrong.  Closes: #154205
+
+ -- Karl Ramm <kcr@debian.org>  Wed, 24 Jul 2002 22:34:36 -0400
+
+xscreensaver (4.05-5) unstable; urgency=low
+
+  * update config.guess and config.sub from
+  http://subversions.gnu.org/cgi-bin/viewcvs/config/config/
+
+ -- Karl Ramm <kcr@debian.org>  Wed, 24 Jul 2002 19:10:55 -0400
+
+xscreensaver (4.05-4) unstable; urgency=low
+
+  * actually strip the hacks.
+
+ -- Karl Ramm <kcr@debian.org>  Wed, 24 Jul 2002 12:13:19 -0400
+
+xscreensaver (4.05-3) unstable; urgency=low
+
+  * attempt to get my version of the package that I want to maintain
+    before this NMU.
+
+ -- Karl Ramm <kcr@debian.org>  Wed, 24 Jul 2002 10:59:27 -0400
+
+xscreensaver (4.05-2.1) unstable; urgency=low
+
+  * NMU, Sponsored by Colin Walters <walters@debian.org>
+   - official maintainer has been MIA for a while
+  * New upstream release
+   - Closes: #146032, #146864, #148515, #150031, #136759, #134076,
+     #121803, #119141, #123363, #107551, #117906, #120550, #148232,
+     #122999, #113437, #90489, #134722, #117787, #118089, #118881,
+     #137073, #148811, #132109, #129124, #62887, #85620
+   - Some of the above bugs should have been closed a long tme ago.
+  * Build with libgle3
+  * Clean up debian/rules, use debhelper
+  * Don't print "unrecognised ClientMessage" messages. Unnecessary.
+  * Don't suggest xli or xloadimage anymore, we use gdk-pixbuf
+  * Don't call x-terminal-emulator with +sb (Closes: #145814)
+  * Remove driver/xscreensaver.kss on clean, so it isn't included in diff
+  * Allow null passwords through PAM. This doesn't work exactly as it
+    should, but now if you have a blank password, typing anything in
+    the password box will get you out of a locked screen. (Closes: #43670)
+  * Start xscreensaver with X if ~/.xscreensaver exists 
+    - reference bug #127276
+
+ -- Ari Pollak <compwiz@aripollak.com>  Thu, 18 Jul 2002 12:17:37 -0400
+
+xscreensaver (4.05-1) unstable; urgency=low
+
+  * It is a tale told by an idiot, full of sound and fury, signifying nothing.
+  * New upstream release. closes: #148232
+
+ -- Karl Ramm <kcr@debian.org>  Sun, 21 Jul 2002 17:05:40 -0400
+
+xscreensaver (3.34-3) unstable; urgency=low
+
+  * add build-dep on libgnome-dev.  closes: #128953, #133924, #141544
+
+ -- Karl Ramm <kcr@debian.org>  Sun,  7 Apr 2002 12:17:37 -0400
+
+xscreensaver (3.34-2) unstable; urgency=low
+
+  * New maintainer.  closes: #139388
+
+ -- Karl Ramm <kcr@debian.org>  Tue,  2 Apr 2002 10:47:31 -0500
+
+xscreensaver (3.34-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Make /etc/X11/app-defaults/XScreenSaver-* conffiles
+    (closes: #132101, #132109).
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 11 Feb 2002 02:53:03 +0000
+
+xscreensaver (3.34-1) unstable; urgency=low
+
+  * New upstream version (Closes: #105372, #117331)
+  * Added libcapplet-dev to Build-depends
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue,  6 Nov 2001 10:22:26 -0600
+
+xscreensaver (3.33-5) unstable; urgency=low
+
+  * Added Replaces: lines for older xscreensaver (Closes: #11752)
+  * Moved KDE file to the right place (closes : #117700)
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 31 Oct 2001 13:38:32 -0600
+
+xscreensaver (3.33-4) unstable; urgency=low
+
+  * new packages for binaries with/without GNOME
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri, 26 Oct 2001 09:40:24 -0500
+
+xscreensaver (3.33-3) unstable; urgency=low
+
+  * Removed dependency on removed package "xv" (Closes: #112395)
+  * Changed build-depends from xlibmesa-dev to libgl-dev (Closes: #104582)
+  * Include time.h in prefs.c to fix IA64 (Closes: #112973)
+  * Changed speedmine to ework around Alpha FP foo (Closes: #108596)
+  * Added note to README.gl about memory usage and GL
+    screensavers. (Closes: #112849)
+  * Fixed spelling error in molecule manpage (Closes: #100915)
+  * Shut up message about unknown client messages. (Closes: #109453)
+  * Fixed command line defaults for xaos (Closes: #99797)
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri, 21 Sep 2001 17:52:17 -0500
+
+xscreensaver (3.33-2) unstable; urgency=low
+
+  * Added Build-Depends (Closes: #104040)
+  * Upgraded to latest Standards-Version.
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon,  9 Jul 2001 23:05:46 -0500
+
+xscreensaver (3.33-1) unstable; urgency=low
+
+  * New upstream version (Closes: #97975)
+  * Applied patch to fix gcc3.0 build (Closes: #99373)
+  * Updated xaos command line (Closes: #(9797)
+  * Move the gl postrm to the right name (Closes: #103605)
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri,  6 Jul 2001 12:20:32 -0500
+
+xscreensaver (3.32-2) unstable; urgency=low
+
+  * Added conflicts for old funny-manpages (Closes: #96446)
+  * Update menu entries to /usr/bin/xscreensaver{,-command}
+    (Closes: #97237)
+  * Remove /usr/doc symlink on removal (Closes: #97788)
+  * "Upgrade" from suidmanager usage (Closes: #97789)
+  * Add proper KDE files (Closes: #88321)
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 17 May 2001 20:33:12 -0500
+
+xscreensaver (3.32-1) unstable; urgency=low
+
+  * New upstream version (Closes: #963432)
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri,  4 May 2001 17:03:31 -0500
+
+xscreensaver (3.31-3) unstable; urgency=low
+
+  * app-defaults files were mistakenly left out. Correct that.
+    (Closes: #95683)
+  * Move the whole works under /usr instead of /usr/X11R6 (Closes: #94355)
+
+ -- Larry Daffner <vizzie@airmail.net>  Sun, 29 Apr 2001 21:31:04 -0500
+
+xscreensaver (3.31-2) unstable; urgency=low
+
+  * Put xscreensaver-gl-helper back in the right package
+  * Fix postinst for debhelper (Closes: #94291)
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue, 17 Apr 2001 21:19:12 -0500
+
+xscreensaver (3.31-1) unstable; urgency=low
+
+  * New upstream version
+  * Moved hacks to directory /usr/X11R6/lib/xscreensaver. This will not be
+    a problem for the most part (except that the xworm hack is new just
+    worm again), since xscreensaver adds this directory to the
+    path. However, people running hacks by hand will have to add this
+    directory to their path. (Closes: #92055)
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri, 13 Apr 2001 09:59:19 -0500
+
+xscreensaver (3.30-1) unstable; urgency=low
+
+  * New upstream version
+  * Fix to upstream manpage to document current DPMS behavior. (Closes:
+    #90491) 
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 26 Mar 2001 18:42:30 -0600
+
+xscreensaver (3.29-3) unstable; urgency=low
+
+  * Added safety valve to rules file to prevent nVidia brain damage
+    (Closes: #88530)
+
+ -- Larry Daffner <vizzie@airmail.net>  Sun,  4 Mar 2001 19:12:54 -0600
+
+xscreensaver (3.29-2) unstable; urgency=low
+
+  * Move gltext hack to correct package (Closes: #88366)
+
+ -- Larry Daffner <vizzie@airmail.net>  Sat,  3 Mar 2001 19:56:16 -0600
+
+xscreensaver (3.29-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu,  1 Mar 2001 20:41:39 -0600
+
+xscreensaver (3.28-3) unstable; urgency=low
+
+  * Rebuild to fix nVidia dain bramage.
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 21 Feb 2001 02:42:39 -0600
+
+xscreensaver (3.28-2) unstable; urgency=low
+
+  * hyperball manpage already included upstream. Don't install.
+  * Fix thinko to REALLY add KDE integration
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 19 Feb 2001 13:13:34 -0600
+
+xscreensaver (3.28-1) unstable; urgency=low
+
+  * New upstream version
+  * Use dh_movefiles to separate packages (Closes: #84591)
+  * Add KDEDIR to build process to ensure .kss file gets installed
+    (Closes: #84253)
+  * Disabled webcollage by default (Closes: #79258)
+  * Fixed path to link to remove in postinst
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon,  5 Feb 2001 13:32:58 -0600
+
+xscreensaver (3.26-7) unstable; urgency=low
+
+  * Use rm -f to undo dependency (Closes: #79206, #79209)
+
+ -- Larry Daffner <vizzie@airmail.net>  Sat,  9 Dec 2000 17:30:05 -0600
+
+xscreensaver (3.26-6) unstable; urgency=low
+
+  * Don't install bogus screensaver-properties; clean up (Closes: #79119)
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri,  8 Dec 2000 16:35:07 -0600
+
+xscreensaver (3.26-5) unstable; urgency=low
+
+  * Recompile to fix bad link (Closes: #78229)
+  * Really move app-defaults (Closes: #78289)
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue, 28 Nov 2000 21:25:56 -0600
+
+xscreensaver (3.26-4) unstable; urgency=low
+
+  * Recompile for XFree 4 (Closes: #77967)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 27 Nov 2000 01:39:12 -0600
+
+xscreensaver (3.26-3) unstable; urgency=low
+
+  * Move gflux and xscreensaver-gl-helper to xscreensaver-gl (Closes: #77850)
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 23 Nov 2000 16:47:06 -0600
+
+xscreensaver (3.26-2) unstable; urgency=low
+
+  * Configure --without-gnome (Closes: #77677)
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue, 21 Nov 2000 22:16:50 -0600
+
+xscreensaver (3.26-1) unstable; urgency=low
+
+  * New upstream version (Closes: #75404)
+  * Use x-terminal-emulator to display (Closes: #59076)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 20 Nov 2000 20:46:21 -0600
+
+xscreensaver (3.25-2) unstable; urgency=low
+
+  * Figure gl visuals correctly for utah-glx
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri,  1 Sep 2000 23:28:11 -0500
+
+xscreensaver (3.25-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 31 Aug 2000 14:07:17 -0500
+
+xscreensaver (3.24-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 19 Apr 2000 14:40:58 -0500
+
+xscreensaver (3.22-7) unstable frozen; urgency=medium
+
+  * Upload into frozen
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri, 28 Jan 2000 22:15:48 -0600
+
+xscreensaver (3.22-6) unstable; urgency=low
+
+  * Fix perl dependency -> perl5 instead (Closes: Bug#56436)
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 27 Jan 2000 19:42:53 -0600
+
+xscreensaver (3.22-5) frozen unstable; urgency=low
+
+  * Added extra suggests/depends for some scripts (Closes: #56298)
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 27 Jan 2000 00:47:35 -0600
+
+xscreensaver (3.22-4) unstable; urgency=low
+
+  * Recompile AGAIN to fix mesa extra svgalib dependency (closes: #55538)
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue, 18 Jan 2000 20:14:57 -0600
+
+xscreensaver (3.22-3) frozen unstable; urgency=low
+
+  * Recompile to fix missing mesa dependency (Closes: #55508
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 17 Jan 2000 21:56:16 -0600
+
+xscreensaver (3.22-2) unstable; urgency=low
+
+  * Explicitly exclude kerberos (Closes: #54995)
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 13 Jan 2000 19:23:07 -0600
+
+xscreensaver (3.22-1) unstable; urgency=low
+
+  * New upstream version (Closes: #52262)
+  * Make sure PAM config is installed (Closes: #52184)
+  * Add missing dependencies (Closes: #52506)
+
+ -- Larry Daffner <vizzie@airmail.net>  Sat,  1 Jan 2000 14:44:06 -0600
+
+xscreensaver (3.21-3) unstable; urgency=low
+
+  * Added Suggests: www-browser (Closes: #51142)
+  * Don't remove webcollage - it's no longer necessary (Closes: #51260)
+
+ -- Larry Daffner <vizzie@airmail.net>  Sun, 28 Nov 1999 19:44:08 -0600
+
+xscreensaver (3.21-2) unstable; urgency=low
+
+  * fixed inadvertent worm-xworm in appdefaults (fixup in rules) (Closes:
+    #51005) 
+  * Changed image program Depends: to Recommends:
+  * Changed suidregister to mode 2755 instead of 4755 (Closes: #44907)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 22 Nov 1999 23:42:37 -0600
+
+xscreensaver (3.21-1) unstable; urgency=low
+
+  * New upstream version (Closes: #50827)
+  * Make compatibility symlinks in /usr/doc (Closes: #47799)
+  * Build with GTK instead of lesstif (Closes: #39032, #47657)
+
+ -- Larry Daffner <vizzie@airmail.net>  Sun, 21 Nov 1999 00:42:08 -0600
+
+xscreensaver (3.17-5) unstable; urgency=low
+
+  * Recompiled with new lesstif
+
+ -- Larry Daffner <vizzie@airmail.net>  Sat, 16 Oct 1999 11:13:52 -0500
+
+xscreensaver (3.17-4) unstable; urgency=low
+
+  * Changed "worm" to "xworm" in appdefaults file. (Fixes: #45840)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 11 Oct 1999 23:24:21 -0500
+
+xscreensaver (3.17-3) unstable; urgency=low
+
+  * Fixed source URL in debian/copyright (Fixes: #35139)
+  * Suidunregister sonar in postrm (Fixes: #44511)
+  * Webcollage removed from debian package (Fixes: #44419, #43459)
+  * Removed bashism from rules file (Fixes: #43660)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 13 Sep 1999 21:25:05 -0500
+
+xscreensaver (3.17-2) unstable; urgency=low
+
+  * Previous version contained the wrong PAM config file. Fixed.
+  * Updated to standards version 3.0.1.0
+
+ -- Larry Daffner <vizzie@airmail.net>  Sat, 31 Jul 1999 11:58:22 -0500
+
+xscreensaver (3.17-1) unstable; urgency=low
+
+  * New upstream version
+  * renamed "worm" to "xworm"
+  * Fixed webcollage to look in /usr/share/dict/words
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 29 Jul 1999 21:47:32 -0500
+
+xscreensaver (3.15-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue, 22 Jun 1999 20:07:59 -0500
+
+xscreensaver (3.13-2) unstable; urgency=low
+
+  * Register sonar with suidmanager to allow configuring for ping mode
+    (disabled by default)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon,  7 Jun 1999 23:45:46 -0500
+
+xscreensaver (3.13-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed,  2 Jun 1999 23:24:16 -0500
+
+xscreensaver (3.10-2) unstable; urgency=low
+
+  * Fixed installation of PAM defaults file.
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 13 May 1999 20:55:38 -0500
+
+xscreensaver (3.10-1) unstable; urgency=low
+
+  * New upstream version
+  * Configured in support for PAM
+  * Cleaner way of moving app defaults into the right place
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 28 Apr 1999 22:04:00 -0500
+
+xscreensaver (3.08-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 24 Mar 1999 22:22:44 -0600
+
+xscreensaver (3.07-3) unstable; urgency=low
+
+  * Fixed typo in postinst (Fixes: #34829)
+
+ -- Larry Daffner <vizzie@airmail.net>  Sat, 20 Mar 1999 09:49:30 -0600
+
+xscreensaver (3.07-2) unstable; urgency=low
+
+  * Added postrm to unregister on removal (Fixes: #34590)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 15 Mar 1999 19:45:18 -0600
+
+xscreensaver (3.07-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu,  7 Jan 1999 22:19:15 -0600
+
+xscreensaver (2.34-1) unstable; urgency=low
+
+  * New upstream version
+  * New OpenGL hacks bubble3d and glplanet added to xscreensaver-gl
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue, 13 Oct 1998 23:55:09 -0500
+
+xscreensaver (2.30-1) unstable; urgency=low
+
+  * New upstream version  
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri, 25 Sep 1998 21:30:37 -0500
+
+xscreensaver (2.27-2) unstable; urgency=low
+
+  * Added menu file (Fixes: #26425)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon,  7 Sep 1998 13:40:46 -0500
+
+xscreensaver (2.27-1) unstable; urgency=low
+
+  * New upstream version, including new gl hack "lament"
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue,  1 Sep 1998 20:41:32 -0500
+
+xscreensaver (2.24-1) unstable; urgency=low
+
+  * new upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon,  6 Jul 1998 23:29:36 -0500
+
+xscreensaver (2.20-1) unstable; urgency=low
+
+  * New upstream release; new screenhacks
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri,   12 Jun 1998 16:35:22 -0500
+
+xscreensaver (2.16-3) frozen unstable; urgency=low
+
+  * Add into frozen as well
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri,  3 Apr 1998 18:40:09 -0600
+
+xscreensaver (2.16-2) unstable; urgency=low
+
+  * recompiled to pick up dependency on lesstifg (fixes: #20568)
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu,  2 Apr 1998 22:24:48 -0600
+
+xscreensaver (2.16-1) unstable; urgency=low
+
+  * New upstream version
+  * Updated to standards version 2.4.0.0 (no changes)
+  * fixed dependency on fortune
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 25 Feb 1998 22:53:58 -0600
+
+xscreensaver (2.15-3) unstable; urgency=low
+
+  * Compile with Lesstif dialogs
+  * Updated to standards version 2.1.2.2
+  * Corrected incorrect file install for XScreenSaver-nogl
+  * Use suidregister for xsreensaver
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon,  9 Feb 1998 20:54:21 -0600
+
+
+xscreensaver (2.15-2) unstable; urgency=low
+
+  * Fixed typo in control file (fixes Bug#17516)
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 26 Jan 1998 19:02:01 -0600
+
+xscreensaver (2.15-1) unstable; urgency=low
+
+  * New upstream version (Fixes #16271)
+
+ -- Larry Daffner <vizzie@airmail.net>  Thu, 22 Jan 1998 23:45:06 -0600
+
+xscreensaver (2.14-1) unstable; urgency=low
+
+  * New upstream version
+  * Re-enabled decayscreen and slidescreen - they should work now.
+
+ -- Larry Daffner <vizzie@airmail.net>  Tue, 23 Dec 1997 01:24:57 -0600
+
+xscreensaver (2.10-4) unstable; urgency=low
+
+  * Disabled the slidescreen and decayscreen hacks by default (Bug #15780)
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 10 Dec 1997 20:45:01 -0600
+
+xscreensaver (2.10-3) unstable; urgency=low
+
+  * Fixed bad symlink /usr/doc/xscreensaver-gl
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 10 Nov 1997 19:18:37 -0600
+
+xscreensaver (2.10-2) unstable; urgency=low
+
+  * New subpackage: xscreensaver-gl
+  * Compiled OpenGL hacks
+
+ -- Larry Daffner <vizzie@airmail.net>  Sun,  9 Nov 1997 10:41:24 -0600
+
+xscreensaver (2.10-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Fri, 31 Oct 1997 07:46:09 +0000
+
+xscreensaver (2.07-1) unstable; urgency=low
+
+  * New upstream version
+  * Recompiled for libc6
+
+ -- Larry Daffner <vizzie@airmail.net>  Sun, 14 Sep 1997 20:59:51 -0500
+
+xscreensaver (1.27-2) unstable; urgency=low
+
+  * Minor tweak to rules file
+  * Rebuilt to catch updated dependencies
+
+ -- Larry Daffner <vizzie@airmail.net>  Mon, 24 Feb 1997 19:05:50 -0600
+
+xscreensaver (1.27-1) unstable; urgency=low
+
+  * New upstream version
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 2 Oct 1996 22:20:14 -0500
+
+xscreensaver (1.26-1) unstable; urgency=low
+
+  * New package
+
+ -- Larry Daffner <vizzie@airmail.net>  Wed, 2 Oct 1996 14:43:42 -0500
+
+
+

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=AntInspect
+Exec=/usr/lib/xscreensaver/antinspect -root
+TryExec=/usr/lib/xscreensaver/antinspect
+Comment=Draws a trio of ants moving their spheres around a circle. Written by Blair Tennessy.

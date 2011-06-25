@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Squiral
+Exec=/usr/lib/xscreensaver/squiral -root
+TryExec=/usr/lib/xscreensaver/squiral
+Comment=Draws a set of interacting, square-spiral-producing automata. The spirals grow outward until they hit something, then they go around it. Written by Jeff Epler.

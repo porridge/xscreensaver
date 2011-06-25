@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=SpeedMine
+Exec=/usr/lib/xscreensaver/speedmine -root
+TryExec=/usr/lib/xscreensaver/speedmine
+Comment=Simulates speeding down a rocky mineshaft, or a funky dancing worm. Written by Conrad Parker.

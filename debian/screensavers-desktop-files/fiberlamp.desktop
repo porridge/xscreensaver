@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Fiberlamp
+Exec=/usr/lib/xscreensaver/fiberlamp -root
+TryExec=/usr/lib/xscreensaver/fiberlamp
+Comment=Draws a groovy rotating fiber optic lamp. Written by Tim Auckland.

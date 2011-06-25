@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=XJack
+Exec=/usr/lib/xscreensaver/xjack -root
+TryExec=/usr/lib/xscreensaver/xjack
+Comment=This behaves schizophrenically and makes a lot of typos. Written by Jamie Zawinski.

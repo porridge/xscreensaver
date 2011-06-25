@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Cynosure
+Exec=/usr/lib/xscreensaver/cynosure -root
+TryExec=/usr/lib/xscreensaver/cynosure
+Comment=Random dropshadowed rectangles pop onto the screen in lockstep. Written by Ozymandias G. Desiderata, Jamie Zawinski, and Stephen Linhart.

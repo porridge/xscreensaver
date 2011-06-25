@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=GLSchool
+Exec=/usr/lib/xscreensaver/glschool -root
+TryExec=/usr/lib/xscreensaver/glschool
+Comment=Uses Craig Reynolds' Boids algorithm to simulate a school of fish. http://en.wikipedia.org/wiki/Boids Written by David C. Lambert.

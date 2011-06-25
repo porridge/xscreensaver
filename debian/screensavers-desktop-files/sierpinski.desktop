@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Sierpinski
+Exec=/usr/lib/xscreensaver/sierpinski -root
+TryExec=/usr/lib/xscreensaver/sierpinski
+Comment=This draws the two-dimensional variant of the recursive Sierpinski triangle fractal. See also the "Sierpinski3D" screen saver. http://en.wikipedia.org/wiki/Sierpinski_triangle Written by Desmond Daignault.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=DNA Logo
+Exec=/usr/lib/xscreensaver/DNAlogo -root
+TryExec=/usr/lib/xscreensaver/DNAlogo
+Comment=DNA Lounge 375 Eleventh Street San Francisco, CA 94107 http://www.dnalounge.com/ Written by Jamie Zawinski.

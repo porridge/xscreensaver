@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=m6502
+Exec=/usr/lib/xscreensaver/m6502 -root
+TryExec=/usr/lib/xscreensaver/m6502
+Comment=This emulates a 6502 microprocessor. The family of 6502 chips were used throughout the 70's and 80's in machines such as the Atari 2600, Commodore PET, VIC20 and C64, Apple ][, and the NES. Some example programs are included, and it can also read in an assembly file as input. Original JavaScript Version by Stian Soreng: http://www.6502asm.com/. Ported to XScreenSaver by Jeremy English. Written by Stian Soreng and Jeremy English.

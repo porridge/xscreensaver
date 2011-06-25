@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=LCDscrub
+Exec=/usr/lib/xscreensaver/lcdscrub -root
+TryExec=/usr/lib/xscreensaver/lcdscrub
+Comment=This screen saver is not meant to look pretty, but rather, to repair burn-in on LCD monitors. Believe it or not, screen burn is not a thing of the past. It can happen to LCD screens pretty easily, even in this modern age. However, leaving the screen on and displaying high contrast images can often repair the damage. That's what this screen saver does. See also: http://docs.info.apple.com/article.html?artnum=88343 http://toastycode.com/blog/2008/02/05/lcd-scrub/ Inspired by the like-named program by Daniel Sandler. Written by Jamie Zawinski.

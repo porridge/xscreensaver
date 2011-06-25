@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Atunnel
+Exec=/usr/lib/xscreensaver/atunnel -root
+TryExec=/usr/lib/xscreensaver/atunnel
+Comment=Draws an animation of a textured tunnel in GL. Written by Eric Lassauge and Roman Podobedov.

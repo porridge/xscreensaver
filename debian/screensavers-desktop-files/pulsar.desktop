@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Pulsar
+Exec=/usr/lib/xscreensaver/pulsar -root
+TryExec=/usr/lib/xscreensaver/pulsar
+Comment=Draws some intersecting planes, making use of alpha blending, fog, textures, and mipmaps. Written by David Konerding.

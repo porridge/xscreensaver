@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Bubble3D
+Exec=/usr/lib/xscreensaver/bubble3d -root
+TryExec=/usr/lib/xscreensaver/bubble3d
+Comment=Draws a stream of rising, undulating 3D bubbles, rising toward the top of the screen, with transparency and specular reflections. Written by Richard Jones.

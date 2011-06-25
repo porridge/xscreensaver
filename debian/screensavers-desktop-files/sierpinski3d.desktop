@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Sierpinski3D
+Exec=/usr/lib/xscreensaver/sierpinski3d -root
+TryExec=/usr/lib/xscreensaver/sierpinski3d
+Comment=This draws the Sierpinski tetrahedron fractal, the three-dimensional variant of the recursive Sierpinski triangle. http://en.wikipedia.org/wiki/Sierpinski_triangle#Analogs_in_higher_dimension Written by Tim Robinson and Jamie Zawinski.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=JigglyPuff
+Exec=/usr/lib/xscreensaver/jigglypuff -root
+TryExec=/usr/lib/xscreensaver/jigglypuff
+Comment=This does bad things with quasi-spherical objects. You have a tetrahedron with tesselated faces. The vertices on these faces have forces on them: one proportional to the distance from the surface of a sphere; and one proportional to the distance from the neighbors. They also have inertia. The resulting effect can range from a shape that does nothing, to a frenetic polygon storm. Somewhere in between there it usually manifests as a blob that jiggles in a kind of disturbing manner. Written by Keith Macleod.

@@ -1,0 +1,21 @@
+#
+# The autoconf makefiles make for some interesting chicken and the
+# egg problems when running debian/rules clean:
+# po/Makefile distclean depends on ./config.status through its
+# Makefile target, so clean the subdirs first
+# This is maybe another autoconf 2.64 problem
+#
+Index: xscreensaver/Makefile.in
+===================================================================
+--- xscreensaver.orig/Makefile.in	2009-09-07 00:23:53.000000000 +0200
++++ xscreensaver/Makefile.in	2009-09-07 00:24:14.000000000 +0200
+@@ -54,8 +54,8 @@
+ 	@$(MAKE_SUBDIR2)
+ 
+ distclean:: clean
+-	-rm -f config.h Makefile config.status config.cache config.log TAGS *~ "#"* intltool-extract intltool-merge intltool-update
+ 	@$(MAKE_SUBDIR2)
++	-rm -f config.h Makefile config.status config.cache config.log TAGS *~ "#"* intltool-extract intltool-merge intltool-update
+ 
+ dist:: tar
+ 

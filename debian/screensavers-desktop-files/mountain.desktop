@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Mountain
+Exec=/usr/lib/xscreensaver/mountain -root
+TryExec=/usr/lib/xscreensaver/mountain
+Comment=Generates random 3D plots that look vaguely mountainous. Written by Pascal Pensa.

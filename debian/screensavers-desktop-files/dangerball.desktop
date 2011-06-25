@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=DangerBall
+Exec=/usr/lib/xscreensaver/dangerball -root
+TryExec=/usr/lib/xscreensaver/dangerball
+Comment=Draws a ball that periodically extrudes many random spikes. Ouch! Written by Jamie Zawinski.

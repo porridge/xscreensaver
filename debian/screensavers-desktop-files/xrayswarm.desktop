@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=XRaySwarm
+Exec=/usr/lib/xscreensaver/xrayswarm -root
+TryExec=/usr/lib/xscreensaver/xrayswarm
+Comment=Draws a few swarms of critters flying around the screen, with faded color trails behind them. Written by Chris Leger.

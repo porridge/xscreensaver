@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=TimeTunnel
+Exec=/usr/lib/xscreensaver/timetunnel -root
+TryExec=/usr/lib/xscreensaver/timetunnel
+Comment=Draws an animation similar to the opening and closing effects on the Dr. Who TV show. Written by Sean P. Brennan.

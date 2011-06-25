@@ -1,0 +1,29 @@
+#
+# Sent upstream (jwz) 2009-06-16
+#
+Index: xscreensaver/hacks/Makefile.in
+===================================================================
+--- xscreensaver.orig/hacks/Makefile.in	2009-09-08 23:41:44.000000000 +0200
++++ xscreensaver/hacks/Makefile.in	2009-09-08 23:42:08.000000000 +0200
+@@ -256,7 +256,7 @@
+ 
+ 
+ default: all
+-all: $(EXES) $(RETIRED_EXES)
++all: $(EXES)
+ 
+ install:   install-program   install-scripts install-xml install-man
+ uninstall: uninstall-program uninstall-xml uninstall-man
+Index: xscreensaver/hacks/glx/Makefile.in
+===================================================================
+--- xscreensaver.orig/hacks/glx/Makefile.in	2009-09-08 23:41:44.000000000 +0200
++++ xscreensaver/hacks/glx/Makefile.in	2009-09-08 23:42:08.000000000 +0200
+@@ -218,7 +218,7 @@
+ 
+ 
+ default: all
+-all: $(EXES) $(RETIRED_EXES)
++all: $(EXES)
+ 
+ install:   install-program    install-xml   install-man
+ uninstall: uninstall-program  uninstall-xml uninstall-man

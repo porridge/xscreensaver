@@ -259,7 +259,7 @@ all: $(EXES) $(EXES2)
 tests: $(TEST_EXES)
 
 install:   install-program   install-ad    install-scripts \
-	   install-gnome     install-man   install-xml install-pam
+	   install-gnome     install-man   install-xml
 uninstall: uninstall-program uninstall-ad  \
 	   uninstall-gnome   uninstall-man uninstall-xml  
 

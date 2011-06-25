@@ -1,7 +1,8 @@
 [Desktop Entry]
 Exec=xscreensaver-demo
-Icon=xscreensaver
+Icon=xscreensaver.svg
 Terminal=false
+StartupNotify=true
 _Name=Screensaver
 _Comment=Change screensaver properties
 Type=Application

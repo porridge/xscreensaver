@@ -2,8 +2,9 @@ xscreensaver (5.10-3ubuntu4.1) lucid; urgency=low
 
   * Added the full-path patch from jmv
   * Added the patches for description.
+  * Install the x-g-description script and manpage to xscreensaver-data package
 
- -- Marcin Owsiany <porridge@debian.org>  Sat, 25 Jun 2011 12:23:59 +0100
+ -- Marcin Owsiany <porridge@debian.org>  Sat, 25 Jun 2011 12:34:08 +0100
 
 xscreensaver (5.10-3ubuntu4) lucid; urgency=low
 

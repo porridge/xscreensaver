@@ -1,0 +1,542 @@
+From b6744397f568f79244bf88cd9d1c1141c134933c Mon Sep 17 00:00:00 2001
+From: Marcin Owsiany <marcin@owsiany.pl>
+Date: Sat, 7 May 2011 15:11:15 +0100
+Subject: [PATCH 4/5] Support showing description of loaded image, if present.
+
+It is presented in the same font as title, but in the lower left-hand corner of
+the screen.
+---
+ hacks/apple2-main.c      |    4 +-
+ hacks/glx/antspotlight.c |    1 +
+ hacks/glx/carousel.c     |    4 ++-
+ hacks/glx/flipflop.c     |    1 +
+ hacks/glx/flipscreen3d.c |    1 +
+ hacks/glx/gflux.c        |    1 +
+ hacks/glx/gleidescope.c  |    1 +
+ hacks/glx/glslideshow.c  |   29 +++++++++++++++++++++++-
+ hacks/glx/grab-ximage.c  |   11 ++++++---
+ hacks/glx/grab-ximage.h  |    1 +
+ hacks/glx/jigsaw.c       |    1 +
+ hacks/glx/mirrorblob.c   |    1 +
+ hacks/glx/photopile.c    |    3 +-
+ hacks/slip.c             |    4 +-
+ hacks/xanalogtv.c        |    4 +-
+ utils/grabclient.c       |   55 ++++++++++++++++++++++++++++++----------------
+ utils/grabscreen.h       |    6 +++++
+ 17 files changed, 96 insertions(+), 32 deletions(-)
+
+diff --git a/hacks/apple2-main.c b/hacks/apple2-main.c
+index dc42ae9..d279337 100644
+--- a/hacks/apple2-main.c
++++ b/hacks/apple2-main.c
+@@ -540,8 +540,8 @@ typedef struct slideshow_data_s {
+ 
+ static void
+ image_loaded_cb (Screen *screen, Window window, Drawable p,
+-                 const char *name, XRectangle *geometry,
+-                 void *closure)
++                 const char *name, const char *description,
++                 XRectangle *geometry, void *closure)
+ {
+   Display *dpy = DisplayOfScreen (screen);
+   apple2_sim_t *sim = (apple2_sim_t *) closure;
+diff --git a/hacks/glx/antspotlight.c b/hacks/glx/antspotlight.c
+index 2598f5c..069cda8 100644
+--- a/hacks/glx/antspotlight.c
++++ b/hacks/glx/antspotlight.c
+@@ -661,6 +661,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geometry,
+                  int image_width, int image_height, 
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+   antspotlightstruct *mp = (antspotlightstruct *) closure;
+diff --git a/hacks/glx/carousel.c b/hacks/glx/carousel.c
+index 513fbc8..16b1ce2 100644
+--- a/hacks/glx/carousel.c
++++ b/hacks/glx/carousel.c
+@@ -196,6 +196,7 @@ alloc_frame (ModeInfo *mi)
+ static void image_loaded_cb (const char *filename, XRectangle *geom,
+                              int image_width, int image_height,
+                              int texture_width, int texture_height,
++                             const char *description,
+                              void *closure);
+ 
+ 
+@@ -225,7 +226,7 @@ load_image (ModeInfo *mi, image_frame *frame)
+   ss->loads_in_progress++;
+ 
+   if (wire)
+-    image_loaded_cb (0, 0, 0, 0, 0, 0, frame);
++    image_loaded_cb (0, 0, 0, 0, 0, 0, 0, frame);
+   else
+     {
+       int w = (MI_WIDTH(mi)  / 2) - 1;
+@@ -245,6 +246,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geom,
+                  int image_width, int image_height,
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+   image_frame *frame = (image_frame *) closure;
+diff --git a/hacks/glx/flipflop.c b/hacks/glx/flipflop.c
+index ace3b88..3dcfdcb 100644
+--- a/hacks/glx/flipflop.c
++++ b/hacks/glx/flipflop.c
+@@ -300,6 +300,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geometry,
+                  int image_width, int image_height, 
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+     Flipflopcreen *c = (Flipflopcreen *)closure;
+diff --git a/hacks/glx/flipscreen3d.c b/hacks/glx/flipscreen3d.c
+index 92c0fa0..b494be6 100644
+--- a/hacks/glx/flipscreen3d.c
++++ b/hacks/glx/flipscreen3d.c
+@@ -394,6 +394,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geometry,
+                  int image_width, int image_height, 
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+   Screenflip *c = (Screenflip *) closure;
+diff --git a/hacks/glx/gflux.c b/hacks/glx/gflux.c
+index 80310cc..34c6b05 100644
+--- a/hacks/glx/gflux.c
++++ b/hacks/glx/gflux.c
+@@ -456,6 +456,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geometry,
+                  int image_width, int image_height, 
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+   gfluxstruct *gp = (gfluxstruct *) closure;
+diff --git a/hacks/glx/gleidescope.c b/hacks/glx/gleidescope.c
+index 3a14f29..d21244b 100644
+--- a/hacks/glx/gleidescope.c
++++ b/hacks/glx/gleidescope.c
+@@ -534,6 +534,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geometry,
+                  int image_width, int image_height, 
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+ 	texture *tp = (texture *) closure;
+diff --git a/hacks/glx/glslideshow.c b/hacks/glx/glslideshow.c
+index e8e5eb3..6382432 100644
+--- a/hacks/glx/glslideshow.c
++++ b/hacks/glx/glslideshow.c
+@@ -109,6 +109,7 @@ typedef struct {
+   ModeInfo *mi;
+   int id;			   /* unique number for debugging */
+   char *title;			   /* the filename of this image */
++  char *description;		   /* the optional description of this image */
+   int w, h;			   /* size in pixels of the image */
+   int tw, th;			   /* size in pixels of the texture */
+   XRectangle geom;		   /* where in the image the bits are */
+@@ -265,6 +266,7 @@ double_time (void)
+ static void image_loaded_cb (const char *filename, XRectangle *geom,
+                              int image_width, int image_height,
+                              int texture_width, int texture_height,
++		             const char *description,
+                              void *closure);
+ 
+ 
+@@ -288,7 +290,7 @@ alloc_image (ModeInfo *mi)
+   ss->image_load_time = ss->now;
+ 
+   if (wire)
+-    image_loaded_cb (0, 0, 0, 0, 0, 0, img);
++    image_loaded_cb (0, 0, 0, 0, 0, 0, 0, img);
+   else
+     load_texture_async (mi->xgwa.screen, mi->window, *ss->glx_context,
+                         0, 0, mipmap_p, img->texid, image_loaded_cb, img);
+@@ -306,6 +308,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geom,
+                  int image_width, int image_height,
+                  int texture_width, int texture_height,
++		 const char *description,
+                  void *closure)
+ {
+   image *img = (image *) closure;
+@@ -339,6 +342,7 @@ image_loaded_cb (const char *filename, XRectangle *geom,
+   img->th = texture_height;
+   img->geom = *geom;
+   img->title = (filename ? strdup (filename) : 0);
++  img->description = (description ? strdup (description) : 0);
+ 
+   /* If the image's width doesn't come back as the width of the screen,
+      then the image must have been scaled down (due to insufficient
+@@ -812,6 +816,7 @@ draw_sprite (ModeInfo *mi, sprite *sp)
+       }
+ 
+ 
++    /* Print the title at the top. */
+     if (do_titles &&
+         img->title && *img->title)
+       {
+@@ -827,6 +832,28 @@ draw_sprite (ModeInfo *mi, sprite *sp)
+                          mi->xgwa.width, mi->xgwa.height, x, y,
+                          img->title, False);
+       }
++
++    /* Print the description at the bottom. */
++    if (do_titles &&
++        img->description && *img->description)
++      {
++        int y = 10, x = 10;
++        int i, newlines = 1;
++        GLfloat line_height = ss->xfont->ascent + ss->xfont->descent;
++        for (i = 0; img->description[i]; i++)
++          if (img->description[i] == '\n')
++            newlines++;
++        y += ceil(line_height * (GLfloat)newlines);
++        glColor4f (0, 0, 0, sp->opacity);   /* cheap-assed dropshadow */
++        print_gl_string (mi->dpy, ss->xfont, ss->font_dlist,
++                         mi->xgwa.width, mi->xgwa.height, x, y,
++                         img->description, False);
++        x++; y++;
++        glColor4f (1, 1, 1, sp->opacity);
++        print_gl_string (mi->dpy, ss->xfont, ss->font_dlist,
++                         mi->xgwa.width, mi->xgwa.height, x, y,
++                         img->description, False);
++      }
+   }
+   glPopMatrix();
+ 
+diff --git a/hacks/glx/grab-ximage.c b/hacks/glx/grab-ximage.c
+index 653fe4b..6d01fbc 100644
+--- a/hacks/glx/grab-ximage.c
++++ b/hacks/glx/grab-ximage.c
+@@ -490,6 +490,7 @@ typedef struct {
+    */
+   void (*callback) (const char *filename, XRectangle *geometry,
+                     int iw, int ih, int tw, int th,
++                    const char *description,
+                     void *closure);
+   void *closure;
+ 
+@@ -647,8 +648,8 @@ ximage_to_texture (XImage *ximage,
+ 
+ static void load_texture_async_cb (Screen *screen,
+                                         Window window, Drawable drawable,
+-                                        const char *name, XRectangle *geometry,
+-                                        void *closure);
++                                        const char *name, const char *description,
++                                        XRectangle *geometry, void *closure);
+ 
+ 
+ /* Grabs an image of the desktop (or another random image file) and
+@@ -670,6 +671,7 @@ load_texture_async (Screen *screen, Window window,
+                                       int image_height,
+                                       int texture_width,
+                                       int texture_height,
++                                      const char *description,
+                                       void *closure),
+                     void *closure)
+ {
+@@ -708,7 +710,8 @@ load_texture_async (Screen *screen, Window window,
+  */
+ static void
+ load_texture_async_cb (Screen *screen, Window window, Drawable drawable,
+-                       const char *name, XRectangle *geometry, void *closure)
++                       const char *name, const char *description,
++                       XRectangle *geometry, void *closure)
+ {
+   Display *dpy = DisplayOfScreen (screen);
+   Bool ok;
+@@ -824,7 +827,7 @@ load_texture_async_cb (Screen *screen, Window window, Drawable drawable,
+ 
+   if (dd.callback)
+     /* asynchronous mode */
+-    dd.callback (name, geometry, iw, ih, tw, th, dd.closure);
++    dd.callback (name, geometry, iw, ih, tw, th, description, dd.closure);
+   else
+     {
+       /* synchronous mode */
+diff --git a/hacks/glx/grab-ximage.h b/hacks/glx/grab-ximage.h
+index 2fd589f..b6aa5b2 100644
+--- a/hacks/glx/grab-ximage.h
++++ b/hacks/glx/grab-ximage.h
+@@ -70,6 +70,7 @@ void load_texture_async (Screen *, Window, GLXContext,
+                                            int image_height,
+                                            int texture_width,
+                                            int texture_height,
++                                           const char *description,
+                                            void *closure),
+                          void *closure);
+ 
+diff --git a/hacks/glx/jigsaw.c b/hacks/glx/jigsaw.c
+index 0d9a314..b826676 100644
+--- a/hacks/glx/jigsaw.c
++++ b/hacks/glx/jigsaw.c
+@@ -529,6 +529,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geometry,
+                  int image_width, int image_height, 
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+   ModeInfo *mi = (ModeInfo *) closure;
+diff --git a/hacks/glx/mirrorblob.c b/hacks/glx/mirrorblob.c
+index 00ba44e..1d7c9db 100644
+--- a/hacks/glx/mirrorblob.c
++++ b/hacks/glx/mirrorblob.c
+@@ -543,6 +543,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geometry,
+                  int image_width, int image_height, 
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+   mirrorblobstruct *mp = (mirrorblobstruct *) closure;
+diff --git a/hacks/glx/photopile.c b/hacks/glx/photopile.c
+index 39a6892..5a7e19a 100644
+--- a/hacks/glx/photopile.c
++++ b/hacks/glx/photopile.c
+@@ -216,6 +216,7 @@ static void
+ image_loaded_cb (const char *filename, XRectangle *geom,
+                  int image_width, int image_height,
+                  int texture_width, int texture_height,
++                 const char *description,
+                  void *closure)
+ {
+   photopile_state *ss = (photopile_state *) closure;
+@@ -297,7 +298,7 @@ load_image (ModeInfo *mi)
+   frame->loaded_p = False;
+ 
+   if (wire)
+-    image_loaded_cb (0, 0, 0, 0, 0, 0, ss);
++    image_loaded_cb (0, 0, 0, 0, 0, 0, 0, ss);
+   else
+     {
+       int w = MI_WIDTH(mi);
+diff --git a/hacks/slip.c b/hacks/slip.c
+index 0c665ea..72eea6d 100644
+--- a/hacks/slip.c
++++ b/hacks/slip.c
+@@ -103,8 +103,8 @@ erandom(slipstruct *sp, int mv)
+ #ifdef STANDALONE
+ static void
+ image_loaded_cb (Screen *screen, Window w, Drawable d,
+-                 const char *name, XRectangle *geom,
+-                 void *closure)
++                 const char *name, const char *description,
++                 XRectangle *geom, void *closure)
+ {
+   ModeInfo *mi = (ModeInfo *) closure;
+   slipstruct *sp = &slips[MI_SCREEN(mi)];
+diff --git a/hacks/xanalogtv.c b/hacks/xanalogtv.c
+index 38a08b3..05cf712 100644
+--- a/hacks/xanalogtv.c
++++ b/hacks/xanalogtv.c
+@@ -309,8 +309,8 @@ static void analogtv_load_random_image(struct state *);
+ 
+ 
+ static void image_loaded_cb (Screen *screen, Window window, Drawable pixmap,
+-                             const char *name, XRectangle *geometry,
+-                             void *closure)
++                             const char *name, const char *description,
++                             XRectangle *geometry, void *closure)
+ {
+   /* When an image has just been loaded, store it into the first available
+      channel.  If there are other unloaded channels, then start loading
+diff --git a/utils/grabclient.c b/utils/grabclient.c
+index 633a003..c2b0703 100644
+--- a/utils/grabclient.c
++++ b/utils/grabclient.c
+@@ -175,24 +175,36 @@ checkerboard (Screen *screen, Drawable drawable)
+ 
+ 
+ static char *
+-get_name (Display *dpy, Window window)
++get_string_property (Display *dpy, Window window, char *atom_name)
+ {
+   Atom type;
+   int format;
+   unsigned long nitems, bytesafter;
+-  unsigned char *name = 0;
+-  Atom atom = XInternAtom (dpy, XA_XSCREENSAVER_IMAGE_FILENAME, False);
++  unsigned char *string_property = 0;
++  Atom atom = XInternAtom (dpy, atom_name, False);
+   if (XGetWindowProperty (dpy, window, atom,
+                           0, 1024, False, XA_STRING,
+                           &type, &format, &nitems, &bytesafter,
+-                          &name)
++                          &string_property)
+       == Success
+       && type != None)
+-    return (char *) name;
++    return (char *) string_property;
+   else
+     return 0;
+ }
+ 
++static char *
++get_name (Display *dpy, Window window)
++{
++  return get_string_property(dpy, window, XA_XSCREENSAVER_IMAGE_FILENAME);
++}
++
++static char *
++get_description (Display *dpy, Window window)
++{
++  return get_string_property(dpy, window, XA_XSCREENSAVER_IMAGE_DESCRIPTION);
++}
++
+ 
+ static Bool
+ get_geometry (Display *dpy, Window window, XRectangle *ret)
+@@ -302,7 +314,8 @@ fork_exec_wait (const char *command)
+ 
+ typedef struct {
+   void (*callback) (Screen *, Window, Drawable,
+-                    const char *name, XRectangle *geom, void *closure);
++                    const char *name, const char *description,
++                    XRectangle *geom, void *closure);
+   Screen *screen;
+   Window window;
+   Drawable drawable;
+@@ -320,8 +333,8 @@ static void
+ fork_exec_cb (const char *command,
+               Screen *screen, Window window, Drawable drawable,
+               void (*callback) (Screen *, Window, Drawable,
+-                                const char *name, XRectangle *geom,
+-                                void *closure),
++                                const char *name, const char *description,
++                                XRectangle *geom, void *closure),
+               void *closure)
+ {
+   XtAppContext app = XtDisplayToApplicationContext (DisplayOfScreen (screen));
+@@ -403,17 +416,19 @@ finalize_cb (XtPointer closure, int *fd, XtIntervalId *id)
+ {
+   grabclient_data *data = (grabclient_data *) closure;
+   Display *dpy = DisplayOfScreen (data->screen);
+-  char *name;
++  char *name, *description;
+   XRectangle geom = { 0, 0, 0, 0 };
+ 
+   XtRemoveInput (*id);
+ 
+   name = get_name (dpy, data->window);
++  description = get_description (dpy, data->window);
+   get_geometry (dpy, data->window, &geom);
+ 
+   data->callback (data->screen, data->window, data->drawable,
+-                  name, &geom, data->closure);
++                  name, description, &geom, data->closure);
+   if (name) free (name);
++  if (description) free (description);
+ 
+   fclose (data->read_pipe);
+ 
+@@ -435,8 +450,8 @@ finalize_cb (XtPointer closure, int *fd, XtIntervalId *id)
+ static void
+ load_random_image_1 (Screen *screen, Window window, Drawable drawable,
+                      void (*callback) (Screen *, Window, Drawable,
+-                                       const char *name, XRectangle *geom,
+-                                       void *closure),
++                                       const char *name, const char *description,
++                                       XRectangle *geom, void *closure),
+                      void *closure,
+                      char **name_ret,
+                      XRectangle *geom_ret)
+@@ -596,7 +611,7 @@ pipe_cb (XtPointer closure, int *source, XtInputId *id)
+   }
+ 
+   if (absfile) free (absfile);
+-  clo2->callback (clo2->screen, clo2->xwindow, clo2->drawable, buf, &geom,
++  clo2->callback (clo2->screen, clo2->xwindow, clo2->drawable, buf, 0, &geom,
+                   clo2->closure);
+   clo2->callback = 0;
+   free (clo2->directory);
+@@ -609,6 +624,7 @@ osx_load_image_file_async (Screen *screen, Window xwindow, Drawable drawable,
+                            const char *dir,
+                            void (*callback) (Screen *, Window, Drawable,
+                                              const char *name,
++                                             const char *description,
+                                              XRectangle *geom,
+                                              void *closure),
+                        void *closure)
+@@ -657,8 +673,8 @@ osx_load_image_file_async (Screen *screen, Window xwindow, Drawable drawable,
+ static void
+ load_random_image_1 (Screen *screen, Window window, Drawable drawable,
+                      void (*callback) (Screen *, Window, Drawable,
+-                                       const char *name, XRectangle *geom,
+-                                       void *closure),
++                                       const char *name, const char *description,
++                                       XRectangle *geom, void *closure),
+                      void *closure,
+                      char **name_ret,
+                      XRectangle *geom_ret)
+@@ -732,7 +748,7 @@ load_random_image_1 (Screen *screen, Window window, Drawable drawable,
+   if (callback) {
+     /* If we got here, we loaded synchronously even though they wanted async.
+      */
+-    callback (screen, window, drawable, name_ret_2, &geom_ret_2, closure);
++    callback (screen, window, drawable, name_ret_2, 0, &geom_ret_2, closure);
+   }
+ }
+ 
+@@ -795,8 +811,8 @@ print_loading_msg (Screen *screen, Window window)
+ void
+ load_image_async (Screen *screen, Window window, Drawable drawable,
+                   void (*callback) (Screen *, Window, Drawable,
+-                                    const char *name, XRectangle *geom,
+-                                    void *closure),
++                                    const char *name, const char *description,
++                                    XRectangle *geom, void *closure),
+                   void *closure)
+ {
+   load_random_image_1 (screen, window, drawable, callback, closure, 0, 0);
+@@ -810,7 +826,8 @@ struct async_load_state {
+ 
+ static void
+ load_image_async_simple_cb (Screen *screen, Window window, Drawable drawable,
+-                            const char *name, XRectangle *geom, void *closure)
++                            const char *name, const char *description,
++                            XRectangle *geom, void *closure)
+ {
+   async_load_state *state = (async_load_state *) closure;
+   state->done_p = True;
+diff --git a/utils/grabscreen.h b/utils/grabscreen.h
+index 2f680e0..9586d8f 100644
+--- a/utils/grabscreen.h
++++ b/utils/grabscreen.h
+@@ -30,6 +30,10 @@
+    If it is from a file, then the `filename' argument will be the name
+    of the file.  It may be NULL.  If you want to keep this string, copy it.
+ 
++   If available, the `description' argument will be set to a string containing
++   up to a few lines of description of the image. It may be NULL.  If you want
++   to keep this string, copy it.
++
+    The size and position of the image is in the `geometry' arg.
+    The image will generally have been scaled up to fit the window, but
+    if a loaded file had a different aspect ratio than the window, it
+@@ -41,6 +45,7 @@ extern void load_image_async (Screen *, Window, Drawable,
+                               void (*callback) (Screen *, Window,
+                                                 Drawable,
+                                                 const char *name,
++                                                const char *description,
+                                                 XRectangle *geometry,
+                                                 void *closure),
+                               void *closure);
+@@ -79,6 +84,7 @@ extern void grab_screen_image_internal (Screen *, Window);
+ /* Don't use these: this is how "xscreensaver-getimage" and "grabclient.c"
+    pass the file name around. */
+ #define XA_XSCREENSAVER_IMAGE_FILENAME "_SCREENSAVER_IMAGE_FILENAME"
++#define XA_XSCREENSAVER_IMAGE_DESCRIPTION "_SCREENSAVER_IMAGE_DESCRIPTION"
+ #define XA_XSCREENSAVER_IMAGE_GEOMETRY "_SCREENSAVER_IMAGE_GEOMETRY"
+ 
+ /* For debugging: turn on verbosity. */
+-- 
+1.7.3.1
+

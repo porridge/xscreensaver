@@ -1,0 +1,193 @@
+From 380ab62a549d3ed515f18813199f1300ea898707 Mon Sep 17 00:00:00 2001
+From: Marcin Owsiany <marcin@owsiany.pl>
+Date: Sat, 7 May 2011 17:04:51 +0100
+Subject: [PATCH 2/5] Extracted a get_program_output function.
+
+---
+ driver/xscreensaver-getimage.c |  138 ++++++++++++++++++++++------------------
+ 1 files changed, 76 insertions(+), 62 deletions(-)
+
+diff --git a/driver/xscreensaver-getimage.c b/driver/xscreensaver-getimage.c
+index d7c1508..1de7895 100644
+--- a/driver/xscreensaver-getimage.c
++++ b/driver/xscreensaver-getimage.c
+@@ -1125,53 +1125,16 @@ display_file (Screen *screen, Window window, Drawable drawable,
+   return False;
+ }
+ 
+-
+-/* Invokes a sub-process and returns its output (presumably, a file to
+-   load.)  Free the string when done.  'grab_type' controls which program
+-   to run.  Returned pathname may be relative to 'directory', or absolute.
++/* Invokes a sub-process and returns its output. Free the string when done.
+  */
+ static char *
+-get_filename_1 (Screen *screen, const char *directory, grab_type type,
+-                Bool verbose_p)
++get_program_output (Screen *screen, int ac, char *av[], Bool verbose_p)
+ {
+   Display *dpy = DisplayOfScreen (screen);
+   pid_t forked;
+   int fds [2];
+   int in, out;
+   char buf[10240];
+-  char *av[20];
+-  int ac = 0;
+-
+-  switch (type)
+-    {
+-    case GRAB_FILE:
+-      av[ac++] = GETIMAGE_FILE_PROGRAM;
+-      if (verbose_p)
+-        av[ac++] = "--verbose";
+-      av[ac++] = "--name";
+-      av[ac++] = (char *) directory;
+-      break;
+-
+-    case GRAB_VIDEO:
+-      av[ac++] = GETIMAGE_VIDEO_PROGRAM;
+-      if (verbose_p)
+-        av[ac++] = "--verbose";
+-      av[ac++] = "--name";
+-      break;
+-
+-# ifdef USE_EXTERNAL_SCREEN_GRABBER
+-    case GRAB_DESK:
+-      av[ac++] = GETIMAGE_SCREEN_PROGRAM;
+-      if (verbose_p)
+-        av[ac++] = "--verbose";
+-      av[ac++] = "--name";
+-      break;
+-# endif
+-
+-    default:
+-      abort();
+-    }
+-  av[ac] = 0;
+ 
+   if (verbose_p)
+     {
+@@ -1219,11 +1182,9 @@ get_filename_1 (Screen *screen, const char *directory, grab_type type,
+       }
+     default:
+       {
+-        struct stat st;
+         int wait_status = 0;
+         FILE *f = fdopen (in, "r");
+         int L;
+-        char *ret = 0;
+ 
+         close (out);  /* don't need this one */
+         *buf = 0;
+@@ -1241,27 +1202,7 @@ get_filename_1 (Screen *screen, const char *directory, grab_type type,
+         if (!*buf)
+           return 0;
+ 
+-        ret = strdup (buf);
+-
+-        if (*ret != '/')
+-          {
+-            /* Program returned path relative to directory.  Prepend dir
+-               to buf so that we can properly stat it. */
+-            strcpy (buf, directory);
+-            if (directory[strlen(directory)-1] != '/')
+-              strcat (buf, "/");
+-            strcat (buf, ret);
+-          }
+-
+-        if (stat(buf, &st))
+-          {
+-            fprintf (stderr, "%s: file does not exist: \"%s\"\n",
+-                     progname, buf);
+-            free (ret);
+-            return 0;
+-          }
+-        else
+-          return ret;
++        return strdup (buf);
+       }
+     }
+ 
+@@ -1269,6 +1210,79 @@ get_filename_1 (Screen *screen, const char *directory, grab_type type,
+ }
+ 
+ 
++/* Invokes a sub-process and returns its output (presumably, a file to
++   load.)  Free the string when done.  'grab_type' controls which program
++   to run.  Returned pathname may be relative to 'directory', or absolute.
++ */
++static char *
++get_filename_1 (Screen *screen, const char *directory, grab_type type,
++                Bool verbose_p)
++{
++  char *av[20];
++  int ac = 0;
++  struct stat st;
++  char *ret, *tmp;
++
++  switch (type)
++    {
++    case GRAB_FILE:
++      av[ac++] = GETIMAGE_FILE_PROGRAM;
++      if (verbose_p)
++        av[ac++] = "--verbose";
++      av[ac++] = "--name";
++      av[ac++] = (char *) directory;
++      break;
++
++    case GRAB_VIDEO:
++      av[ac++] = GETIMAGE_VIDEO_PROGRAM;
++      if (verbose_p)
++        av[ac++] = "--verbose";
++      av[ac++] = "--name";
++      break;
++
++# ifdef USE_EXTERNAL_SCREEN_GRABBER
++    case GRAB_DESK:
++      av[ac++] = GETIMAGE_SCREEN_PROGRAM;
++      if (verbose_p)
++        av[ac++] = "--verbose";
++      av[ac++] = "--name";
++      break;
++# endif
++
++    default:
++      abort();
++    }
++  av[ac] = 0;
++
++  ret = get_program_output (screen, ac, av, verbose_p);
++  if (!ret || !*ret)
++    return 0;
++
++  if (*ret != '/')
++    {
++      /* Program returned path relative to directory.  Prepend dir
++         so that we can properly stat it. */
++      tmp = malloc(strlen(ret) + 2 + strlen(directory));
++      strcpy (tmp, directory);
++      if (directory[strlen(directory)-1] != '/')
++        strcat (tmp, "/");
++      strcat (tmp, ret);
++    }
++  else
++    tmp = strdup (ret);
++
++  if (stat(tmp, &st))
++    {
++      fprintf (stderr, "%s: file does not exist: \"%s\"\n",
++               progname, tmp);
++      free (ret);
++      ret = 0;
++    }
++  free (tmp);
++  return ret;
++}
++
++
+ /* Returns a pathname to an image file.  Free the string when you're done.
+  */
+ static char *
+-- 
+1.7.3.1
+

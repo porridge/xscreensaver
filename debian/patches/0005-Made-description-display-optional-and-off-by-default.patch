@@ -1,0 +1,206 @@
+From 47424a970c7c5b138100cf07996c9e579f01a11a Mon Sep 17 00:00:00 2001
+From: Marcin Owsiany <marcin@owsiany.pl>
+Date: Sun, 19 Jun 2011 17:03:03 +0100
+Subject: [PATCH 5/5] Made description display optional and off by default.
+
+Added a getDescriptions boolean resource and -(no-)desc flag that control
+whether xscreensaver-getimage should invoke xscreensaver-getimage-description.
+
+Added a -descriptions flag to glslideshow that controls whether it should
+display the description if it has been loaded with the image.
+---
+ driver/prefs.c                 |    3 +++
+ driver/types.h                 |    5 +++--
+ driver/xscreensaver-getimage.c |   32 ++++++++++++++++++++------------
+ hacks/config/glslideshow.xml   |    1 +
+ hacks/glx/glslideshow.c        |    6 +++++-
+ 5 files changed, 32 insertions(+), 15 deletions(-)
+
+diff --git a/driver/prefs.c b/driver/prefs.c
+index 1b09314..463a7d3 100644
+--- a/driver/prefs.c
++++ b/driver/prefs.c
+@@ -282,6 +282,7 @@ static const char * const prefs[] = {
+   "grabDesktopImages",
+   "grabVideoFrames",
+   "chooseRandomImages",
++  "getDescriptions",
+   "imageDirectory",
+   "mode",
+   "selected",
+@@ -823,6 +824,7 @@ write_init_file (Display *dpy,
+       CHECK("grabDesktopImages") type =pref_bool, b = p->grab_desktop_p;
+       CHECK("grabVideoFrames")   type =pref_bool, b = p->grab_video_p;
+       CHECK("chooseRandomImages")type =pref_bool, b = p->random_image_p;
++      CHECK("getDescriptions")   type =pref_bool, b = p->get_desc_p;
+       CHECK("imageDirectory")    type =pref_str,  s = p->image_directory;
+ 
+       CHECK("mode")             type = pref_str,
+@@ -1078,6 +1080,7 @@ load_init_file (Display *dpy, saver_preferences *p)
+   p->grab_desktop_p  = get_boolean_resource (dpy, "grabDesktopImages",  "Boolean");
+   p->grab_video_p    = get_boolean_resource (dpy, "grabVideoFrames",    "Boolean");
+   p->random_image_p  = get_boolean_resource (dpy, "chooseRandomImages", "Boolean");
++  p->get_desc_p      = get_boolean_resource (dpy, "getDescriptions",    "Boolean");
+   p->image_directory = get_string_resource  (dpy,
+                                              "imageDirectory",
+                                              "ImageDirectory");
+diff --git a/driver/types.h b/driver/types.h
+index 63ac39e..a7c8ab3 100644
+--- a/driver/types.h
++++ b/driver/types.h
+@@ -118,8 +118,9 @@ struct saver_preferences {
+ 
+   Bool grab_desktop_p;		/* These are not used by "xscreensaver" */
+   Bool grab_video_p;		/*  itself: they are used by the external */
+-  Bool random_image_p;		/*  "xscreensaver-getimage" program, and set */
+-  char *image_directory;	/*  by the "xscreensaver-demo" configurator. */
++  Bool random_image_p;		/*  "xscreensaver-getimage" program, */
++  Bool get_desc_p;		/*  and set by the "xscreensaver-demo" */
++  char *image_directory;	/*  configurator. */
+ 
+   text_mode tmode;		/* How we generate text to display. */
+   char *text_literal;		/* used when tmode is TEXT_LITERAL. */
+diff --git a/driver/xscreensaver-getimage.c b/driver/xscreensaver-getimage.c
+index b398eed..3bfeb08 100644
+--- a/driver/xscreensaver-getimage.c
++++ b/driver/xscreensaver-getimage.c
+@@ -103,6 +103,7 @@ typedef enum {
+ #define GETIMAGE_VIDEO_PROGRAM   "xscreensaver-getimage-video"
+ #define GETIMAGE_FILE_PROGRAM    "xscreensaver-getimage-file"
+ #define GETIMAGE_SCREEN_PROGRAM  "xscreensaver-getimage-desktop"
++#define GETIMAGE_DESCRIPTION_PROGRAM "xscreensaver-getimage-description"
+ 
+ extern const char *blurb (void);
+ 
+@@ -1519,6 +1520,7 @@ get_image (Screen *screen,
+            Bool video_p,
+            Bool image_p,
+            const char *dir,
++           Bool desc_p,
+            const char *file)
+ {
+   Display *dpy = DisplayOfScreen (screen);
+@@ -1559,6 +1561,8 @@ get_image (Screen *screen,
+                progname, image_p ? "True" : "False");
+       fprintf (stderr, "%s: imageDirectory:     %s\n",
+                progname, (file ? file : dir ? dir : ""));
++      fprintf (stderr, "%s: getDescriptions: %s\n",
++               progname, desc_p ? "True" : "False");
+     }
+ 
+ # if !(defined(HAVE_GDK_PIXBUF) || defined(HAVE_JPEGLIB))
+@@ -1704,17 +1708,18 @@ get_image (Screen *screen,
+                           (absfile ? absfile : file),
+                           verbose_p, &geom))
+         goto COLORBARS;
+-      {
+-        int ac = 0;
+-        char *av[20];
+-        char *ret;
+-        av[ac++] = "xscreensaver-getimage-description";
+-        av[ac++] = absfile ? absfile : (char *) file;
+-        av[ac] = 0;
+-        ret = get_program_output (screen, ac, av, verbose_p);
+-        if (ret && *ret)
+-          description = ret;
+-      }
++      if (desc_p)
++        {
++          int ac = 0;
++          char *av[20];
++          char *ret;
++          av[ac++] = GETIMAGE_DESCRIPTION_PROGRAM;
++          av[ac++] = absfile ? absfile : (char *) file;
++          av[ac] = 0;
++          ret = get_program_output (screen, ac, av, verbose_p);
++          if (ret && *ret)
++            description = ret;
++        }
+       file_prop = file;
+       break;
+ 
+@@ -1804,6 +1809,7 @@ mapper (XrmDatabase *db, XrmBindingList bindings, XrmQuarkList quarks,
+    "      -images  / -no-images       whether to allow image file loading\n"  \
+    "      -video   / -no-video        whether to allow video grabs\n"	      \
+    "      -desktop / -no-desktop      whether to allow desktop screen grabs\n"\
++   "      -desc / -no-desc            whether to retrieve image descriptions\n" \
+    "      -directory <path>           where to find image files to load\n"    \
+    "      -file <filename>            load this image file\n"                 \
+    "\n"									      \
+@@ -1902,6 +1908,8 @@ main (int argc, char **argv)
+       else if (!strcmp (argv[i], "-no-video"))   P.grab_video_p = False;
+       else if (!strcmp (argv[i], "-images"))     P.random_image_p = True;
+       else if (!strcmp (argv[i], "-no-images"))  P.random_image_p = False;
++      else if (!strcmp (argv[i], "-desc"))       P.get_desc_p = True;
++      else if (!strcmp (argv[i], "-no-desc"))    P.get_desc_p = False;
+       else if (!strcmp (argv[i], "-file"))       file = argv[++i];
+       else if (!strcmp (argv[i], "-directory") || !strcmp (argv[i], "-dir"))
+         P.image_directory = argv[++i];
+@@ -1979,6 +1987,6 @@ main (int argc, char **argv)
+ 
+   get_image (screen, window, drawable, P.verbose_p,
+              P.grab_desktop_p, P.grab_video_p, P.random_image_p,
+-             P.image_directory, file);
++             P.image_directory, P.get_desc_p, file);
+   exit (0);
+ }
+diff --git a/hacks/config/glslideshow.xml b/hacks/config/glslideshow.xml
+index bcd7acb..cc2d77c 100644
+--- a/hacks/config/glslideshow.xml
++++ b/hacks/config/glslideshow.xml
+@@ -40,6 +40,7 @@
+    <vgroup>
+     <boolean id="letterbox" _label="Letterbox" arg-unset="-no-letterbox"/>
+     <boolean id="titles" _label="Show file names" arg-set="-titles"/>
++    <boolean id="descriptions" _label="Show file descriptions" arg-set="-descriptions"/>
+     <boolean id="showfps" _label="Show frame rate" arg-set="-fps"/>
+    </vgroup>
+    <vgroup>
+diff --git a/hacks/glx/glslideshow.c b/hacks/glx/glslideshow.c
+index 6382432..a81ae2b 100644
+--- a/hacks/glx/glslideshow.c
++++ b/hacks/glx/glslideshow.c
+@@ -94,6 +94,7 @@
+ # define DEF_ZOOM           "75"
+ # define DEF_FPS_CUTOFF     "5"
+ # define DEF_TITLES         "False"
++# define DEF_DESCRIPTIONS   "False"
+ # define DEF_LETTERBOX      "True"
+ # define DEF_DEBUG          "False"
+ # define DEF_MIPMAP         "True"
+@@ -192,6 +193,7 @@ static Bool letterbox_p;    /* When a loaded image is not the same aspect
+                              */
+ static Bool mipmap_p;	    /* Use mipmaps instead of single textures. */
+ static Bool do_titles;	    /* Display image titles. */
++static Bool do_descriptions;/* Display image descriptions. */
+ static Bool debug_p;	    /* Be loud and do weird things. */
+ 
+ 
+@@ -202,6 +204,7 @@ static XrmOptionDescRec opts[] = {
+   {"-zoom",         ".zoom",          XrmoptionSepArg, 0      },
+   {"-cutoff",       ".FPScutoff",     XrmoptionSepArg, 0      },
+   {"-titles",       ".titles",        XrmoptionNoArg, "True"  },
++  {"-descriptions", ".descriptions",  XrmoptionNoArg, "True"  },
+   {"-letterbox",    ".letterbox",     XrmoptionNoArg, "True"  },
+   {"-no-letterbox", ".letterbox",     XrmoptionNoArg, "False" },
+   {"-clip",         ".letterbox",     XrmoptionNoArg, "False" },
+@@ -220,6 +223,7 @@ static argtype vars[] = {
+   { &fps_cutoff,    "FPScutoff",    "FPSCutoff",    DEF_FPS_CUTOFF,     t_Int},
+   { &debug_p,       "debug",        "Debug",        DEF_DEBUG,         t_Bool},
+   { &do_titles,     "titles",       "Titles",       DEF_TITLES,        t_Bool},
++  { &do_descriptions,"descriptions","Descriptions", DEF_DESCRIPTIONS,  t_Bool},
+ };
+ 
+ ENTRYPOINT ModeSpecOpt slideshow_opts = {countof(opts), opts, countof(vars), vars, NULL};
+@@ -834,7 +838,7 @@ draw_sprite (ModeInfo *mi, sprite *sp)
+       }
+ 
+     /* Print the description at the bottom. */
+-    if (do_titles &&
++    if (do_descriptions &&
+         img->description && *img->description)
+       {
+         int y = 10, x = 10;
+-- 
+1.7.3.1
+

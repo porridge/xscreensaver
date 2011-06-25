@@ -1,0 +1,121 @@
+From 37d330d7d24e68ea6c7146782bf5bead2434bc88 Mon Sep 17 00:00:00 2001
+From: Marcin Owsiany <marcin@owsiany.pl>
+Date: Tue, 10 May 2011 21:28:58 +0100
+Subject: [PATCH 1/5] Added xscreensaver-getimage-description with a manpage.
+
+---
+ driver/Makefile.in                           |    3 +-
+ driver/xscreensaver-getimage-description     |   27 +++++++++++++++
+ driver/xscreensaver-getimage-description.man |   45 ++++++++++++++++++++++++++
+ 3 files changed, 74 insertions(+), 1 deletions(-)
+ create mode 100755 driver/xscreensaver-getimage-description
+ create mode 100644 driver/xscreensaver-getimage-description.man
+
+diff --git a/driver/Makefile.in b/driver/Makefile.in
+index aaf4de0..8aba514 100644
+--- a/driver/Makefile.in
++++ b/driver/Makefile.in
+@@ -219,7 +219,7 @@ EXES2		= @ALL_DEMO_PROGRAMS@
+ EXES_OSX	= pdf2jpeg
+ 
+ SCRIPTS_1	= xscreensaver-getimage-file xscreensaver-getimage-video \
+-		  xscreensaver-text
++		  xscreensaver-text xscreensaver-getimage-description
+ SCRIPTS_OSX	= xscreensaver-getimage-desktop
+ SCRIPTS		= $(SCRIPTS_1) @SCRIPTS_OSX@
+ 
+@@ -232,6 +232,7 @@ MEN_1		= xscreensaver.man xscreensaver-demo.man \
+ 		  xscreensaver-text.man \
+ 		  xscreensaver-getimage.man \
+ 		  xscreensaver-getimage-file.man \
++		  xscreensaver-getimage-description.man \
+ 		  xscreensaver-getimage-video.man
+ MEN_OSX		= xscreensaver-getimage-desktop.man pdf2jpeg.man
+ MEN		= $(MEN_1) @MEN_OSX@
+diff --git a/driver/xscreensaver-getimage-description b/driver/xscreensaver-getimage-description
+new file mode 100755
+index 0000000..96cd5b6
+--- /dev/null
++++ b/driver/xscreensaver-getimage-description
+@@ -0,0 +1,27 @@
++#!/bin/sh
++# Copyright Š 2011 Marcin Owsiany <marcin@owsiany.pl>.
++#
++# Permission to use, copy, modify, distribute, and sell this software and its
++# documentation for any purpose is hereby granted without fee, provided that
++# the above copyright notice appear in all copies and that both that
++# copyright notice and this permission notice appear in supporting
++# documentation.  No representations are made about the suitability of this
++# software for any purpose.  It is provided "as is" without express or 
++# implied warranty.
++#
++#
++# This script is invoked by "xscreensaver-getimage" to retrieve the textual
++# description of the image, if any. It may then be used by some of the hacks
++# (such as glslideshow) to be displayed on the screen together with the image.
++#
++# Created: 10-05-2011.
++if ! type jhead >/dev/null 2>&1; then
++	exit 1
++else
++	# Generic image info goes to STDOUT, and warnings to STDERR. Redirect
++	# them both to /dev/null. Reopen another random FD we hope is unused
++	# (7) to STDOUT and tell head to dump the comment section to there.
++	# I don't know how portable /dev/fd/X is, but this way there is no need
++	# to use a temporary file.
++	jhead -cs /dev/fd/7 "$@" 7>&1 >/dev/null 2>&1
++fi
+diff --git a/driver/xscreensaver-getimage-description.man b/driver/xscreensaver-getimage-description.man
+new file mode 100644
+index 0000000..b611a3f
+--- /dev/null
++++ b/driver/xscreensaver-getimage-description.man
+@@ -0,0 +1,45 @@
++.TH XScreenSaver 1 "10-May-2011 (5.13)" "X Version 11"
++.SH NAME
++xscreensaver-getimage-description - retrieve an image description
++.SH SYNOPSIS
++.B xscreensaver-getimage-description
++file
++.SH DESCRIPTION
++The \fIxscreensaver\-getimage\-description\fP program is a helper program
++for the xscreensaver hacks that show images.  Specifically, it
++is invoked by
++.BR xscreensaver\-getimage (1)
++as needed.  This is not a user-level command.
++
++There are multiple ways to attach description to an image: from keeping it
++separately in a file or dedicated database, to embedding in the image file
++itself, in various ways, depending on the image format.
++
++Sometimes the description is typed in by the user to describe the scene, but in
++many cases it is just an advertisement for the digital camera or photo editing
++software, and as such is not useful for displaying by xscreensaver.
++However we try as hard as we can, and ultimately it is up to the user to
++maintain a consistent way of storing descriptions of his image collection, or
++tweaking/substituting this script to suit their needs.
++
++This script works by running
++.BR jhead (1)
++to retrieve the JPEG (non-EXIF) comment section.
++.SH SEE ALSO
++.BR jhead (1),
++.BR X (1),
++.BR xscreensaver (1),
++.BR xscreensaver\-demo (1),
++.BR xscreensaver\-getimage (1),
++.BR xscreensaver\-getimage\-file (1),
++.SH COPYRIGHT
++Copyright \(co 2011 by Marcin Owsiany.  Permission to use, copy,
++modify, distribute, and sell this software and its documentation for
++any purpose is hereby granted without fee, provided that the above
++copyright notice appear in all copies and that both that copyright
++notice and this permission notice appear in supporting documentation.
++No representations are made about the suitability of this software for
++any purpose.  It is provided "as is" without express or implied
++warranty.
++.SH AUTHOR
++Marcin Owsiany <marcin@owsiany.pl>, 10-May-2011.
+-- 
+1.7.3.1
+

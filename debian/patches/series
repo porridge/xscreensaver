@@ -14,3 +14,9 @@
 53_XScreenSaver.ad.in.patch
 
 80_Makefile_in-clean-fix.patch
+0001-Applied-full-path-patch-from-Jemmy.patch
+0002-Added-xscreensaver-getimage-description-with-a-manpa.patch
+0003-Extracted-a-get_program_output-function.patch
+0004-xscreensaver-getimage-propagates-image-description.patch
+0005-Support-showing-description-of-loaded-image-if-prese.patch
+0006-Made-description-display-optional-and-off-by-default.patch

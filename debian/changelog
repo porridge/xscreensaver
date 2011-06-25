@@ -1,3 +1,9 @@
+xscreensaver (5.11-1.1) squeeze; urgency=low
+
+  * Added the full-path and descriptions patches.
+
+ -- Marcin Owsiany <porridge@debian.org>  Sat, 25 Jun 2011 15:13:09 +0100
+
 xscreensaver (5.11-1) unstable; urgency=low
 
   * New upstream version

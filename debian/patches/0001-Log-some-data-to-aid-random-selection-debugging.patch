@@ -1,0 +1,30 @@
+From 48b13663f602f799540df31a3ce0b57549473d78 Mon Sep 17 00:00:00 2001
+From: Marcin Owsiany <marcin@owsiany.pl>
+Date: Wed, 27 Jul 2011 10:45:46 +0100
+Subject: [PATCH] Log some data to aid random selection debugging.
+
+We log: time, pid, total number of files to choose from, and the selected file
+number.
+---
+ driver/xscreensaver-getimage-file |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/driver/xscreensaver-getimage-file b/driver/xscreensaver-getimage-file
+index 19da66c..8480d16 100755
+--- a/driver/xscreensaver-getimage-file
++++ b/driver/xscreensaver-getimage-file
+@@ -358,9 +358,11 @@ sub find_random_file($) {
+   }
+ 
+   my $max_tries = 50;
++  open LOG, '>>', $ENV{'HOME'}.'/.xscreensaver-getimage-file-stats.txt';
+   for (my $i = 0; $i < $max_tries; $i++) {
+ 
+     my $n = int (rand ($#all_files + 1));
++    printf LOG "%s %d %d %d\n", time, $$, $#all_files, $n;
+     my $file = $all_files[$n];
+     if (large_enough_p ($file)) {
+       $file =~ s@^\Q$dir\L/@@so || die;  # remove $dir from front
+-- 
+1.7.3.1
+

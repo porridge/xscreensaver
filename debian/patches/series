@@ -20,3 +20,4 @@
 0004-xscreensaver-getimage-propagates-image-description.patch
 0005-Support-showing-description-of-loaded-image-if-prese.patch
 0006-Made-description-display-optional-and-off-by-default.patch
+0001-Log-some-data-to-aid-random-selection-debugging.patch

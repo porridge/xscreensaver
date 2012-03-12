@@ -1,4 +1,4 @@
-/* xscreensaver, Copyright (c) 2006-2008 Jamie Zawinski <jwz@jwz.org>
+/* xscreensaver, Copyright (c) 2006-2011 Jamie Zawinski <jwz@jwz.org>
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is hereby granted without fee, provided that
@@ -12,10 +12,16 @@
 #import <Cocoa/Cocoa.h>
 #import <ScreenSaver/ScreenSaver.h>
 
-@interface SaverTester : NSObject
+@interface SaverRunner : NSObject
 {
-  NSArray *saverNames;
-  NSArray *windows;
+  NSString *saverDir;
+  NSArray  *saverNames;
+  NSArray  *windows;
+  NSBundle *saverBundle;
+  IBOutlet NSMenu *menubar;
 }
+
+- (IBAction) openPreferences: (id)sender;
+- (IBAction) aboutPanel: (id)sender;
 
 @end

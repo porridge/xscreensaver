@@ -1,0 +1,25 @@
+From 58bdb16db909279c709ea134440ed5cb39f34e5a Mon Sep 17 00:00:00 2001
+From: Marcin Owsiany <marcin@owsiany.pl>
+Date: Sun, 18 Mar 2012 19:20:23 +0000
+Subject: [PATCH 2/2] Bump cache TTL from 3h to 2 weeks.
+
+---
+ driver/xscreensaver-getimage-file |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/driver/xscreensaver-getimage-file b/driver/xscreensaver-getimage-file
+index 8878eca..d4b86bd 100755
+--- a/driver/xscreensaver-getimage-file
++++ b/driver/xscreensaver-getimage-file
+@@ -64,7 +64,7 @@ my $cache_p = 1;
+ 
+ # Regenerate the cache if it is older than this many seconds.
+ #
+-my $cache_max_age = 60 * 60 * 3;   # 3 hours
++my $cache_max_age = 60 * 60 * 24 * 7 * 2;   # 2 weeks
+ 
+ 
+ # This matches files that we are allowed to use as images (case-insensitive.)
+-- 
+1.7.9.2
+

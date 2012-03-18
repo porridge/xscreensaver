@@ -1,0 +1,249 @@
+From f3507b9b609aaa7fc12d0c234e9309b2d25936d4 Mon Sep 17 00:00:00 2001
+From: Marcin Owsiany <marcin@owsiany.pl>
+Date: Sun, 18 Mar 2012 19:16:32 +0000
+Subject: [PATCH 1/2] Keep cache in DB_File::Lock, remove each pick.
+
+First, keep cache in a database rather than a plain text file. Second, whenever
+a file is picked, remove the file from cache, so that every file is shown at
+most once. Refresh the cache once it goes empty.
+---
+ driver/xscreensaver-getimage-file |  133 +++++++++++++++++++++++--------------
+ 1 file changed, 83 insertions(+), 50 deletions(-)
+
+diff --git a/driver/xscreensaver-getimage-file b/driver/xscreensaver-getimage-file
+index 19da66c..8878eca 100755
+--- a/driver/xscreensaver-getimage-file
++++ b/driver/xscreensaver-getimage-file
+@@ -34,8 +34,6 @@ use strict;
+ use POSIX;
+ use Fcntl;
+ 
+-use Fcntl ':flock'; # import LOCK_* constants
+-
+ use POSIX ':fcntl_h';				# S_ISDIR was here in Perl 5.6
+ import Fcntl ':mode' unless defined &S_ISUID;	# but it is here in Perl 5.8
+ 	# but in Perl 5.10, both of these load, and cause errors!
+@@ -45,6 +43,8 @@ use bytes;  # Larry can take Unicode and shove it up his ass sideways.
+             # Perl 5.8.0 causes us to start getting incomprehensible
+             # errors about UTF-8 all over the place without this.
+ 
++use DB_File::Lock;  # For the cache file
++
+ my $progname = $0; $progname =~ s@.*/@@g;
+ my $version = q{ $Revision: 1.27 $ }; $version =~ s/^[^0-9]+([0-9.]+).*$/$1/;
+ 
+@@ -223,57 +223,62 @@ sub spotlight_all_files($) {
+ # running at once, one will wait for the other, instead of both of
+ # them spanking the same file system at the same time.
+ #
+-my $cache_fd = undef;
+-my $cache_file_name = undef;
+-my $read_cache_p = 0;
+-
+-sub read_cache($) {
+-  my ($dir) = @_;
+-
+-  return () unless ($cache_p);
+ 
++sub cache_file() {
+   my $dd = "$ENV{HOME}/Library/Caches";    # MacOS location
++  my $f;
+   if (-d $dd) {
+-    $cache_file_name = "$dd/org.jwz.xscreensaver.getimage.cache";
++    $f = "$dd/org.jwz.xscreensaver.getimage.cache";
+   } elsif (-d "$ENV{HOME}/tmp") {
+-    $cache_file_name = "$ENV{HOME}/tmp/.xscreensaver-getimage.cache";
++    $f = "$ENV{HOME}/tmp/.xscreensaver-getimage.cache";
+   } else {
+-    $cache_file_name = "$ENV{HOME}/.xscreensaver-getimage.cache";
++    $f = "$ENV{HOME}/.xscreensaver-getimage.cache";
+   }
++  return $f;
++}
++
++my %cache;
++my $cache_file_name = cache_file;
++my $read_cache_p = 0;
++
++sub read_cache($) {
++  my ($dir) = @_;
++
++  return () unless ($cache_p);
+ 
+   print STDERR "$progname: awaiting lock: $cache_file_name\n"
+     if ($verbose > 1);
+ 
+   my $file = $cache_file_name;
+-  open ($cache_fd, '+>>', $file) || error ("unable to write $file: $!");
+-  flock ($cache_fd, LOCK_EX)     || error ("unable to lock $file: $!");
+-  seek ($cache_fd, 0, 0)         || error ("unable to rewind $file: $!");
++  unless (tie %cache, "DB_File::Lock", $file, O_RDWR | O_CREAT, 0, $DB_HASH, 'write') {
++    if (-e $file) { # try to recover
++      unlink $file or error ("unable to delete cache file $file: $!");
++      tie %cache, "DB_File::Lock", $file, O_RDWR | O_CREAT, 0, $DB_HASH, 'write' or error ("unable to open cache $file: $!");
++    } else {
++      error ("unable to open cache $file: $!");
++    }
++  }
+ 
+-  my $mtime = (stat($cache_fd))[9];
++  my $mtime = $cache{timestamp} || 0;
+ 
+   if ($mtime + $cache_max_age < time) {
+     print STDERR "$progname: cache is too old\n" if ($verbose);
+     return ();
+   }
+ 
+-  my $odir = <$cache_fd>;
+-  $odir =~ s/[\r\n]+$//s if defined ($odir);
++  my $odir = $cache{dir};
+   if (!defined ($odir) || ($dir ne $odir)) {
+     print STDERR "$progname: cache is for $odir, not $dir\n"
+       if ($verbose && $odir);
+     return ();
+   }
+ 
+-  my @files = ();
+-  while (<$cache_fd>) { 
+-    s/[\r\n]+$//s;
+-    push @files, "$odir/$_";
+-  }
++  my @files = map { $_ =~ s,^file:,,;"$odir/$_" } grep /^file:/, keys %cache;
+ 
+   print STDERR "$progname: " . ($#files+1) . " files in cache\n"
+     if ($verbose);
+ 
+-  $read_cache_p = 1;
++  $read_cache_p = 1 if @files;
+   return @files;
+ }
+ 
+@@ -288,43 +293,42 @@ sub write_cache($) {
+ 
+   if (! $read_cache_p) {
+ 
+-    truncate ($cache_fd, 0) ||
+-      error ("unable to truncate $cache_file_name: $!");
+-    seek ($cache_fd, 0, 0) ||
+-      error ("unable to rewind $cache_file_name: $!");
+-
+     if ($#all_files >= 0) {
+-      print $cache_fd "$dir\n";
++      $cache{dir} = $dir;
+       foreach (@all_files) {
+         my $f = $_; # stupid Perl. do this to avoid modifying @all_files!
+-        $f =~ s@^\Q$dir\L/@@so || die;  # remove $dir from front
+-        print $cache_fd "$f\n";
++        $f =~ s@^\Q$dir\L/@file:@so || die;  # remove $dir from front, put file: there
++        $cache{$f} = 1;
+       }
++      $cache{timestamp} = time;
+     }
+ 
+     print STDERR "$progname: cached " . ($#all_files+1) . " files\n"
+       if ($verbose);
+   }
+ 
+-  flock ($cache_fd, LOCK_UN) ||
+-    error ("unable to unlock $cache_file_name: $!");
+-  close ($cache_fd);
+-  $cache_fd = undef;
++  untie %cache;
+ }
+ 
++sub wipe_cache($) {
++  my $dir = shift;
+ 
+-sub find_random_file($) {
+-  my ($dir) = @_;
++  return unless ($cache_p);
+ 
+-  if ($use_spotlight_p == -1) {
+-    $use_spotlight_p = 0;
+-    if (-x '/usr/bin/mdfind') {
+-      $use_spotlight_p = 1;
+-    }
+-  }
++  unlink $cache_file_name;
++}
+ 
+-  @all_files = read_cache ($dir);
++sub cache_forget($$) {
++  my $dir = shift;
++  my $file = shift;
++
++  return unless ($cache_p);
+ 
++  delete $cache{'file:'.$file};
++}
++
++sub maybe_get_files($) {
++  my $dir = shift;
+   if ($#all_files >= 0) {
+     # got it from the cache...
+ 
+@@ -348,28 +352,57 @@ sub find_random_file($) {
+       if ($verbose);
+   }
+ 
+-  write_cache ($dir);
+-
+   @all_files = sort(@all_files);
+ 
+   if ($#all_files < 0) {
+     print STDERR "$progname: no files in $dir\n";
+     exit 1;
+   }
++}
+ 
++sub pick_file($) {
++  my $dir = shift;
+   my $max_tries = 50;
+   for (my $i = 0; $i < $max_tries; $i++) {
+ 
+     my $n = int (rand ($#all_files + 1));
+     my $file = $all_files[$n];
+     if (large_enough_p ($file)) {
+-      $file =~ s@^\Q$dir\L/@@so || die;  # remove $dir from front
++      $file =~ s@^\Q$dir\L/@@so || die "unexpected file [$file]";  # remove $dir from front
+       return $file;
+     }
+   }
+-
+   print STDERR "$progname: no suitable images in $dir " .
+                "(after $max_tries tries)\n";
++  return undef;
++}
++
++sub find_random_file($) {
++  my ($dir) = @_;
++
++  if ($use_spotlight_p == -1) {
++    $use_spotlight_p = 0;
++    if (-x '/usr/bin/mdfind') {
++      $use_spotlight_p = 1;
++    }
++  }
++
++  @all_files = read_cache ($dir);
++
++  maybe_get_files ($dir);
++  my $file = pick_file ($dir);
++  if (not defined $file) {
++    wipe_cache ($dir);
++    @all_files = ();
++    maybe_get_files ($dir);
++    $file = pick_file ($dir);
++  }
++  cache_forget ($dir, $file) if defined $file;
++
++  write_cache ($dir);
++
++  return $file if defined $file;
++
+   exit 1;
+ }
+ 
+-- 
+1.7.9.2
+

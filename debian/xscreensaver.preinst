@@ -1,0 +1,43 @@
+#!/bin/sh
+# preinst script for xscreensaver
+#
+# see: dh_installdeb(1)
+
+set -e
+
+# Remove a no-longer used conffile
+rm_conffile() {
+    local PKGNAME="$1"
+    local CONFFILE="$2"
+
+    [ -e "$CONFFILE" ] || return 0
+
+    local md5sum="$(md5sum $CONFFILE | sed -e 's/ .*//')"
+    local old_md5sum="$(dpkg-query -W -f='${Conffiles}' $PKGNAME | \
+            sed -n -e "\' $CONFFILE ' { s/ obsolete$//; s/.* //; p }")"
+    if [ "$md5sum" != "$old_md5sum" ]; then
+        echo "Obsolete conffile $CONFFILE has been modified by you."
+        echo "Saving as $CONFFILE.dpkg-bak ..."
+        mv -f "$CONFFILE" "$CONFFILE".dpkg-bak
+    else
+        echo "Removing obsolete conffile $CONFFILE ..."
+        rm -f "$CONFFILE"
+    fi
+}
+
+case "$1" in
+install|upgrade)
+    # Remove a file which was mistakenly shipped in 5.10-2
+    # and kept in 5.10-3 but deleted unconditionally since 5.10-4
+    if dpkg --compare-versions "$2" le "5.10-3"; then
+        rm_conffile xscreensaver "/etc/X11/Xsession.d/80xscreensaver_start"
+    fi
+    # Was shipped in -3,-4,-5 but deleted unconditionally since 5.10-6
+    if dpkg --compare-versions "$2" le "5.10-5"; then
+        rm_conffile xscreensaver "/etc/xdg/autostart/xscreensaver-daemon.desktop"
+    fi
+esac
+
+#DEBHELPER#
+
+exit 0

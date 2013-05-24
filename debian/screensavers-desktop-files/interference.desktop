@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Interference
+Exec=/usr/lib/xscreensaver/interference -root
+TryExec=/usr/lib/xscreensaver/interference
+Comment=Color field based on computing decaying sinusoidal waves. Written by Hannu Mallat.

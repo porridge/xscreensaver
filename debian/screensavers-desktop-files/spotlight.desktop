@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Spotlight
+Exec=/usr/lib/xscreensaver/spotlight -root
+TryExec=/usr/lib/xscreensaver/spotlight
+Comment=Draws a spotlight scanning across a black screen, illuminating the underlying desktop (or a picture) when it passes. Written by Rick Schultz and Jamie Zawinski.

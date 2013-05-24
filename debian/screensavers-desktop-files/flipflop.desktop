@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=FlipFlop
+Exec=/usr/lib/xscreensaver/flipflop -root
+TryExec=/usr/lib/xscreensaver/flipflop
+Comment=Draws a grid of 3D colored tiles that change positions with each other. Written by Kevin Ogden and Sergio Gutierrez.

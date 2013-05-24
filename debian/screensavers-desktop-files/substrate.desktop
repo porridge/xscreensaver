@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Substrate
+Exec=/usr/lib/xscreensaver/substrate -root
+TryExec=/usr/lib/xscreensaver/substrate
+Comment=Crystalline lines grow on a computational substrate. A simple perpendicular growth rule creates intricate city-like structures. Written by J. Tarbell and Mike Kershaw.

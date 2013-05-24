@@ -1,0 +1,13 @@
+Index: xscreensaver/driver/Makefile.in
+===================================================================
+--- xscreensaver.orig/driver/Makefile.in	2011-04-18 22:47:51.000000000 +0200
++++ xscreensaver/driver/Makefile.in	2011-04-21 23:44:12.000000000 +0200
+@@ -260,7 +260,7 @@
+ tests: $(TEST_EXES)
+ 
+ install:   install-program   install-ad    install-scripts \
+-	   install-gnome     install-man   install-xml install-pam
++	   install-gnome     install-man   install-xml
+ uninstall: uninstall-program uninstall-ad  \
+ 	   uninstall-gnome   uninstall-man uninstall-xml  
+ 

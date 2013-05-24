@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Klein
+Exec=/usr/lib/xscreensaver/klein -root
+TryExec=/usr/lib/xscreensaver/klein
+Comment=This draws a visualization of a Klein bottle or some other interesting parametric surfaces. http://en.wikipedia.org/wiki/Klein_bottle Written by Andrey Mirtchovski.

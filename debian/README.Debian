@@ -1,0 +1,21 @@
+XScreenSaver autostart
+======================
+
+There is an example desktop file for XDG-compliant session managers
+in /usr/share/xscreensaver called xscreensaver-daemon.desktop
+
+If you want XScreenSaver to autostart in your sessions just copy it
+to ~/.config/autostart , or if you want it for all users copy it
+to /etc/xdg/autostart .
+
+The use of a NotShowIn option can be useful if you install the desktop
+file globally but have several desktop environments installed.
+
+For instance, if you have nuked gnome-screensaver and replaced it
+by xscreensaver, using a desktop file globally will be handy, but in
+that case you should use NoShowIn=KDE; just to avoid starting it in
+KDE sessions.
+
+If you use xscreensaver in other xdg-compliant environments
+but gnome-screensaver and kscreensaver for Gnome and KDE, using
+NoShowIn=KDE;GNOME; might suit your purpose.

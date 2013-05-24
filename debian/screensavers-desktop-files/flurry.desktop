@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Flurry
+Exec=/usr/lib/xscreensaver/flurry -root
+TryExec=/usr/lib/xscreensaver/flurry
+Comment=This X11 port of the OSX screensaver of the same name draws a colourful star(fish)like flurry of particles. Original Mac version: http://homepage.mac.com/calumr Written by Calum Robinson and Tobias Sargeant.

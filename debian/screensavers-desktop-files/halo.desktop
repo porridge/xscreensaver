@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Halo
+Exec=/usr/lib/xscreensaver/halo -root
+TryExec=/usr/lib/xscreensaver/halo
+Comment=Draws trippy psychedelic circular patterns that hurt to look at. http://en.wikipedia.org/wiki/Moire_pattern Written by Jamie Zawinski.

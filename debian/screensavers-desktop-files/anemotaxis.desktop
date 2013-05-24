@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Anemotaxis
+Exec=/usr/lib/xscreensaver/anemotaxis -root
+TryExec=/usr/lib/xscreensaver/anemotaxis
+Comment=Anemotaxis demonstrates a search algorithm designed for locating a source of odor in turbulent atmosphere. The searcher is able to sense the odor and determine local instantaneous wind direction. The goal is to find the source in the shortest mean time. http://en.wikipedia.org/wiki/Anemotaxis Written by Eugene Balkovsky.

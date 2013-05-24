@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=RDbomb
+Exec=/usr/lib/xscreensaver/rd-bomb -root
+TryExec=/usr/lib/xscreensaver/rd-bomb
+Comment=Draws a grid of growing square-like shapes that, once they overtake each other, react in unpredictable ways. "RD" stands for reaction-diffusion. Written by Scott Draves.

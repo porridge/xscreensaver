@@ -1,0 +1,3 @@
+version=3
+#http://www.jwz.org/xscreensaver/xscreensaver-(.*)\.tar\.gz
+http://www.jwz.org/xscreensaver/download.html xscreensaver-(.*)\.tar\.gz

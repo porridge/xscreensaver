@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Deluxe
+Exec=/usr/lib/xscreensaver/deluxe -root
+TryExec=/usr/lib/xscreensaver/deluxe
+Comment=Draws a pulsing sequence of transparent stars, circles, and lines. Written by Jamie Zawinski.

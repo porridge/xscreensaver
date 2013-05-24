@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Maze
+Exec=/usr/lib/xscreensaver/maze -root
+TryExec=/usr/lib/xscreensaver/maze
+Comment=This generates random mazes (with various different algorithms), and then solves them. Backtracking and look-ahead paths are displayed in different colors. Written by Jim Randell and many others.

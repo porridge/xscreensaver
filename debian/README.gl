@@ -1,0 +1,31 @@
+If you are having problems with running the GL screenhacs from xscreensaver,
+but not from a window, please see
+<http://www.jwz.org/xscreensaver/faq.html#gl-mem>, especially if you
+are using nVIdia's GL implementation. This has appeared as a SIGSEGV
+crash and as a failutre to allocate GL context. In particular:
+
+  1.I upgraded to 3.33, and xscreensaver won't run GL hacks any more (or
+    they run slowly), but they work fine from the command line. 
+
+    Try editing your .xscreensaver file and changing the memoryLimit
+    setting to 0. Version 3.33 introduced the memoryLimit option as a
+    precautionary limit to prevent runaway memory use if one of the
+    display modes happened to be buggy; it prevents any program launched
+    by xscreensaver from allocating more than that much memory. It
+    defaults to 50M, which is a lot. However, apparently certain OpenGL
+    libraries (notably nVidia) do something strange that makes them appear
+    to allocate more than 128M of memory for every OpenGL program!
+    Consequently, those programs die on startup because they aren't able
+    to allocate memory. On some systems, memoryLimit doesn't cause the GL
+    programs to crash, but instead, causes them to run slowly
+    (non-accelerated.) Turning off the memory limit should work around
+    this.
+
+The OpenGL screenhacks are included as a separate package, so the base
+xscreensaver package does not depend on Mesa. The postinst scripts will
+automatically add a link so that the OpenGL screenhacks are used if they
+are installed. If you wish to have the OpenGL screenhacks installed,
+but not used, refer to the manpage and set the XScreenSaver*programs
+to an appropriate value in /etc/X11/Xresources, a personal app-defaults
+file, or your .Xdefaults.
+

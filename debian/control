@@ -1,0 +1,164 @@
+Source: xscreensaver
+Section: x11
+Priority: optional
+Maintainer: Tormod Volden <debian.tormod@gmail.com>
+Build-Depends: bc, debhelper (>= 7.0), fortune-mod, libgtk2.0-dev, libpam0g-dev (>= 0.72), libgl1-mesa-dev | libgl-dev, libglu1-mesa-dev | xlibmesa-glu-dev | libglu-dev, xutils-dev, libxml2-dev, libglade2-dev, libjpeg-dev, libgle-dev, intltool, autotools-dev, libx11-dev, libxext-dev, libxinerama-dev, libxmu-dev, libxpm-dev, libxrandr-dev, libxss-dev, libxt-dev, libxtst-dev, libxxf86vm-dev, x11proto-core-dev, xbitmaps, quilt
+Standards-Version: 3.9.3
+Homepage: http://www.jwz.org/xscreensaver/
+Vcs-git: git://git.debian.org/git/collab-maint/xscreensaver.git
+Vcs-browser: http://git.debian.org/?p=collab-maint/xscreensaver.git;a=summary
+
+Package: xscreensaver
+Architecture: any
+Depends: ${shlibs:Depends}, xscreensaver-data, ${misc:Depends}
+Conflicts: funny-manpages (<< 1.3-1), suidmanager (<< 0.50), xscreensaver-gnome (<< 4.09-2), xscreensaver-nognome (<< 4.09-2), gnome-control-center (<< 1:2)
+Recommends: libjpeg-progs, perl5, miscfiles | wordlist
+Suggests: xfishtank, xdaliclock, xscreensaver-gl, fortune, www-browser, qcam | streamer, gdm3 | kdm-gdmcompat
+Description: Automatic screensaver for X
+ XScreenSaver is a modular screen saver and locker for X11,
+ containing more than 200 screen savers.
+ .
+ This package includes the bare minimum needed to blank and lock
+ your screen. Install this package if you prefer xscreensaver to
+ gnome-screensaver. If you prefer gnome-screensaver, you don't
+ need to install this package.
+ .
+ The graphical display modes are in the xscreensaver-data, 
+ xscreensaver-data-extra, xscreensaver-gl and xscreensaver-gl-extra 
+ packages.
+
+Package: xscreensaver-data
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libwww-perl
+Suggests: xscreensaver
+Conflicts: xscreensaver (<< 5.04-3), kscreensaver-xsavers (<< 4:3.5.9-1)
+Replaces: xscreensaver (<< 5.04-3), gnome-screensaver (<< 2.15.4-0ubuntu1)
+Breaks: gnome-screensaver (<< 2.26), kscreensaver-xsaver (<= 4:4.2.4-1)
+Description: data files to be shared among screensaver frontends
+ XScreenSaver is a modular screen saver and locker for X11,
+ containing more than 200 screen savers.
+ .
+ This package contains a small selection of graphical screen saver
+ modules (listed below) from the xscreensaver collection. This package
+ is used by both xscreensaver and gnome-screensaver.
+ .
+ This is the selected set of non-GL screensavers shipped by default:
+ abstractile, cwaves, deco, distort, fiberlamp, fuzzyflakes, galaxy,
+ m6502, metaballs, penrose, ripples, shadebobs, slidescreen, swirl,
+ xlyap.
+ .
+ More display modes can be found in xscreensaver-data-extra, xscreensaver-gl
+ and xscreensaver-gl-extra packages.
+
+Package: xscreensaver-data-extra
+Architecture: any
+Depends: ${shlibs:Depends}, xscreensaver-data (>= 5.04-3), dictionaries-common, libjpeg-progs, netpbm, ${misc:Depends}
+Enhances: xscreensaver, gnome-screensaver
+Conflicts: xscreensaver (<< 5.04-3), kscreensaver-xsavers (<< 4:3.5.9-1)
+Replaces: xscreensaver (<< 5.04-3)
+Breaks: gnome-screensaver (<< 2.26), kscreensaver-xsaver (<= 4:4.2.4-1)
+Description: data files to be shared among screensaver frontends
+ XScreenSaver is a modular screen saver and locker for X11,
+ containing more than 200 screen savers.
+ .
+ This package contains the rest of the 2D screen saver modules
+ from the xscreensaver collection. This package is used by both
+ xscreensaver and gnome-screensaver.
+ .
+ This is the set of non-GL screensavers not shipped by default:
+ anemone, anemotaxis, apollonian, apple2, attraction, barcode, blaster,
+ blitspin, bouboule, boxfit, braid, bumps, ccurve, celtic, cloudlife,
+ compass, coral, crystal, cynosure, decayscreen, deluxe, demon,
+ discrete, drift, epicycle, eruption, euler2d, fadeplot, fireworkx,
+ flame, flow, fluidballs, fontglide, goop, grav, greynetic, halftone,
+ halo, helix, hopalong, ifs, imsmap, interaggregate, interference,
+ intermomentary, julia, kaleidescope, kumppa, lcdscrub, ljlatest, loop,
+ maze, memscroller, moire2, moire, mountain, munch, nerverot, noseguy,
+ pacman, pedal, penetrate, petri, phosphor, piecewise, polyominoes,
+ pong, pyro, qix, rd-bomb, rocks, rorschach, rotzoomer, sierpinski,
+ slip, speedmine, spotlight, squiral, starfish, strange, substrate,
+ thornbird, triangle, truchet, twang, vermiculate, vidwhacker, wander,
+ whirlwindwarp, wormhole, xanalogtv, xflame, xjack, xmatrix, xrayswarm,
+ xspirograph, zoom.
+ .
+ More display modes can be found in the xscreensaver-data, xscreensaver-gl
+ and xscreensaver-gl-extra packages.
+
+Package: xscreensaver-gl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: xscreensaver
+Conflicts: xscreensaver (<< 5.04-3)
+Replaces: xscreensaver-data (<< 5.10-3)
+Breaks: gnome-screensaver (<< 2.26), kscreensaver-xsaver (<= 4:4.2.4-1)
+Description: GL(Mesa) screen hacks for xscreensaver
+ XScreenSaver is a modular screen saver and locker for X11,
+ containing more than 200 screen savers.
+ .
+ This package contains a small selection of 3D (OpenGL) screen
+ saver modules from the xscreensaver collection. This package is
+ used by both xscreensaver and gnome-screensaver.
+ .
+ This is the set of GL screensavers shipped by default:
+ antinspect, antspotlight, atunnel, blinkbox, bubble3d, circuit,
+ cubestorm, endgame, engine, flipflop, flipscreen3d, flyingtoasters,
+ gears, gflux, glblur, glcells, gleidescope, glknots, glmatrix,
+ glschool, glslideshow, glsnake, gltext, hypertorus, jigglypuff,
+ lavalite, lockward, mirrorblog, moebius, moebiusgears, molecule,
+ morph3d, pipes, polyhedra, polytopes, pulsar, queens, sierpinski3d,
+ sonar, spheremonics, stonerview, superquadrics, topblock, voronoi.
+ .
+ More display modes can be found in the xscreensaver-data,
+ xscreensaver-data-extra and xscreensaver-gl-extra packages.
+
+Package: xscreensaver-gl-extra
+Architecture: any
+Depends: ${shlibs:Depends}, xscreensaver-gl (>= 5.04-3), ${misc:Depends}
+Enhances: xscreensaver, gnome-screensaver
+Conflicts: xscreensaver (<< 5.04-3)
+Replaces: xscreensaver-gl (<< 5.04-3)
+Breaks: gnome-screensaver (<< 2.26), kscreensaver-xsaver (<= 4:4.2.4-1)
+Description: GL(Mesa) screen hacks for xscreensaver
+ XScreenSaver is a modular screen saver and locker for X11,
+ containing more than 200 screen savers.
+ .
+ This package contains the rest of the 3D (OpenGL) screen saver
+ modules from the xscreensaver collection. This package is used
+ by both xscreensaver and gnome-screensaver.
+ .
+ This is the set of GL screensavers not shipped by default with
+ xscreensaver-gl:
+ antmaze, atlantis, blocktube, boing, bouncingcow, boxed, cage,
+ carousel, companioncube, crackberg, cube21, cubenetic, cubicgrid,
+ dangerball, extrusion, fliptext, flurry, glhanoi, glplanet, hilbert,
+ hypnowheel, jigsaw, juggler3d, klein, lament, menger, noof, photopile,
+ pinion, providence, rubik, rubikblocks, sballs, skytentacles,
+ sproingies, stairs, starwars, surfaces, tangram, timetunnel, tronbit.
+ .
+ More display modes can be found in the xscreensaver-data,
+ xscreensaver-data-extra and xscreensaver-gl packages.
+
+Package: xscreensaver-screensaver-webcollage
+Architecture: any
+Depends: ${shlibs:Depends}, xscreensaver-data-extra, ${misc:Depends}
+Conflicts: xscreensaver-data-extra (<< 5.10-4)
+Replaces: xscreensaver-data-extra (<< 5.10-4)
+Description: Webcollage hack from XScreenSaver
+ This package ships the hack webcollage which displays images from random 
+ web searches on the Internet.
+ .
+ WARNING: The Internet being what it is, absolutely anything might show up 
+ in the collage of search results including -- quite possibly -- pornography, 
+ or even nudity. Please act accordingly.
+
+Package: xscreensaver-screensaver-bsod
+Architecture: any
+Depends: ${shlibs:Depends}, xscreensaver-data-extra, ${misc:Depends}
+Conflicts: xscreensaver-data-extra (<< 5.10-4)
+Replaces: xscreensaver-data-extra (<< 5.10-4)
+Description: BSOD hack from XScreenSaver
+ This package ships the hack BSOD that shows the popular Blue Screens of Death
+ from several OSes including BSD, Windows, Linux, Solaris, Apple and much more.
+ .
+ WARNING: This screensaver could be confused with a real BSOD and could lead an
+ user to reboot the machine with consequences like data loss.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Stairs
+Exec=/usr/lib/xscreensaver/stairs -root
+TryExec=/usr/lib/xscreensaver/stairs
+Comment=Escher's infinite staircase. http://en.wikipedia.org/wiki/Maurits_Cornelis_Escher Written by Marcelo Vianna.

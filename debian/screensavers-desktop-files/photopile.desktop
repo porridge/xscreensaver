@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Photopile
+Exec=/usr/lib/xscreensaver/photopile -root
+TryExec=/usr/lib/xscreensaver/photopile
+Comment=Loads several random images, and displays them as if lying in a random pile. The pile is periodically reshuffled, with new images coming in and old ones being thrown out. Written by Jens Kilian.

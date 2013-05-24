@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Swirl
+Exec=/usr/lib/xscreensaver/swirl -root
+TryExec=/usr/lib/xscreensaver/swirl
+Comment=Flowing, swirly patterns. Written by M. Dobie and R. Taylor.

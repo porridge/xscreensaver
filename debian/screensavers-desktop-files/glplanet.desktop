@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=GLPlanet
+Exec=/usr/lib/xscreensaver/glplanet -root
+TryExec=/usr/lib/xscreensaver/glplanet
+Comment=Draws a planet bouncing around in space. The built-in image is a map of the earth (extracted from `xearth'), but you can wrap any texture around the sphere, e.g., the planetary textures that come with `ssystem'. Written by David Konerding.

@@ -1,0 +1,22 @@
+Index: xscreensaver/driver/xscreensaver-getimage-video
+===================================================================
+--- xscreensaver.orig/driver/xscreensaver-getimage-video	2011-04-21 23:18:56.000000000 +0200
++++ xscreensaver/driver/xscreensaver-getimage-video	2011-04-21 23:44:15.000000000 +0200
+@@ -34,6 +34,8 @@
+ 
+ my $tmpdir   = $ENV{TMPDIR} || "/tmp";
+ my $tmpfile  = sprintf("%s/xssv.%08x.ppm", $tmpdir, rand(0xFFFFFFFF));
++my $tmpfile1 = sprintf ("%s/xssgv01.ppm", $tmpdir, rand(0xFFFFFFFF));
++my $tmpfile3 = sprintf ("%s/xssgv03.ppm", $tmpdir, rand(0xFFFFFFFF));
+ 
+ my $verbose           = 0;
+ my $use_stdout_p      = 0;
+@@ -48,7 +50,7 @@
+ # If you add other programs to this list, please let me know!
+ #
+ my @programs = (
+-
++  "streamer -a -t3 -r1 -o $tmpfile1; mv $tmpfile3 $tmpfile",		# XawTV after 2 sec
+   "bttvgrab -d q -Q -l 1 -o ppm -f $tmpfile",	# BTTV
+   "qcam > $tmpfile",				# Connectix Qcam
+   "gqcam -t PPM -d $tmpfile",			# GTK+ Qcam clone

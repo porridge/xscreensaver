@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Queens
+Exec=/usr/lib/xscreensaver/queens -root
+TryExec=/usr/lib/xscreensaver/queens
+Comment=Solves the N-Queens problem (where N is between 5 and 10 queens). The problem is: how may one place N queens on an NxN chessboard such that no queen can attack a sister? See also the "Endgame" screen saver. http://en.wikipedia.org/wiki/Eight_queens_puzzle Written by Blair Tennessy.

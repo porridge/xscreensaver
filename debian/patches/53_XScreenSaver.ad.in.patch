@@ -1,0 +1,100 @@
+Index: xscreensaver/driver/XScreenSaver.ad.in
+===================================================================
+--- xscreensaver.orig/driver/XScreenSaver.ad.in	2011-10-05 22:51:19.000000000 +0200
++++ xscreensaver/driver/XScreenSaver.ad.in	2011-10-05 23:05:46.000000000 +0200
+@@ -58,11 +58,11 @@
+ *captureStderr: 	True
+ *ignoreUninstalledPrograms: False
+ 
+-*textMode:		file
++*textMode:		url
+ *textLiteral:		XScreenSaver
+ *textFile:		@DEFAULT_TEXT_FILE@
+ *textProgram:		fortune
+-*textURL:		http://twitter.com/statuses/public_timeline.atom
++*textURL:		http://planet.debian.org/rss20.xml
+ !*textURL:		http://www.livejournal.com/stats/latest-rss.bml
+ 
+ *overlayTextForeground:	#FFFF00
+@@ -99,9 +99,13 @@
+ !
+ !   Gnome 2.4, 2.6: (yelp can't display man pages, as of 2.6.3)
+ !
+-@GNOME24@*loadURL: @WITH_BROWSER@ '%s'
+-@GNOME24@*manualCommand: gnome-terminal --title '%s manual' \
+-@GNOME24@		--command '/bin/sh -c "man %s; read foo"'
++! Debian: If we _build_ with GNOME this one will be used,
++! but the built packages should work on non-GNOME systems as well.
++! Use yelp if installed, since it works fine in current GNOME.
++@GNOME24@*loadURL: x-www-browser '%s'
++@GNOME24@*manualCommand: yelp man:%s || \
++@GNOME24@			x-terminal-emulator -title '%s manual' \
++@GNOME24@			  -e /bin/sh -c "man %s"
+ !
+ !   Gnome 2.2:
+ !
+@@ -116,14 +120,18 @@
+ !
+ !   non-Gnome systems:
+ !
+-@NOGNOME@*loadURL: firefox '%s' || mozilla '%s' || netscape '%s'
+-@NOGNOME@*manualCommand: xterm -sb -fg black -bg gray75 -T '%s manual' \
+-@NOGNOME@		    -e /bin/sh -c 'man "%s" ; read foo'
++! Debian: This is used when _building_ without GNOME
++@NOGNOME@*loadURL: x-www-browser '%s'
++@NOGNOME@*manualCommand: yelp man:%s || \
++@NOGNOME@			x-terminal-emulator -title '%s manual' \
++@NOGNOME@			  -e /bin/sh -c 'man "%s"'
+ 
+ 
+ ! The format used for printing the date and time in the password dialog box
+ ! (see the strftime(3) manual page for details.)
+-*dateFormat:		%d-%b-%y (%a); %I:%M %p
++*dateFormat:		%Y-%m-%d %H:%M:%S
++! Original upstream format
++! *dateFormat:		%d-%b-%y (%a); %I:%M %p
+ ! To show the time only:
+ ! *dateFormat:		%I:%M %p
+ ! For 24 hour time:
+@@ -134,7 +142,9 @@
+ ! (That button does not appear on the dialog if this program does not exist.)
+ ! For Gnome: probably "gdmflexiserver -ls".  KDE, probably "kdmctl reserve".
+ !
+-@NEW_LOGIN_COMMAND_P@*newLoginCommand:	@NEW_LOGIN_COMMAND@
++! @NEW_LOGIN_COMMAND_P@*newLoginCommand:	@NEW_LOGIN_COMMAND@
++! Debian: Hard-wire the command in case the build machine does not have gdm
++*newLoginCommand:	gdmflexiserver -ls
+ 
+ 
+ ! Turning on "installColormap" on 8-bit systems interacts erratically with
+@@ -251,7 +261,6 @@
+ 				xspirograph -root			    \n\
+ @GL_KLUDGE@ GL: 				circuit -root				    \n\
+ @GL_KLUDGE@ GL: 				dangerball -root			    \n\
+-- GL: 				dnalogo -root				    \n\
+ @GL_KLUDGE@ GL: 				engine -root				    \n\
+ @GL_KLUDGE@ GL: 				flipscreen3d -root			    \n\
+ @GL_KLUDGE@ GL: 				gltext -root				    \n\
+@@ -355,7 +364,8 @@
+ @GL_KLUDGE@ GL: 				rubikblocks -root			    \n\
+ @GL_KLUDGE@ GL: 				companioncube -root			    \n\
+ @GL_KLUDGE@ GL: 				hilbert -root				    \n\
+-@GL_KLUDGE@ GL: 				tronbit -root				    \n
++@GL_KLUDGE@ GL: 				tronbit -root				    \n\
++				unicode -root				    \n
+ 
+ 
+ 
+@@ -405,10 +415,11 @@
+ *Dialog.shadowThickness:	2
+ 
+ *passwd.heading.label:		XScreenSaver %s
+-*passwd.body.label:		This screen is locked.
++*passwd.body.label:		Please enter your password.
+ *passwd.unlock.label:		OK
+ *passwd.login.label:		New Login
+ *passwd.user.label:		Username:
++*passwd.passwd.label:		Password:
+ *passwd.thermometer.width:	8
+ *passwd.asterisks:              True
+ *passwd.uname:                  True

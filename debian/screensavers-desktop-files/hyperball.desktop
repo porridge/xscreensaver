@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=HyperBall
+Exec=/usr/lib/xscreensaver/hyperball -root
+TryExec=/usr/lib/xscreensaver/hyperball
+Comment=Hyperball is to hypercube as dodecahedron is to cube: this displays a 2D projection of the sequence of 3D objects which are the projections of the 4D analog to the dodecahedron. Technically, it is a "120 cell polytope". See also "polytopes" for a more general version of this using OpenGL. http://en.wikipedia.org/wiki/Hypercube http://en.wikipedia.org/wiki/Regular_polytope Written by Joe Keane.

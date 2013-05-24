@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Thornbird
+Exec=/usr/lib/xscreensaver/thornbird -root
+TryExec=/usr/lib/xscreensaver/thornbird
+Comment=Displays a view of the "Bird in a Thornbush" fractal. Written by Tim Auckland.

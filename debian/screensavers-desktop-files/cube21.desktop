@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Cube21
+Exec=/usr/lib/xscreensaver/cube21 -root
+TryExec=/usr/lib/xscreensaver/cube21
+Comment=Animates a Rubik-like puzzle known as Cube 21 or Square-1. The rotations are chosen randomly. See also the "Rubik" and "GLSnake" screen savers. http://en.wikipedia.org/wiki/Square_One_%28puzzle%29 Written by Vasek Potocek.

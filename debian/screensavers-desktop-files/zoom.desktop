@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Zoom
+Exec=/usr/lib/xscreensaver/zoom -root
+TryExec=/usr/lib/xscreensaver/zoom
+Comment=Zooms in on a part of the screen and then moves around. With the "Lenses" option, the result is like looking through many overlapping lenses rather than just a simple zoom. Written by James Macnicol.

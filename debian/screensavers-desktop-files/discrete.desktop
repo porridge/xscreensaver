@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Discrete
+Exec=/usr/lib/xscreensaver/discrete -root
+TryExec=/usr/lib/xscreensaver/discrete
+Comment=More "discrete map" systems, including new variants of Hopalong and Julia, and a few others. Written by Tim Auckland.

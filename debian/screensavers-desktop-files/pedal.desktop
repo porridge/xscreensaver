@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Pedal
+Exec=/usr/lib/xscreensaver/pedal -root
+TryExec=/usr/lib/xscreensaver/pedal
+Comment=This is sort of a combination spirograph/string-art. It generates a large, complex polygon, and renders it by filling using an even/odd winding rule. Written by Dale Moore.

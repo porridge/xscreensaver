@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=CompanionCube
+Exec=/usr/lib/xscreensaver/companioncube -root
+TryExec=/usr/lib/xscreensaver/companioncube
+Comment=The symptoms most commonly produced by Enrichment Center testing are superstition, perceiving inanimate objects as alive, and hallucinations. The Enrichment Center reminds you that the weighted companion cube will never threaten to stab you and, in fact, cannot speak. In the event that the Weighted Companion Cube does speak, the Enrichment Center urges you to disregard its advice. http://en.wikipedia.org/wiki/Portal_%28video_game%29 Written by Jamie Zawinski.

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=BSOD
+Exec=/usr/lib/xscreensaver/bsod -root
+TryExec=/usr/lib/xscreensaver/bsod
+Comment=BSOD stands for "Blue Screen of Death". The finest in personal computer emulation, BSOD simulates popular screen savers from a number of less robust operating systems. Written by Jamie Zawinski.

@@ -1,0 +1,15 @@
+10_upstream_skip_retired_hacks.patch
+20_hacks_man_section.patch
+20_hacks_maze_xpm_libs.patch
+20_skip_install-pam.patch
+21_driver_xscreensaver-getimage-video
+22_hacks_barcode.patch
+23_hacks_glx_glsnake.patch
+
+# These two go together
+30_hacks_xanalogtv.patch
+31_utils_images_logo-50-bad-xpm.patch
+
+53_XScreenSaver.ad.in.patch
+
+80_Makefile_in-clean-fix.patch

@@ -1,0 +1,13 @@
+Index: xscreensaver/hacks/Makefile.in
+===================================================================
+--- xscreensaver.orig/hacks/Makefile.in	2011-04-21 23:44:00.000000000 +0200
++++ xscreensaver/hacks/Makefile.in	2011-04-21 23:44:04.000000000 +0200
+@@ -593,7 +593,7 @@
+ 	$(CC_HACK) -o $@ $@.o	$(HACK_OBJS) $(HACK_LIBS)
+ 
+ maze:		maze.o		$(HACK_OBJS) $(ERASE) $(LOGO)
+-	$(CC_HACK) -o $@ $@.o	$(HACK_OBJS) $(ERASE) $(LOGO) $(HACK_LIBS)
++	$(CC_HACK) -o $@ $@.o	$(HACK_OBJS) $(ERASE) $(LOGO) $(HACK_LIBS) $(XPM_LIBS)
+ 
+ moire:		moire.o		$(HACK_OBJS) $(COL) $(SHM)
+ 	$(CC_HACK) -o $@ $@.o	$(HACK_OBJS) $(COL) $(SHM) $(HACK_LIBS)

@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Phosphor
+Exec=/usr/lib/xscreensaver/phosphor -root
+TryExec=/usr/lib/xscreensaver/phosphor
+Comment=Draws a simulation of an old terminal, with large pixels and long-sustain phosphor. On X11 systems, This program is also a fully-functional VT100 emulator! Written by Jamie Zawinski.

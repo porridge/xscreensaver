@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=GLMatrix
+Exec=/usr/lib/xscreensaver/glmatrix -root
+TryExec=/usr/lib/xscreensaver/glmatrix
+Comment=Draws 3D dropping characters similar to what is seen in the title sequence of "The Matrix". See also "xmatrix" for a 2D rendering of the similar effect that appeared on the computer monitors actually *in* the movie. Written by Jamie Zawinski.

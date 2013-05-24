@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Circuit
+Exec=/usr/lib/xscreensaver/circuit -root
+TryExec=/usr/lib/xscreensaver/circuit
+Comment=Animates a number of 3D electronic components. Written by Ben Buxton.

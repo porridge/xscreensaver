@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Moire
+Exec=/usr/lib/xscreensaver/moire -root
+TryExec=/usr/lib/xscreensaver/moire
+Comment=When the lines on the screen Make more lines in between, That's a moire'! http://en.wikipedia.org/wiki/Moire_pattern Written by Jamie Zawinski and Michael Bayne.

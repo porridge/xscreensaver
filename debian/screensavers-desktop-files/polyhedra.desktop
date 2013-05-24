@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Polyhedra
+Exec=/usr/lib/xscreensaver/polyhedra -root
+TryExec=/usr/lib/xscreensaver/polyhedra
+Comment=Displays different 3D solids and some information about each. A new solid is chosen every few seconds. There are 75 uniform polyhedra, plus 5 infinite sets of prisms and antiprisms; including their duals brings the total to 160. http://en.wikipedia.org/wiki/Uniform_polyhedra Written by Dr. Zvi Har'El and Jamie Zawinski.

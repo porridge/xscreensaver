@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Morph3D
+Exec=/usr/lib/xscreensaver/morph3d -root
+TryExec=/usr/lib/xscreensaver/morph3d
+Comment=Platonic solids that turn inside out and get spikey. http://en.wikipedia.org/wiki/Platonic_solid Written by Marcelo Vianna.

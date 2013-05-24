@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Truchet
+Exec=/usr/lib/xscreensaver/truchet -root
+TryExec=/usr/lib/xscreensaver/truchet
+Comment=This draws line- and arc-based truchet patterns that tile the screen. http://en.wikipedia.org/wiki/Tessellation Written by Adrian Likins.

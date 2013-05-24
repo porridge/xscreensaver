@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Rocks
+Exec=/usr/lib/xscreensaver/rocks -root
+TryExec=/usr/lib/xscreensaver/rocks
+Comment=This draws an animation of flight through an asteroid field, with changes in rotation and direction. Written by Jamie Zawinski.

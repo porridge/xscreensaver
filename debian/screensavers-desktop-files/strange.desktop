@@ -1,0 +1,6 @@
+
+[Desktop Entry]
+Name=Strange
+Exec=/usr/lib/xscreensaver/strange -root
+TryExec=/usr/lib/xscreensaver/strange
+Comment=This draws iterations to strange attractors: it's a colorful, unpredictably-animating swarm of dots that swoops and twists around. http://en.wikipedia.org/wiki/Attractor#Strange_attractor Written by Massimino Pascal.

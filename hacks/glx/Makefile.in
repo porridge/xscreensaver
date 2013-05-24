@@ -19,8 +19,8 @@ datarootdir	= @datarootdir@
 datadir		= @datadir@
 mandir		= @mandir@
 libexecdir	= @libexecdir@
-mansuffix	= 6
-manNdir		= $(mandir)/man$(mansuffix)
+mansuffix	= 6x
+manNdir		= $(mandir)/man6
 
 HACKDIR		= @HACKDIR@
 HACK_CONF_DIR	= @HACK_CONF_DIR@
@@ -227,7 +227,7 @@ TARFILES	= $(SRCS) $(HDRS) $(MEN) $(RETIRED_MEN) $(EXTRAS)
 
 
 default: all
-all: $(EXES) $(RETIRED_EXES)
+all: $(EXES)
 
 install:   install-program    install-xml   install-man
 uninstall: uninstall-program  uninstall-xml uninstall-man

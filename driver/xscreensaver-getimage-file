@@ -74,7 +74,8 @@ my $cache_p = 1;
 
 # Regenerate the cache if it is older than this many seconds.
 #
-my $cache_max_age = 60 * 60 * 3;   # 3 hours
+my $cache_max_age = 60 * 60 * 24 * 7 * 2;   # 2 weeks
+
 
 # Re-poll RSS/Atom feeds when local copy is older than this many seconds.
 #

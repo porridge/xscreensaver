@@ -1,3 +1,9 @@
+xscreensaver (5.15-3.1) unstable; urgency=low
+
+  * Added the description and no-duplicates patches
+
+ -- Marcin Owsiany <porridge@debian.org>  Wed, 28 Aug 2013 12:11:16 -0700
+
 xscreensaver (5.15-3) unstable; urgency=low
 
   [ Jose Luis Rivas ]

@@ -1,0 +1,57 @@
+From 24eb463ef195e9024fa21576176654b48a514d03 Mon Sep 17 00:00:00 2001
+From: Marcin Owsiany <marcin@owsiany.pl>
+Date: Sat, 14 May 2011 13:27:11 +0100
+Subject: [PATCH 3/7] xscreensaver-getimage propagates image description.
+
+It is retrieved using xscreensaver-getimage-description.
+---
+ driver/xscreensaver-getimage.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/driver/xscreensaver-getimage.c b/driver/xscreensaver-getimage.c
+index 1de7895..b398eed 100644
+--- a/driver/xscreensaver-getimage.c
++++ b/driver/xscreensaver-getimage.c
+@@ -1525,6 +1525,7 @@ get_image (Screen *screen,
+   grab_type which = GRAB_BARS;
+   struct stat st;
+   const char *file_prop = 0;
++  const char *description = 0;
+   char *absfile = 0;
+   XRectangle geom = { 0, 0, 0, 0 };
+ 
+@@ -1703,6 +1704,17 @@ get_image (Screen *screen,
+                           (absfile ? absfile : file),
+                           verbose_p, &geom))
+         goto COLORBARS;
++      {
++        int ac = 0;
++        char *av[20];
++        char *ret;
++        av[ac++] = "xscreensaver-getimage-description";
++        av[ac++] = absfile ? absfile : (char *) file;
++        av[ac] = 0;
++        ret = get_program_output (screen, ac, av, verbose_p);
++        if (ret && *ret)
++          description = ret;
++      }
+       file_prop = file;
+       break;
+ 
+@@ -1725,6 +1737,13 @@ get_image (Screen *screen,
+     else
+       XDeleteProperty (dpy, window, a);
+ 
++    a = XInternAtom (dpy, XA_XSCREENSAVER_IMAGE_DESCRIPTION, False);
++    if (description)
++      XChangeProperty (dpy, window, a, XA_STRING, 8, PropModeReplace,
++                       (unsigned char *) description, strlen(description));
++    else
++      XDeleteProperty (dpy, window, a);
++
+     a = XInternAtom (dpy, XA_XSCREENSAVER_IMAGE_GEOMETRY, False);
+     if (geom.width > 0)
+       {
+-- 
+1.8.4
+

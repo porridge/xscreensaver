@@ -13,3 +13,10 @@
 53_XScreenSaver.ad.in.patch
 
 80_Makefile_in-clean-fix.patch
+0001-Added-xscreensaver-getimage-description-with-a-manpa.patch
+0002-Extracted-a-get_program_output-function.patch
+0003-xscreensaver-getimage-propagates-image-description.patch
+0004-Support-showing-description-of-loaded-image-if-prese.patch
+0005-Made-description-display-optional-and-off-by-default.patch
+0006-Keep-cache-in-DB_File-Lock-remove-each-pick.patch
+0007-Bump-cache-TTL-from-3h-to-2-weeks.patch
